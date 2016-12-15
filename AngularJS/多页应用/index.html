@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html ng-app="Md1">
+<head lang="en">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../css/bootstrap.css"/>
+    <link rel="stylesheet" href="../../css/animate.css"/>
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/angular.js"></script>
+    <script src="../../js/angular-route.js"></script>               <!--路由文件-->
+    <script src="../../js/angular-animate.js"></script>             <!--动画文件-->
+    <script src="../../js/angular-touch.js"></script>             <!--触屏文件-->
+    <title></title>
+</head>
+<body>
+<div ng-view class="page">
+
+</div>
+<script>
+    angular.module("Md1",['ng','ngRoute','ngAnimate','ngTouch']).controller("Mc1",function($scope,$location){
+        $scope.dump=function(){                 //在strat页面放有ng-click="dump()"
+            $location.path('/main');            //当点击dump（）时，跳转到main   path：路线
+        }
+    }).config(function($routeProvider){       //config配置，$routeProvider路由提供者。
+        $routeProvider.when('/strat',{                              //when:当……时
+            templateUrl:'tpl/strat.html',                            //templateurl:模板页面的路径！
+            controller:'Mc1'                                        //相当于将Mc1放到strat内
+        }).when('/main',{                                           //when:当……时
+            templateUrl:'tpl/main.html'                             //templateurl:模板页面的路径！
+        }).when('/detail',{                                         //when:当……时
+            templateUrl:'tpl/detail.html'                          //templateurl:模板页面的路径！
+        }).otherwise({                                              //otherwise:打开后第一个加载的页面！
+            redirectTo:'/strat'
+        })
+    })
+</script>
+</body>
+</html>

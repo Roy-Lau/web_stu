@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html ng-app>
+<head lang="en">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/bootstrap.css"/>
+
+    <title>ng-Init</title>
+</head>
+<body>
+<div class="container">
+    <!--ngInit相当于声明-->
+    <h3>{{a}}</h3>
+    <p ng-init="a=10;b=20"></p> <!--AngularJs可以同时声明两个变量-->
+    <!--ngInit声明数组-->
+    <h3>{{arr[3]}}</h3>
+    <p ng-init="arr=[10,20,30,40,50]"></p>
+
+
+</div>
+<script src="../js/jquery-1.11.3.js"></script>
+<script src="../js/angular.js"></script>
+
+
+</body>
+</html>

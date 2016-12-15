@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html ng-app="">
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta http-equiv="X-UA-Compitable" content="IE=edge,Chrome=1">
+    <link rel="stylesheet" href="../css/bootstrap.css"/>
+    <!--<link rel="stylesheet" href="../css/style.css"/>-->
+    <link rel="icon" href="../img/ico.png">
+    <title>客户关系管理系统</title>
+
+</head>
+<body>
+<!---------------------注册页------------------------>
+<div class="modal-header bg-success">
+    <h2 class="modal-title text-center" id="myModalLabel1">
+        注册
+    </h2>
+</div>
+<br /> <br />
+<div class="modal-body">
+    <form class="form-horizontal" role="form">
+        <div class="form-group">
+            <label for="firstname1" class="col-sm-4 control-label">用户名</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="firstname1" onblur="onb()" placeholder="请输入用户名">
+            </div>
+            <div class="col-sm-4">
+                <div id="user"></div>
+            </div>
+        </div>
+        <br />
+        <div class="form-group">
+            <label for="password1" class="col-sm-4 control-label">密码</label>
+            <div class="col-sm-4">
+                <input class="form-control" id="password1" onblur="checkpwd()"  placeholder="请输入密码">
+            </div>
+            <div class="col-sm-4">
+                <div class="frbule" id="error1"></div>
+            </div>
+        </div>
+        <br />
+        <div class="form-group">
+            <label for="password2" class="col-sm-4 control-label">确认密码</label>
+            <div class="col-sm-4">
+                <input class="form-control" id="password2"  onblur="rcheckpwd()" placeholder="请确认密码">
+            </div>
+            <div class="col-sm-4">
+                <div class="frbule" id="error2"></div>
+            </div>
+        </div>
+        <br />
+        <div class="form-group">
+            <label for="email" class="col-sm-4 control-label">邮箱</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="email" onblur="checkemail()" placeholder="请输入邮箱"/>
+            </div>
+            <div class="col-sm-4">
+                <div class="frbule" id="semail"></div>
+            </div>
+        </div>
+        <br />
+        <div class="form-group">
+            <label class="col-sm-4 control-label">所属行业</label>
+            <div class="col-sm-4">
+                <select name="" id="" class="form-control">
+                    <option value="">——请选择——</option>
+                    <option value="">金融</option>
+                    <option value="">IT</option>
+                    <option value="">医疗</option>
+                    <option value="">房地产</option>
+                    <option value="">交通</option>
+                    <option value="">旅游</option>
+                    <option value="">教育</option>
+                    <option value="">文化出版</option>
+                    <option value="">电子商务</option>
+                    <option value="">生活信息</option>
+                    <option value="">游戏</option>
+                    <option value="">在线社区</option>
+                    <option value="">其他</option>
+                </select>
+            </div>
+        </div>
+        <br />
+        <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-6">
+                <input type="checkbox" ng-model="myAgree"/>我同意本站条款！！！
+                <button class="btn btn-danger" ng-disabled="!myAgree">立即注册</button><!--ng-disabled禁用-->
+                <!--<button type="submit" class="btn btn-success" >立即注册</button>&lt;!&ndash;disabled="disabled"&ndash;&gt;-->
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<script src="../js/jquery-1.12.1.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script>
+    /********************js表单验证**********************/
+//验证用户名
+    function onb() {
+        var regname = /^\w{4,10}$/;
+        var fname = document.getElementById("firstname1");
+        var ftname = document.getElementById("user");
+        if (fname.value == "" || fname.value.length < 4 || fname.value.length > 10) {
+            ftname.className = "frred";
+            ftname.innerHTML = "请输入4-10位用户名，可包含数字、字母、下划线";
+        }
+        else {
+            if (fname.value.match(regname)) {
+                ftname.className = "fgren";
+                ftname.innerHTML = "√ 用户名可用!"
+            }
+            else {
+                ftname.className = "frred";
+                ftname.innerHTML = "× 用户名格式输入错误，请检查！";
+            }
+        }
+    }
+    //验证密码
+    function checkpwd() {
+        var fpwd = document.getElementById("password1");
+        var ftpwd = document.getElementById("error");
+        if (fpwd.value == "" || fpwd.value.length < 4 || fpwd.value.length > 20) {
+            ftpwd.className = "frred";
+            ftpwd.innerHTML = "× 请输入4-20位用户密码！";
+        }
+        else {
+            ftpwd.className = "fgren";
+            ftpwd.innerHTML = "√密码可用！"
+        }
+    }
+    function rcheckpwd() {
+        var fpwd = document.getElementById("password1");
+        var frpwd = document.getElementById("password2");
+        var ftrpwd = document.getElementById("error2");
+        if (frpwd.value == "") {
+            ftrpwd.className = "frred";
+            ftrpwd.innerHTML = "× 两次密码输入不一致！"
+        }
+        else {
+            if (frpwd.value != fpwd.value) {
+                ftrpwd.className = "frred";
+                ftrpwd.innerHTML = "× 俩次密码输入不一致，请重新输入！";
+            }
+            else {
+                ftrpwd.className = "fgren";
+                ftrpwd.innerHTML = " √ 密码输入正确"
+            }
+        }
+    }
+    //验证邮箱
+    function checkemail() {
+        var regemail = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*(;\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*)*$/;
+        var femail = document.getElementById("email");
+        var ftemail = document.getElementById("semail");
+        if (femail.value == "") {
+            ftemail.className = "frred";
+            ftemail.innerHTML = "× 电子邮箱不能为空！";
+        }
+        else {
+            if (femail.value.match(regemail)) {
+                ftemail.className = "fgren";
+                ftemail.innerHTML = "√ 邮箱地址正确！";
+            }
+            else {
+                ftemail.className = "frred";
+                ftemail.innerHTML = "× 邮箱格式输入错误，请检查！";
+            }
+        }
+    }
+</script>
+</body>
+</html>

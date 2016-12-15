@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta http-equiv="X-UA-Compitable" content="IE=edge">   <!--这一行代码时为了兼容老版本的IE：新版本的IE启用老版本的IE内核-->
+    <link rel="stylesheet" href="../css/bootstrap.css"/>    <!--引入css的Bootstrap-->
+    <title>栅格布局——一行分为12列</title>
+    <style>
+        div{
+            border:1px solid blue;
+        }
+    </style>
+</head>
+<body>
+    <!--全局CSS样式——栅格布局系统
+        页面做布局的几种方式：
+        (1)TABLE布局
+        优势：简单、不易出错！
+        不足：显示速度慢！语义不符合！
+        (2)DIV+CSS布局
+        优势：易扩展，渲染速度快！
+        不足：不易控制！
+        (3)Bootstrap提供的响应式布局——栅格布局系统
+        优势： TABLE布局优点(有行/列的概念)+DIV布局的优点(用DIV来实现)+响应式布局-->
+    <h3>仅在lg超大pc下显示布局</h3>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-1">一行一列</div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2">一行二列</div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">一行四列</div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">一行六列</div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8">一行八列</div>
+        </div>
+        <div class="row">
+            <div class="col-lg-10">一行十列</div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">一行十二列</div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2">一行二列</div>
+            <div class="col-lg-2">一行二列</div>
+        </div>
+        <div class="row">
+            <div class="col-lg-5">一行五列</div>
+            <div class="col-lg-5">一行五列</div>
+            <div class="col-lg-5">一行五列</div>
+        </div>
+    </div>      <!---->
+    <br/>
+   <h3>在手机 pad pc 超大pc都正常显示布局</h3>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-3">3</div>
+            <div class="col-xs-7">7</div>
+            <div class="col-xs-2">2</div>
+        </div>
+    </div>     <!-- -->
+    <h3>pc和超大pc端3:7:2     pad端5:7 隐藏2      手机端上中下各占100%</h3>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-sm-5">左边</div>
+            <div class="col-md-7 col-sm-7">中间</div>
+            <div class="col-md-2 hidden-sm">右边</div>
+        </div>
+    </div>
+    <h3>偏移效果 两端各占5 中间空2</h3>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-5">左</div>
+            <div class="col-xs-5 col-xs-offset-2">右</div>
+        </div>
+    </div>
+<!--[if lte IE 9]-->        <!--&lt;!&ndash;如果用户使用是的IE9以下的版本的浏览器，就解析下面的文件&ndash;&gt;-->
+<script src="../js/html5shiv.min.js"></script>      <!--引入html5shiv.min文件，为了让老版本的IE（<9）支持HTML5新标签-->
+<script src="../js/respond.min.js"></script>        <!--引入respond.min文件，为了让老版本的IE（<9）支持CSS3MediaQuery-->
+<!--[endif]-->
+<script src="../jQuery/jquery-1.12.1.min.js"></script>  <!--引入jQuery文件  jQuery必须在bootstrap的上面-->
+<script src="../js/bootstrap.js"></script>              <!--引入bootstrap.js文件  bootstrap是基于jQuery的-->
+
+</body>
+</html>

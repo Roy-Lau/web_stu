@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>js选项卡</title>
+    <style>
+        #x div{width:100px;height:100px;border:1px solid yellow;float:left}
+        #n div:first-child{clear:both;}
+        #n div{width:600px;height: 500px;border:1px solid yellow;}
+        #n div:not(#nr1){display: none;}      /*#n内的所有div除#nr1外的全部隐藏   not（#nr1）#nr1以外的元素*/
+    </style>
+    <script>
+        function huan(index,tt){
+            var nArr= n.getElementsByTagName("div");
+            var xArr= x.getElementsByTagName("div");
+            for(var i=0;i<nArr.length;i++){
+                nArr[i].style.display="none";
+                xArr[i].style.backgroundColor="#fff"
+            }
+            document.getElementById("nr"+index).style.display="block";;
+            tt.style.backgroundColor="yellow";
+        }
+    </script>
+</head>
+<body>
+<div id="x">
+    <div onmouseover="huan(1,this)">选项卡1</div>
+    <div onmouseover="huan(2,this)">选项卡2</div>
+    <div onmouseover="huan(3,this)">选项卡3</div>
+    <div onmouseover="huan(4,this)">选项卡4</div>
+    <div onmouseover="huan(5,this)">选项卡5</div>
+    <div onmouseover="huan(6,this)">选项卡6</div>
+</div>
+<div id="n">
+    <div id="nr1">选项内容1</div>
+    <div id="nr2">选项内容2</div>
+    <div id="nr3">选项内容3</div>
+    <div id="nr4">选项内容4</div>
+    <div id="nr5">选项内容5</div>
+    <div id="nr6">选项内容6</div>
+</div>
+</body>
+</html>

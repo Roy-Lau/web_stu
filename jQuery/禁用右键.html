@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>禁用右键</title>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script>
+
+        $(document).bind('contextmenu',function(e){
+                return false;  
+        });
+//        contextmenu译为：右键菜单
+
+
+    </script>
+</head>
+<body>
+    <p>整个页面右键不能使用！！！</p>
+</body>
+</html>

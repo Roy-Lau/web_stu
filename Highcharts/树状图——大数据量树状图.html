@@ -1,0 +1,100 @@
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>树状图——大数据量树状图</title>
+    <script src="js/jquery-2.1.4.js"></script>
+    <script src="js/highlight-9.1.0.min.js"></script>   
+<script src="http://code.highcharts.com/modules/treemap.js"></script>    
+<script src="http://code.highcharts.com/modules/heatmap.js"></script>  
+</head>
+<body>
+<div id="container" style="width: 550px; height: 400px; margin: 0 auto"></div>
+<script language="JavaScript">
+$(document).ready(function() { 
+//省略部分 js 代码
+ var data = {……};
+ var points = [],
+		region_p,
+		region_val,
+		region_i,
+		country_p,
+		country_i,
+		cause_p,
+		cause_i,
+		cause_name = [];
+	cause_name['Communicable & other Group I'] = 'Communicable diseases';
+	cause_name['Noncommunicable diseases'] = 'Non-communicable diseases';
+	cause_name['Injuries'] = 'Injuries';
+	region_i = 0;
+	for (var region in data) {
+		region_val = 0;
+		region_p = {
+			id: "id_" + region_i,
+			name: region,
+			color: Highcharts.getOptions().colors[region_i]
+		};
+		country_i = 0;
+		for (var country in data[region]) {
+			country_p = {
+				id: region_p.id + "_" + country_i,
+				name: country,
+				parent: region_p.id
+			};
+			points.push(country_p);
+			cause_i = 0;
+			for (var cause in data[region][country]) {
+				cause_p = {
+					id: country_p.id + "_" + cause_i,
+					name: cause_name[cause],
+					parent: country_p.id,
+					value: Math.round(+data[region][country][cause])
+				};
+				region_val += cause_p.value;
+				points.push(cause_p);
+				cause_i++;
+			}
+			country_i++;
+		}
+		region_p.value = Math.round(region_val / country_i);
+		points.push(region_p);
+		region_i++;
+	}
+   var chart = {
+      renderTo: 'container'
+   };
+
+   var title = {
+      text: 'Global Mortality Rate 2012, per 100 000 population'   
+   };        
+   
+   var subtitle: {
+      text: 'Click points to drill down. Source: <a href="http://apps.who.int/gho/data/node.main.12?lang=en">WHO</a>.'
+   };
+   
+   var series = [{
+      type: "treemap",
+      layoutAlgorithm: 'squarified',
+      allowDrillToNode: true,
+      dataLabels: {
+         enabled: false
+      },
+      levelIsConstant: false,
+      levels: [{
+         level: 1,
+         dataLabels: {
+            enabled: true
+         },
+      borderWidth: 3
+      }],
+      data: points
+   }]; 
+      
+   var json = {};     
+   json.title = title;            
+   json.series = series;       
+   
+   $('#container').highcharts(json);
+});
+</script>
+</body>
+</html>

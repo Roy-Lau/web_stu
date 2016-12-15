@@ -1,0 +1,58 @@
+/*封装*/
+div,body,html,h1,h2,h3,h4,h5,h6,p,form,ul,ol,li,dl,dd,input,img{margin:0;padding:0}
+h1,h2,h3,h4,h5,h6{display:inline;}
+a{text-decoration: none;color:#000;}
+li{list-style: none;}
+.tcenter{line-height:2em;width:368px;height:60px;text-align:center;font-size:2em;display:block;}
+.center{width:63px;height:60px;text-align:center;color:white;display:block;}
+.fl-l{float:left;}
+.fl-r{float:right;}
+/**{border:1px solid red;}*/
+
+/*头部*/
+.logo{width: 100%;background-color:green; opacity:0.6;}
+.logo-img{display:block;margin: auto;}
+.nav{width:60px;height:60px;border-radius: 50%; transform:scale(2);
+    margin:36px;position:absolute;z-index: 2; }
+.nav-ul{position:absolute;left:30px;top:200px;line-height: 1.6em;position:absolute;z-index: 2; }
+.nav-ul li{border:1px solid red;border-radius: 3px;margin:2px;background-color:green;opacity:0.8;}
+.nav-ul li a{margin-left:3px;font-size: 1.2em;color:white;}
+
+
+/*身体*/
+.zong{width:75%;margin: auto;}
+.zuo,.you{margin-top: 60px;}
+.zuo1,.you1{width:431px;height:318px;border:2px solid #ff8382;}
+.zuo1 a,.you1 a{background-color: #ff6765;}
+.zuo1 span,.you1 span{background-color: #ff6765;opacity: 0.5;}
+.zuo2{width:431px;height:220px;border:2px solid dodgerblue;background-color: #f3f6f8;}
+.zuo2 p{margin:60px 10px 40px 10px;font-size:0.8em;}
+.zuo2 a,.you5 a{background-color: #7ae0ed;}
+.zuo2 span,.you5 span{background-color: #7ae0ed;opacity: 0.5;}
+.zuo3{width:431px;height:375px;border:2px solid red;}
+.zuo3 a{background-color: #ff6765;}
+.zuo3 span{background-color: #ff6765;opacity: 0.5;}
+.zuo4{width:431px;height:335px;border:2px solid #93c052;}
+.you2{width:431px;height:298px;border:2px solid #93c052;}
+.zuo4 a,.you2 a{background-color: #93c052;}
+.zuo4 span,.you2 span{background-color: #93c052;opacity: 0.5; }
+.zuo2,.zuo3,.zuo4{margin-top:50px}
+/*右边的一部分*/
+.you3{width:431px;height:180px;border:2px solid #2a394e;}
+.you3 a{font-size: 3em;margin:30px 20px 30px 40px;display:block;}
+.you4{width: 431px;height: 230px;border:2px solid #ffe388;}
+.me{margin:50px 10px 30px 10px;display: block;background-image:url(images/quotes_bg.png)}
+.ell{background-color: #ffe388;}
+.you4 span{background-color: #ffe388;opacity: 0.5;}
+.you5{width:431px;height:275px;border:2px solid dodgerblue;background-color: #f3f6f8;}
+.you2,.you3,.you4,.you5{margin-top:50px}
+/*竖线*/
+.axis{width:3px;height:1600px;background-color:yellow;margin: auto;position:absolute;left:50%;z-index: 10;}
+/*圆*/
+.yuan{width:90px;height:100px;border-radius: 50%;
+    background-color:black;margin:16px;position:absolute;left:46%;top:1660px;z-index: 10; }
+.yuan a{color:white;display:block;margin:20px 0px 0px 8px;}
+/*底部*/
+.footer{width:75%;height:150px;margin: auto;clear: both;position:relative;top:120px;}
+.footer img{display:block;margin: auto;}
+footer p{text-align: center;}

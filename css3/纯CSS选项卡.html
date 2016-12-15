@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>纯CSS选项卡</title>
+<style>
+*{
+	margin: 0;
+	padding: 0;
+}
+html{
+	background: #ECECEC;
+}
+nav{
+	width: 90%;
+	padding-left: 10%;
+	height: 40px;
+	background: #0086D8;
+	color: #FFFFFF;
+}
+nav div:nth-child(3){
+	border-right: 1px solid #000000;
+}
+nav div:hover{
+	background: #00316C;
+}
+nav div:hover ~ {
+	
+}
+nav div{
+	cursor: pointer;
+	float: left;
+	width: 200px;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	border-left:1px solid #000000 ;
+}
+.tab{
+	width: 200px;
+	height: auto;
+	border: 1px solid #000000;
+	border-radius:0 0 3px 3px;
+	background: #FFFFFF;
+	position: absolute;
+	left: 10%;
+	top: 40px;
+	display: none;
+}
+nav div:nth-child(1):hover ~ #tal1,nav div:nth-child(2):hover ~ #tal2,nav div:nth-child(3):hover ~ #tal3{
+	display: block;
+}
+#tal1:hover,#tal2:hover,#tal3:hover{
+	display: block;
+}
+#tal2{
+	margin-left: 201px;
+}
+#tal3{
+	margin-left: 402px;
+}
+.tab li{
+	list-style-type: none;
+	width: 200px;
+	border-bottom: 1px dotted #000000;
+	color: black;
+	line-height: 40px;
+	text-indent: 30px;
+	cursor: pointer;
+}
+.tab li:nth-child(3){
+	border: 0;
+}
+.tab li:hover{
+	background: pink;
+	color: #FFFFFF;
+}
+</style>
+</head>
+<body>
+<nav>
+<div class="div">选项一</div>
+<div class="div">选项二</div>
+<div class="div">选项三</div>
+<ul class="tab" id="tal1">
+	<li>选项一：第一个li标签</li>
+	<li>选项一：第二个li标签</li>
+	<li>选项一：第三个li标签</li>
+</ul>
+<ul class="tab" id="tal2">
+	<li>选项二：第一个li标签</li>
+	<li>选项二：第二个li标签</li>
+	<li>选项二：第三个li标签</li>
+</ul>
+<ul class="tab" id="tal3">
+	<li>选项三：第一个li标签</li>
+	<li>选项三：第二个li标签</li>
+	<li>选项三：第三个li标签</li>
+</ul>
+</nav>
+</body>
+</html>

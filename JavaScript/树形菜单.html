@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>树形菜单</title>
+    <style>
+        ul{
+            display:none;
+        }
+    </style>
+    <script>
+        function dian(index){
+            var ul=document.getElementById("ul"+index)
+            if(ul.style.display!="block"){
+                ul.style.display="block";
+            }else{
+                ul.style.display="none";
+            }
+        }
+    </script>
+</head>
+<body>
+        <div  onclick="dian(1)">文学艺术</div>
+        <ul id="ul1">
+            <li>文学1</li>
+            <li>文学2</li>
+            <li>文学3</li>
+            <li>文学4</li>
+        </ul>
+        <div onclick="dian(2)">贴图专区</div>
+        <ul id="ul2">
+            <li>文学1</li>
+            <li>文学2</li>
+            <li>文学3</li>
+            <li>文学4</li>
+        </ul>
+        <div onclick="dian(3)">房产论坛</div>
+        <ul id="ul3">
+            <li>文学1</li>
+            <li>文学2</li>
+            <li>文学3</li>
+            <li>文学4</li>
+        </ul>
+        <div onclick="dian(4)">娱乐八卦</div>
+        <ul id="ul4">
+            <li>文学1</li>
+            <li>文学2</li>
+            <li>文学3</li>
+            <li>文学4</li>
+        </ul>
+
+</body>
+</html>

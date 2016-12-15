@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>四大特性之三 依赖注入</title>
+</head>
+<body>
+<script>
+    function Driver(){
+        var car=new Car();
+        car.start();
+        car.run();
+        car.stop();
+    }
+//    依赖注入
+    function Driver(car){
+        car.start();
+        car.run();
+        car.stop();
+    }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>五角星</title>
+    <script>
+        var num = prompt("请输入行数：");
+        for(var i=1;i<=num;i++){
+            var j;
+            for(j=1;j<=num-i;j++){
+                document.write("&nbsp;");
+            }
+            for(j=1;j<=i;j++){
+                document.write("*");
+            }
+            document.write("<br/>");
+        }
+    </script>
+</head>
+<body>
+<!--&nbsp;&nbsp;&nbsp;&nbsp;* <br/>-->
+<!--&nbsp;&nbsp;&nbsp;* * <br/>-->
+<!--&nbsp;&nbsp;* * * <br/>-->
+<!--&nbsp;* * * * <br/>-->
+<!--* * * * * <br/>-->
+</body>
+</html>

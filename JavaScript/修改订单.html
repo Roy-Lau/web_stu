@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+        function addTr(){
+           var newTr=myTable.insertRow(myTable.rows.length-1)
+            var newTd=newTr.insertCell(0)
+            newTd.innerHTML="抗疲劳神奇钛项圈"
+            var newTd=newTr.insertCell(1)
+            newTd.innerHTML="66"
+            var newTd=newTr.insertCell(2)
+            newTd.innerHTML=999
+            var newTd=newTr.insertCell(3)
+            newTd.innerHTML='<input type="button" value="删除"  onclick="delTr(this)">'+"&nbsp&nbsp"+
+                            '<input type="button" value="修改"  onclick="xiu(this)">'
+        }
+        function delTr(num){
+            myTable.deleteRow(num.parentNode.parentNode.rowIndex)
+        }
+        function xiu(num1){
+            num1.setAttribute("value","确定")
+            num1.setAttribute("onclick","gai(this)")
+            var fu=num1.parentNode.parentNode
+            fu.cells[1].innerHTML='<input type="text">'
+        }
+        function gai(asd){
+            asd.setAttribute("value","修改")
+            asd.setAttribute("onclick","xiu(this)")
+            var fu1=asd.parentNode.parentNode.cells[1];
+            fu1.innerHTML=fu1.childNodes[0].value;
+        }
+
+    </script>
+</head>
+<body>
+    <table border="1" id="myTable">
+        <tr id="tr1">
+            <td>商品名称</td>
+            <td>数量</td>
+            <td>价格</td>
+            <td>操作</td>
+        </tr>
+        <tr>
+            <td>防滑真皮休闲鞋</td>
+            <td>12</td>
+            <td>&yen568.50</td>
+            <td><input type="button" value="删除" onclick="delTr(this)">
+                <input type="button" value="修改" onclick="xiu(this)">
+            </td>
+        </tr>
+        <tr>
+            <td>抗疲劳神奇钛项圈</td>
+            <td>2</td>
+            <td>49.00</td>
+            <td><input type="button" value="删除" onclick="delTr(this)">
+                <input type="button" value="修改" onclick="xiu(this)">
+            </td>
+        </tr>
+
+        <tr id=""><td><input type="button" value="增加订单" onclick="addTr()"></td></tr>
+    </table>
+
+</body>
+</html>

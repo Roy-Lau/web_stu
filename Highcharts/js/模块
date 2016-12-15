@@ -1,0 +1,33 @@
+一. 功能模块
+
+功能模块是在 Highcharts 主要功能的基础做的扩展，是由官方发布的功能包，常用功能模块有：
+
+    更多图表类型扩展模块（highcharts-more.js）
+    3D 图表模块 （highcharts-3d.js）
+    导出功能模块（modules/exporting.js）
+    金字塔图表类型（modules/funnel.js）
+    钻取功能模块（modules/drilldown.js）
+    数据加载功能模块（modules/data.js）
+
+更多模块可以在下载的资源包的 modules 目录找到，具体的功能我们会在后面的教程中讲解。
+
+使用功能模块很简单，只需要引入对应的文件即可，唯一需要注意的是保证 highcharts.js 的先引用。
+
+例如启用导出功能时需要引入的文件及顺序是：
+
+<script src="http://cdn.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>
+<script src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script> 
+<script src="http://cdn.hcharts.cn/highcharts/modules/exporting.js"></script>
+
+二. Highstock 和 Highmaps
+
+Highstock 和 Highmaps 是另外针对不同使用场景的图表产品，他们相互独立又有密切关系，他们关系和混合使用的说明如下
+1）三款产品简介
+
+    Highcharts 基础图表
+    Highstock 股票及大数据量时间轴图表
+    Highmaps 地图
+
+2）相关之间的关系
+
+Highstock 是完全包含 Highcharts 的，是在 Highcharts 的基础上增加了更多高级功能；Highmaps 则完全独立，不过我们提供了地图功能模块 map.js （在 Highmaps 资源包的 modules 目录）供 Highcharts 或 Highstock 调用。

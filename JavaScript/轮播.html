@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        li{
+            list-style-type: none;
+            float: left;
+            width:30px;
+            height:30px;
+            line-height: 30px;
+            text-align: center;
+            border: 2px solid red;
+            margin-left: 10px;
+        }
+        ul{
+            margin-left: 40px;
+        }
+        .liColor{
+            background-color: red;
+        }
+    </style>
+    <script>
+        var index = 2;//定义下标等于2
+        function huantu(){
+            var liArr = ul1.getElementsByTagName("li");
+            for(var i = 0;i<liArr.length;i++){
+                liArr[i].className = "";
+            }
+            liArr[index-1].className = "liColor";
+
+            img1.src = "imgs/dd_scroll_"+index+".jpg";      //img1的src
+            index++;                                        //下标自加1
+            if(index > 6){                                  //如果下标大于等于6，执行index=1
+                index = 1;
+            }
+        }
+        var tingshiqi = setInterval(huantu,3000);           //每3秒启动一次换图
+
+        function huantu_ting(j){
+           clearInterval(tingshiqi);
+            var liArr = ul1.getElementsByTagName("li");
+            for(var i = 0;i<liArr.length;i++){
+                liArr[i].className = "";
+            }
+            liArr[j-1].className = "liColor";
+
+            img1.src = "imgs/dd_scroll_"+j+".jpg";
+            if(j <= 5){
+                index = j+1;
+            }else{
+                index = 1;
+            }
+        }
+        function kaiqi(){
+            tingshiqi = setInterval(huantu,3000);
+        }
+
+    </script>
+</head>
+<body>
+<img id="img1" src="imgs/dd_scroll_1.jpg"/>
+<ul id="ul1">
+    <li onmouseover="huantu_ting(1)" class="liColor" onmouseout="kaiqi()">1</li>
+    <li onmouseover="huantu_ting(2)" onmouseout="kaiqi()">2</li>
+    <li onmouseover="huantu_ting(3)" onmouseout="kaiqi()">3</li>
+    <li onmouseover="huantu_ting(4)" onmouseout="kaiqi()">4</li>
+    <li onmouseover="huantu_ting(5)" onmouseout="kaiqi()">5</li>
+    <li onmouseover="huantu_ting(6)" onmouseout="kaiqi()">6</li>
+</ul>
+</body>
+</html>

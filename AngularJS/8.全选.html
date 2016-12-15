@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html ng-app="Md1">
+<head lang="en">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/bootstrap.css"/>
+    <script src="../js/jquery-1.11.3.js"></script>
+    <script src="../js/angular.js"></script>
+    <title>全选 取消全选</title>
+</head>
+<body>
+    <div class="container" ng-controller="Mc1">
+        <table class="table tab-content">
+            <tr>
+                <th>选择</th>
+                <th>姓名</th>
+                <th>工资</th>
+                <th>操作</th>
+            </tr>
+            <tr>
+                <td><input type="checkbox" ng-model="query1" ng-checked="check"/></td>
+                <td>liess</td>
+                <td>2800</td>
+                <td><input type="button" class="btn btn-danger" value="删除"/></td>
+            </tr>
+            <tr>
+                <td><input type="checkbox" ng-model="query2" ng-checked="check"/></td>
+                <td>jek</td>
+                <td>3800</td>
+                <td><input type="button" class="btn btn-danger" value="删除"/></td>
+            </tr>
+            <tr>
+                <td><input type="checkbox" ng-model="query3" ng-checked="check"/></td>
+                <td>ben</td>
+                <td>4800</td>
+                <td><input type="button" class="btn btn-danger" value="删除"/></td>
+            </tr>
+        </table>
+        <input type="checkbox" ng-model="check" ng-checked="query1&&query2&&query3"/>
+        <span ng-Hide="check||(query1&&query2&&query3)">全选</span>
+        <span ng-Show="check||(query1&&query2&&query3)">取消全选</span>
+        <br/><br/><br/><br/><br/>
+        <!--ngIf：为HTML增加选择功能，只有在表达式值为true时，当前元素才添加到DOM树-->
+        <input type="checkbox" ng-model="q"/>
+        <span ng-if="!q">全选</span><span ng-if="q">取消全选</span>
+
+        <p>{{d}}</p>                    <!--$rootScope相当于全局变量-->
+    </div>
+    <!--
+    ngShow/ngHide: 通过display：none/block来控制当前元素是否显示
+    ngDisabled:  赋值为true/false，可以控制当前元素是否禁用
+    ngChecked:  赋值为true/false，可以控制当前元素是否选中
+    -->
+
+
+    <div class="container" ng-controller="Mc2">
+        <p>{{a}}</p>
+        <p>{{b}}</p>
+        <p>{{c}}</p>
+        <p>{{d}}</p>
+    </div>
+    <div class="container" ng-controller="Mc3">
+        <p>{{a}}</p>
+        <p>{{b}}</p>
+        <p>{{c}}</p>
+        <p>{{d}}</p>
+    </div>
+    <script>
+        angular.module("Md1",[]).controller("Mc1",function(){
+
+        }).controller("Mc2",function($scope){
+            $scope.a=1
+            $scope.b=2
+        }).controller("Mc3",function($scope,$rootScope){
+            $scope.c=3
+            $rootScope.d=4  //$rootScope相当于全局变量
+        })
+    </script>
+</body>
+</html>

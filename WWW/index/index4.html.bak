@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="gb2312">
+   <title>ylbx</title>
+</head>
+<body>
+   
+	<img src="D:\HTML5\WWW\image\logo4.png" width="100%">
+    <dl>
+	<dt>中国医疗保险LOGO</dt>
+	<dd>
+	<a href=”#”>首页|</a>
+	<a href=”#”>每日快讯|</a>
+	<a href=”#”>高端视野|</a>
+	<a href=”#”>观点交锋|</a>
+	<a href=”#”>九州集萃|</a>
+	<a href=”#”>工伤生育|</a>
+	<a href=”#”>医药经纬|</a>
+	<a href=”#”>商保之窗|</a>
+	<a href=”#”>环球医保|</a>
+	</dd>
+	<dd>
+	<a href=”#”>保健一招|</a>
+	<a href=”#”>在线投稿|</a>
+	<a href=”#”>在线评刊|</a>
+	<a href=”#”>在线调查|</a>
+	<a href=”#”>在线问答|</a>
+	<a href=”#”>栏目推介|</a>
+	<a href=”#”>编委介绍|</a>
+	<a href=”#”>采编动态|</a>
+	<a href=”#”>在线征订|</a>
+	</dd>	
+     </dl>
+	 
+	<dl>
+		<dt>每日快讯 <a href=”#”>更多>></a></dt>
+		<dd>
+		<img src="D:\HTML5\WWW\image\logo6.png" width=20%>
+		</dd>
+		<dd>
+		年我国卫生事业发展统计的公报2009年我国卫生事业发展统计
+		</dd>
+	</dl>
+	<ul>
+		<li>我国卫生事业发展 2016-4-12</li>
+		<li>我国卫生事业发展 2016-4-12</li>
+		<li>我国卫生事业发展 2016-4-12</li>
+		<li>我国卫生事业发展 2016-4-12</li>
+		<li>我国卫生事业发展 2016-4-12</li>
+	</ul>
+	<ul>
+		<li>栏目推荐
+		<a href=”#”>更多>></a>
+		</li>
+		<li><a href=”#”>专题报道</a></li>
+		<li><a href=”#”>医家之言</a></li>
+		<li><a href=”#”>商业保险</a></li>
+		<li><a href=”#”>管理平台</a></li>	
+	</ul>
+	<ul>
+		<li>新闻图片
+		<a href=”#”>更多>></a>
+		</li>
+	<img src="D:\HTML5\WWW\image\logo8.png">
+	<p>中国医药行业信用评比 1 234</p>
+	</ul>
+	<ul>
+		<li>封面杂志
+			<a href=”#”>更多>></a>
+		</li>	
+		<img src="D:\HTML5\WWW\image\logo10.png">
+			<p>2016.3 总第18期</p>
+		<img src="D:\HTML5\WWW\image\logo10.png">
+			<p>2016.3 总第18期</p>
+		<img src="D:\HTML5\WWW\image\logo10.png">
+			<p>2016.3 总第18期</p>
+		<img src="D:\HTML5\WWW\image\logo10.png">
+			<p>2016.3 总第18期</p>
+	</ul>
+	<form>
+		信息类别：
+		<select>
+		<option>--请选择--</option>	
+		<option>医疗</option>	
+		<option>保险</option>	
+		<option>保健</option>	
+		</select>
+		<input type="txt" name"gjz" value="请输入关键字"/>
+		<input type="button" value="检索"/>
+		热门关键字：医疗 保险 保健
+	</form>
+	<ul>
+		<li>新闻动态
+			<a href=”#”>MORE>></a>
+		</li>
+	</ul>
+	<img src="D:\HTML5\WWW\image\logo13.png">
+
+	<img src="D:\HTML5\WWW\image\logo14.png">
+	<img src="D:\HTML5\WWW\image\logo15.png">
+	<img src="D:\HTML5\WWW\image\logo16.png">
+	<img src="D:\HTML5\WWW\image\logo17.png">
+	<img src="D:\HTML5\WWW\image\logo18.png">
+	<img src="D:\HTML5\WWW\image\logo19.png">
+	<img src="D:\HTML5\WWW\image\logo20.png">
+</body>
+</html>
+

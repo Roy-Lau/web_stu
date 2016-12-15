@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+    <script>
+        var shiArr=["北京市","上海市","天津市"];
+        var quArr=[];
+        quArr[0]=[];
+        quArr[0][0]="海淀区";
+        quArr[0][1]="朝阳区";
+
+        quArr[1]=[];
+        quArr[1][0]="虹桥区";
+        quArr[1][1]="浦东区";
+
+        quArr[2]=[];
+        quArr[2][0]="和平区";
+        quArr[2][1]="津南区";
+
+        window.onload=function(){
+            for(var i=0;i<shiArr.length;i++){
+                shi.add(new Option(shiArr[i],i),null);
+            }
+            for(var i=0;i<quArr[0].length;i++){
+                qu.add(new Option(quArr[0][i],i),null);
+            }
+        }
+        function huanqu(t){
+            qu.innerHTML="";
+            for(var i=0;i<quArr[t.selectedIndex].length;i++){
+                qu.add(new Option(quArr[t.selectedIndex][i],i),null);
+            }
+        }
+    </script>
+<body>
+    <select id="shi" onchange="huanqu(this)"></select>
+    <select id="qu"></select>
+</body>
+</html>

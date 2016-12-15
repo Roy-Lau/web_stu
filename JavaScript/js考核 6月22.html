@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+        var kl=10;
+        function rose(kl){
+            kl--;
+            console.log(kl);            //10
+        }
+        function jack(){
+            kl--;
+            console.log(kl);            //4
+        }
+        console.log(kl);                //10
+        rose(5);
+        console.log(kl);                //9
+        jack();
+        console.log(kl);                //9
+
+        var n=100;
+        function fun(){
+            console.log(n);                 //undefined
+            var n=99;
+            console.log(n);                 //99
+        }
+        fun();
+        console.log(n);                     //100
+    </script>
+</head>
+<body>
+
+</body>
+</html>

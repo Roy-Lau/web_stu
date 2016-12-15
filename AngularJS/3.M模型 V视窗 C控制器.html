@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html ng-app="Md1">
+<head lang="en">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/bootstrap.css"/>
+    <title>四大特性之一MVC模式</title>
+  <!--M模型 V视窗 C控制器具体步骤：
+    1)声明一个自定义的模块(module)
+    angular.module('模块名', [ ])
+    2)在当前AngularJS应用中注册自定义模块
+    ng-app="模块名"
+    3)在自定义模块中创建Controller函数，其中创建Model数据
+    $scope.模型变量名 = 值
+    4)在View中创建Controller对象的实例，指定其作用范围
+    <标签 ng-controller=“控制器名”>...控制器的有效范围...</标签>
+    5)在控制器的作用范围内输出Model变量
+    可以使用{{}}输出Model变量的值-->
+
+</head>
+<body>
+<div class="container" ng-controller="Mc1">
+    <h3>{{n}}</h3>
+    <h3>{{f}}</h3>
+
+</div>
+<div class="container" ng-controller="Mc2"> <!--Mc2的作用范围-->
+    <h3>{{n}}</h3>
+    <h3>{{f}}</h3>
+
+</div>
+<script src="../js/jquery-1.11.3.js"></script>
+<script src="../js/angular.js"></script>
+<script>
+    //    angular.module创建一个angular自定义模块module   Md1是自定义模块名，[]空数组
+    //        点儿上一个controller局部变量Mc1，function方法。
+    angular.module("Md1",[]).controller("Mc1",function($scope){
+        $scope.n="Tom";
+    //        var n="10"     var的变量可以作用于script中，但是不会作用于页面中；
+    //        console.log(n)
+    }).controller("Mc2",function($scope){
+
+        $scope.f="Rose";
+    })
+    //    下面的两行稍微复杂 但是好理解 效果同上
+    //    var Myapp=angular.module("Md1",[]);
+    //    Myapp.contorller("Mc1",function(){});
+</script>
+</body>
+</html>

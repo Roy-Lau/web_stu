@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>博客</title>
+    <style>
+        .ctn{margin: 0 auto;width: 60%;height: 500px;border: 1px solid lawngreen;}
+        .center{text-align: center;}
+        /*下边的样式是为了画出对话框*/
+        #box{width: 0px;
+            height: 0px;
+            border-top: 25px solid transparent;
+            border-bottom: 20px solid transparent;
+            border-right: 20px solid grey;
+            margin-top:20px;
+        }
+        #box1{width:500px;
+            height:80px;
+            background-color:grey;
+            border-radius:5px;
+            padding: 8px;
+        }
+        /*下边的样式是为了浮动和隐藏对话框*/
+        #box,#box1{float:left;display: none;}
+    </style>
+    <!--需要改进的地方：
+        1.对话框根据内容的大小 显示
+        2.每点击一次评论 出现一个内容-->
+    <script>
+        var inpArr=document.getElementsByTagName("input")
+        function update(){
+//            下边的两行显示对话框
+                box.style.display="block"
+                box1.style.display="block"
+//            new 一个时间的方法
+                var date=new Date()
+//            将 时间 和 value的值赋给box1
+                box1.innerHTML=date.toTimeString()+':'+inpArr[0].value
+
+        }
+        function cole(){
+            inpArr[0].value=""
+            box1.innerHTML=""
+            box.style.display="none"
+            box1.style.display="none"
+        }
+    </script>
+</head>
+<body>
+<div class="ctn">
+    <div id="box"></div>
+    <div id="box1"></div>
+</div>
+<div class="center">
+    <input type="text"/>
+    <input type="button" value="评论" onclick="update()"/>
+    <input type="button" value="取消" onclick="cole()"/>
+</div>
+
+</body>
+</html>

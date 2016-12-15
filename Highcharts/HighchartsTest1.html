@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>月平均气温</title>
+    <script src="js/jquery-2.1.4.js"></script>
+    <script src="js/highcharts.js"></script>
+    <script src="js/exporting.js"></script>
+    <script src="js/canvas-tools.js"></script>
+    <script src="js/export-csv.js"></script>
+    <script src="js/jspdf.min.js"></script>
+    <script src="js/highcharts-export-clientside.js"></script>
+</head>
+<body>
+<div id="container" style="width: 600px ;height:500px;margin: 0 auto;"></div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        var title = {
+            text:'月平均气温'
+        };
+        var subtitle = {
+            text:'——数据来自网络'
+        };
+        var xAxis = {
+            categories : ['一月','二月','三月','四月','五月','六月',
+                        '七月','八月','九月','十月','十一月','十二月',]
+        };
+        var yAxis = {
+            title: {
+                text: 'Temperature(\xB0C)' //Temperature:温度 (\xB0C)摄氏度符号
+            },
+            plotLines:[{                   //plotLines:主线
+                value:0,
+                width:1,
+                color:'#808080'
+            }]
+        };
+        var tooltip = {value:'\xB0C'};
+        var legend = {                     //legend:传奇，图例
+                layout:'vertical',         //layout:布局,安排,设计;布置图,规划图vertical:垂直的
+                align:'right',             //align:排列
+                verticalalign:'middle',    //verticalalign：垂直排列  middle:居中
+                borderwidth:'0'
+        };
+        var series = [                      //series:串联;级数;系列，连续;
+            {
+                name:'Tokyo',               //Tokyo:东京
+                data:[7.0,6.9, 9.5, 14.5, 18.2, 21.5, 25.2,
+                                26.5, 23.3, 18.3, 13.9, 9.6]
+            },
+            {
+                name:'New York',
+                data:[-0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8,
+                                24.1, 20.1, 14.1, 8.6, 2.5]
+            },
+            {
+                name:'Berlin',
+                data:[-0.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6,
+                                    17.9, 14.3, 9.0, 3.9, 1.0]
+            },
+            {
+                nmae:'London',
+                data:[3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 
+                                    16.6, 14.2, 10.3, 6.6, 4.8]
+            },
+        ]     
+       
+        var json = {};
+        json.title    = title;
+        json.subtitle = subtitle;
+        json.xAxis    = xAxis;
+        json.yAxis    = yAxis;
+        json.tooltip  = tooltip;
+        json.legend   = legend;
+        json.series   = series;
+        
+         $('#container').highcharts(json);
+    });
+
+</script>
+</body>
+</html>
+
+
+ 

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html ng-app="Md1">
+<head lang="en">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/bootstrap.css"/>
+    <script src="../js/jquery-1.11.3.js"></script>
+    <script src="../js/angular.js"></script>
+    <title>管道</title>
+    <style>
+        h3{color:pink;font-weight: bold;}
+    </style>
+</head>
+<body>
+<div class="container" ng-controller="Mc1">
+    <h3>大小写转换</h3>
+    <p>小写：{{str}}</p>
+    <p>小写：{{str|lowercase}}</p>    <!--把数据格式化为小写-->
+    <p>大写：{{str|uppercase}}</p>    <!--把数据格式化为大写-->
+
+    <h3>把数字型数据格式化为三位一个逗号的字符串:</h3>
+    <p>数字：{{num|number}}</p>
+    <p>保留两位：{{num|number:2}}</p>        <!--位数过多会出现NaN-->
+
+    <h3>把数字型数据格式化为货币格式的字符串，同时指定货</h3>
+    <p>{{yuan|currency}}</p>
+    <p>{{yuan|currency:'￥'}}</p>
+    <p>{{yuan|currency:'RMB：'}}</p>
+
+    <h3>把数字/Date型数据格式化为特定日期时间格式的字符串</h3>
+    <p>国际标准时间：{{time}}</p>
+    <p>date：{{time|date}}</p>
+    <p>年月日：{{time|date:'yyyy年MM月dd日'}}</p>
+    <p>时分秒：{{time|date:'yyyy-MM-dd hh:mm:ss'}}</p>
+</div>
+<script>
+    angular.module("Md1",[]).controller("Mc1",function($scope){
+        $scope.str="Lorem";
+        $scope.num=314159269535.7189345
+        $scope.yuan=314159269535.7189345
+        $scope.time=new Date()
+    })
+</script>
+</body>
+</html>

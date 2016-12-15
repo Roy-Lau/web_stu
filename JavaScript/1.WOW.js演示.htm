@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<!-- saved from url=(0032)http://www.dowebok.com/demo/131/ -->
+<html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<title>WOW.js演示_dowebok</title>
+<link rel="stylesheet" href="http://cdn.dowebok.com/98/css/animate.min.css">
+	<!--使用WOW.js必须提前引入animate.css-->
+<style>
+	*{ margin: 0; padding: 0;}
+	body {  font-family: "Microsoft Yahei";}
+	body h1 { margin: 80px 0; font-size: 50px; font-weight: 500; text-align: center;}
+	body .txt { margin: 80px 0; font-size: 16px; text-align: center;}
+	.dowebok { margin: 0 auto;}
+	.dowebok ul { list-style-type: none;}
+	.dowebok .row { font-size: 0; text-align: center;}
+	.dowebok .wow { display: inline-block; width: 280px; height: 280px; margin: 30px 15px 0; border-radius: 50%; font: 30px/280px "Microsoft Yahei"; vertical-align: top; *display: inline; zoom: 1;}
+	.bg-green { background: #5bd5a0;}
+	.bg-blue { background: #1daee9;}
+	.bg-purple { background: #c843a5;}
+	.bg-red { background: #eb3980;}
+	.bg-yellow { background: #ffcc35;}
+</style>
+<body>
+<h1>WOW.js - 让页面滚动更有趣</h1>
+
+<p class="txt">WOW.js 能让页面滚动时显示动画，使页面更有趣。</p>
+
+<div class="dowebok">
+	<div class="row">
+		<div class="wow rollIn bg-blue animated" >1</div>
+		<div class="wow bounceInDown bg-green animated" >2WOW.js</div>
+		<div class="wow lightSpeedIn bg-purple animated" >3</div>
+	</div>
+
+	<div class="row">
+		<div class="wow rollIn bg-yellow animated" data-wow-delay="0.5s" style="visibility: visible; -webkit-animation-delay: 0.5s;">4简单易用</div>
+		<div class="wow pulse bg-red animated" data-wow-iteration="5" data-wow-duration="0.15s" style="visibility: visible; -webkit-animation-duration: 0.15s; -webkit-animation-iteration-count: 5;">5 pulse译为：心跳！</div>
+		<div class="wow bounceInRight bg-blue animated" >6轻量级</div>
+	</div>
+
+	<div class="row">
+		<div class="wow bounceInLeft bg-green animated" >7</div>
+		<div class="wow flipInX bg-purple animated" >8WOW.js</div>
+		<div class="wow bounceInRight bg-yellow animated" >9</div>
+	</div>
+
+	<div class="row">
+		<div class="wow rollIn bg-blue animated" >10无需 jQuery</div>
+		<div class="wow shake bg-red animated" data-wow-iteration="5" data-wow-duration="0.15s" style="visibility: visible; -webkit-animation-duration: 0.15s; -webkit-animation-iteration-count: 5;">11</div>
+		<div class="wow swing bg-purple animated" data-wow-iteration="2" style="visibility: visible; -webkit-animation-iteration-count: 2;">12纯 JS</div>
+	</div>
+
+	<div class="row">
+		<div class="wow rollIn bg-red animated" >13</div>
+		<div class="wow bounceInU bg-yellow animated" data-wow-delay="0.5s" style="visibility: visible; -webkit-animation-delay: 0.5s;">14WOW.js</div>
+		<div class="wow lightSpeedIn bg-green animated" data-wow-delay="0.5s" data-wow-duration="0.15s" style="visibility: visible; -webkit-animation-duration: 0.15s; -webkit-animation-delay: 0.5s;">15</div>
+	</div>
+
+	<div class="row">
+		<div class="wow bounceInLeft bg-purple animated" >16依赖 animate.css</div>
+		<div class="wow pulse bg-blue animated" data-wow-iteration="5" data-wow-duration="0.25s" style="visibility: visible; -webkit-animation-duration: 0.25s; -webkit-animation-iteration-count: 5;">17</div>
+		<div class="wow lightSpeedIn bg-yellow animated" >18多种动画</div>
+	</div>
+
+	<div class="row">
+		<div class="wow bounce bg-green animated" data-wow-iteration="5" data-wow-duration="0.15s" style="visibility: visible; -webkit-animation-duration: 0.15s; -webkit-animation-iteration-count: 5;">19</div>
+		<div class="wow bounceInUp bg-red animated" >20WOW.js</div>
+		<div class="wow bounceInRight bg-purple animated" >21</div>
+	</div>
+
+	<div class="row">
+		<div class="wow rollInDown bg-red animated" data-wow-delay="0.5s" style="visibility: visible; -webkit-animation-delay: 0.5s;">22无需 jQuery！？</div>
+		<div class="wow bounceInDown bg-green animated" data-wow-delay="1s" style="visibility: visible; -webkit-animation-delay: 1s;">23</div>
+		<div class="wow bounceInRight bg-yellow animated" data-wow-delay="1.5s" style="visibility: visible; -webkit-animation-delay: 1.5s;">24谢谢</div>
+	</div>
+</div>
+
+<script src="./WOW_js/wow.min.js"></script>
+<script>
+if (!(/msie [6|7|8|9]/i.test(navigator.userAgent))){
+	new WOW().init();
+};
+</script>
+</body>
+</html>

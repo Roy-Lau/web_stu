@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .frred{color:#FF0000; font-size:12px;}
+        .frbule{color:#0066CC; font-size:12px;}
+        .fgren{color:#339933; font-size:12px;}
+    </style>
+    <script>
+        //    验证用户名
+        function onb(){
+            var regname=/^\w{4,10}$/;
+            var fname=document.getElementById("name");
+            var ftname=document.getElementById("s1");
+            if(fname.value==""|| fname.value.length<4||fname.value.length>10){
+                ftname.className="frred";
+                ftname.innerHTML="请输入4-10位用户名，可包含数字、字母、下划线";
+            }
+            else{
+                if(fname.value.match(regname)){
+                    ftname.className="fgren";
+                    ftname.innerHTML="用户名可用!"
+                }
+                else{
+                    ftname.className="frred";
+                    ftname.innerHTML="用户名格式输入错误，请检查！";
+                }}
+        }
+
+        //验证密码
+        function checkpwd(){
+            var fpwd=document.getElementById("password1");
+            var ftpwd=document.getElementById("error1");
+            if(fpwd.value==""||fpwd.value.length<4||fpwd.value.length>20){
+                ftpwd.className="frred";
+                ftpwd.innerHTML="× 请输入4-20位用户密码！";
+            }
+            else{
+                ftpwd.className="fgren";
+                ftpwd.innerHTML="√密码可用！"
+            }
+        }
+        function rcheckpwd(){
+            var fpwd=document.getElementById("password1");
+            var frpwd=document.getElementById("password2");
+            var ftrpwd=document.getElementById("error2");
+            if(frpwd.value=="")
+            {
+                ftrpwd.className="frred";
+                ftrpwd.innerHTML="× 两次密码输入不一致！"
+            }
+            else{
+                if(frpwd.value!=fpwd.value)
+                {
+                    ftrpwd.className="frred";
+                    ftrpwd.innerHTML="× 俩次密码输入不一致，请重新输入！";
+                }
+                else
+                {
+                    ftrpwd.className="fgren";
+                    ftrpwd.innerHTML=" √ 密码输入正确"
+                }
+            }
+        }
+        //验证邮箱
+        function checkemail(){
+            var regemail=/^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*(;\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*)*$/;
+            var femail=document.getElementById("email");
+            var ftemail=document.getElementById("semail");
+            if(femail.value==""){
+                ftemail.className="frred";
+                ftemail.innerHTML="电子邮箱不能为空！";
+            }
+            else{
+                if(femail.value.match(regemail)){
+                    ftemail.className="fgren";
+                    ftemail.innerHTML="邮箱地址正确！";
+                }
+                else{
+                    ftemail.className="frred";
+                    ftemail.innerHTML="邮箱格式输入错误，请检查！";
+                }
+            }
+        }
+
+    </script>
+</head>
+<body>
+        名字：<input type="text" value="请输入用户名" id="name" onblur="onb()"><span id="s1"></span><br />
+        姓氏：<input type="text"><span></span><br />
+      登录名：<input type="text"><span></span><br />
+        密码：<input type="password" id="password1" onblur="checkpwd()">
+        <span class="frbule" id="error1"></span><br />
+
+  再次输入密码：<input type="password" id="password2" onblur="rcheckpwd()">
+        <span class="frbule" id="error2"></span><br />
+
+     电子邮箱：<input type="email" onblur="checkemail()" id="email" >
+        <span class="frbule" id="semail"></span><br />
+
+        性别：<input type="radio" name="sex" value="men">男
+        <input type="radio" name="sex" value="women">女<br />
+        头像：<input type="file" value=""><br />
+        爱好：<input type="checkbox" value="">运动
+        <input type="checkbox" value="">聊天
+        <input type="checkbox" value="">玩游戏<br />
+    出生日期：<input type="number" min="1700" max="2016" step="1" value="1998">年
+            <form>
+                <select>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>11</option>
+                    <option>12</option>
+                </select>月
+            </form>
+        <input type="number" min="1" max="31" step="1" value="1">日<br />
+            <input type="button" value="提交">
+            <input type="button" value="重填">
+</body>
+</html>

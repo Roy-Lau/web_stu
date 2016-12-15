@@ -1,0 +1,47 @@
+div,body,html,h1,h2,h3,h4,h5,h6,p,form,ul,ol,li,dl,dd,input{margin:0;padding:0}
+a{text-decoration: none;color: #fff;}
+li{list-style: none;}
+html,body{width: 100%;height: 100%;background-color: #fff;}
+input{border: none;outline: none;}
+/*自定义样式*/
+.w{width: 1142px;}
+.auto{margin: auto;}
+.fl-l{float: left;}
+.fl-r{float: right;}
+.ov-h{overflow: hidden;}
+.clear{clear: both;}
+header{height: 790px;background: url('../images/banner.jpg') 0px 0px no-repeat;background-size: cover;padding-top: 1px;position:relative}
+header #nav{background: rgba(0,0,0,.4);margin-top: 20px;}
+header #nav ul{padding: 16px 10px;}
+header #nav>ul>li{display: inline-block;position: relative;}
+header #nav>ul>li .menu{position: absolute;display: none;margin-left: 20px;z-index: 99999;}
+header #nav>ul>li .menu li{line-height: 26px;text-align: center;}
+header #nav>ul>li .menu li:hover a{color: red;}
+header #nav>ul>li:hover .menu{display: block;}
+header #nav ul li a{font-weight: 900;padding-top: 4px}
+header #nav ul li a.active{color: #FAEE0D;border-top: 4px solid #FAEE0D;padding-top: 4px;}
+header #nav ul li a{transition: all 0.5s;}
+header #nav>ul>li>a:hover{border-top: 4px solid #FAEE0D;color: #FAEE0D;}
+header #nav ul li span{margin: 0 10px;color: #fff;font-weight: 900;}
+header .search{width: 230px;height: 33px;border: 1px solid #ccc;margin-top: 8px;margin-right: 20px;}
+header .search .text{width:194px;height: 33px;background-color: transparent;text-indent: 1em;color: #fff;}
+header .search .btn{width:36px;height: 33px;background: url('../images/search.png') center no-repeat;}
+header h1.logo{width: 327px;height: 119px;border-top: 5px solid #fff;border-bottom: 5px solid #fff;line-height: 119px;text-align: center;font-size: 50px;margin-top: 209px;}
+#pic_box{position: absolute;bottom: 0px;left: 50%;margin-left: -571px;}
+#pic_box li{background: #16A667;display:inline-block;text-align: center;padding: 15px 50px 3px 50px;margin-left: 10px;;}
+#pic_box li img{border: 8px solid #fff;border-radius: 50%;padding: 10px;transition: all 0.8s;}
+#pic_box li img:hover{transform: rotateY(360deg);}
+#pic_box li h3,p{color: #fff;line-height: 26px;}
+
+/*鼠标悬停  背景图放大*/
+#Latest_Works h2{padding: 20px 0;}
+#Latest_Works a{float:left;width: 285px;height: 244px;position: relative;}
+#Latest_Works a img.pic{width: 100%;height: auto;}
+#Latest_Works a .pic_box{position: absolute;top: 0px;left: 0;width: 285px;height: 244px;transform: scale(0);transition: all 0.5s;transform-origin: center;border: 1px solid #fff;box-shadow: 0px 0px 5px #fff;background: rgba(255,255,255,.16);}
+#Latest_Works a .pic_box img{margin: auto;display: block;padding-top: 92px;}
+#Latest_Works a:hover .pic_box{transform: scale(1);}
+
+/*鼠标悬停 背景颜色闭合*/
+.more{position:relative;width: 120px;height: 40px;line-height: 40px;text-align: center;background: #f2af00;display: inline-block;z-index: 1;}
+.more:after{content: '';position: absolute;top: 0;left: 0;right: 0;bottom: 0;background: #16A667;z-index: -1;transition: all 0.5s;transform: scaleY(1);}
+.more:hover:after{transform: scaleY(0);}

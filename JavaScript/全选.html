@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>复选框</title>
+    <script>
+        function dian(tt){
+            var a= document.getElementsByTagName("input");
+            var bllom=false;
+            alert(tt.checked)
+            if(tt.checked){
+               bllom=true;
+            }
+            for(var i=0;i< a.length;i++){
+                a[i].checked=bllom;
+            }
+        }
+//              Out of memory at line译为：内存溢出，  多为死循环或虚拟未存不足！
+    </script>
+</head>
+<body>
+        <input type="checkbox" value="全选" onclick="dian(this)"/>全选<br/>
+        <input type="checkbox" value="选中"/><br/>
+        <input type="checkbox" value="选中"/><br/>
+        <input type="checkbox" value="选中"/><br/>
+        <input type="checkbox" value="选中"/><br/>
+        <input type="checkbox" value="选中"/><br/>
+        <input type="checkbox" value="选中"/><br/>
+</body>
+</html>

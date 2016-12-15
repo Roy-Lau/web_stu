@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <!--width=device-width视口的宽度等于屏幕的宽度  initial-scale=1缩放比例为1 user-scalable=no禁止缩放-->
+    <meta http-equiv="X-UA-Compitable" content="IE=edge">   <!--这一行代码时为了兼容老版本的IE：新版本的IE启用老版本的IE内核-->
+    <link rel="stylesheet" href="../css/bootstrap.css"/>    <!--引入css的Bootstrap-->
+    <title>弹框</title>
+
+</head>
+<body>
+
+<button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModa1">
+    注册
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="myModa1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"><!--固定定位的半透明遮罩层-->
+    <div class="modal-dialog" role="document">      <!--定位、宽高-->
+        <div class="modal-content">                 <!--背景、边框、阴影-->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel11">注册</h4>
+            </div>
+            <div class="modal-body">
+                <div class="input-group">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default">用户名</button>
+                    </div>
+                    <input type="text" class="form-control" aria-label="...">
+                </div>
+                <br/>
+                <div class="input-group">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default">密码</button>
+                    </div>
+                    <input type="password" class="form-control" aria-label="...">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-info">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Button trigger moda2 -->
+<button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#myModa2">
+    登陆
+</button>
+
+<!-- Moda2 -->
+<div class="modal fade" id="myModa2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel1">登陆</h4>
+            </div>
+            <div class="modal-body">
+                <div class="input-group">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default">账号</button>
+                    </div>
+                    <input type="text" class="form-control" aria-label="...">
+                </div>
+                <br/>
+                <div class="input-group">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default">密码</button>
+                    </div>
+                    <input type="password" class="form-control" aria-label="...">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Button trigger moda2 -->
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModa3">
+   更改密码
+</button>
+
+<!-- Moda2 -->
+<div class="modal fade" id="myModa3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel2">重置密码</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">旧密码</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">新密码</label>
+                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox"> 7天自动登录！
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success">提交</button>
+                <button type="button" class="btn btn-warning" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--[if lte IE 9]        &lt;!&ndash;如果用户使用是的IE9以下的版本的浏览器，就解析下面的文件&ndash;&gt;-->
+<script src="../js/html5shiv.min.js"></script>      <!--引入html5shiv.min文件，为了让老版本的IE（<9）支持HTML5新标签-->
+<script src="../js/respond.min.js"></script>        <!--引入respond.min文件，为了让老版本的IE（<9）支持CSS3MediaQuery-->
+<!--[endif]-->
+<script src="../jQuery/jquery-1.12.1.min.js"></script>  <!--引入jQuery文件  jQuery必须在bootstrap的上面-->
+<script src="../js/bootstrap.js"></script>              <!--引入bootstrap.js文件  bootstrap是基于jQuery的-->
+</body>
+</html>

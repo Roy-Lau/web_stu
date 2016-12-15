@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title> html学习的第二周1</title>
+  <meta name="generator" content="editplus" />
+  <meta name="author" content="" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+	<style type="text/css">																	/*内部样式*/
+	*{margin:0;padding:0;}			/*通用选择器*/
+	body{background-image:url(../image/shu/a1.png);
+			repeat:no-repeat;}  /*html的斜杠是(\)css的斜杠是(/)/*/	/*标签样式*/
+	#b1{background-color:pink;}		/*id选择器*/
+	.a1 dt{color:#55aa55;			/*class类选择器*/
+		font-size:28px;}
+	 .a1 dd{color:red;font:"宋体";}
+	</style>
+ </head>
+ <body id="b1">
+	<dl class="a1">
+	<dt> 钗头凤</dt>
+  <dd>红酥手，黄縢酒，满城春色宫墙柳。东风恶，欢情薄。一怀愁绪，几年离索。错、错、错。</dd>
+  <dd style="font-size:18px;"><!--css内联样式-->春如旧，人空瘦，泪痕红浥鲛绡透。桃花落，闲池阁。山盟虽在，锦书难托。莫、莫、莫！</dd>
+  <dl>
+	<ul>
+  <li>做程序猿其实可痛苦的了......</li>
+ <li>程序猿一建一改，一天就过去了；嚎~</li>
+ <li>程序猿再一改一调，整个晚上就过去了；嚎~</li>
+ <li>程序猿最痛苦的事儿是啥，知道不？</li>
+ <li>就是，程序猿没做完，设计又改了；嚎~</li>
+ <li>程序猿最最痛苦的事儿是啥，知道不？</li>
+ <li>就是，程序猿好不容易做完了，方案全改了；嚎~</li>
+ <li>程序猿最最最痛苦的事儿是啥，知道不？</li>
+ <li>就是，程序猿做完了，狗日的客户跑了；嚎~~~</li>
+  </ul>
+ </body>
+</html>

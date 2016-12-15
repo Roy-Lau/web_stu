@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>时钟</title>
+    <script src="../jQuery/jquery-1.12.1.min.js" type="text/javascript"></script>
+
+    <script>
+       var date= new Date();
+//        document.write(date.getFullYear()+"年"+ (date.getMonth()+1)+"月"+ date.getDate()+"日"+
+//          "----星期"+date.getDay()
+//          +"----时间"+date.getHours()+" : "+date.getMinutes()+" : "+date.getSeconds()+"秒"+date.getMilliseconds()
+//          )
+            function time(){
+           var date= new Date();
+            h1.innerHTML=date.toLocaleString();         //本地时间（电脑当前的时间）
+        }
+
+         setInterval(time,1000);
+    </script>
+</head>
+<body>
+    <div><a id="h1"></a></div>
+</body>
+</html>

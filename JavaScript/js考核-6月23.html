@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<script>
+    var n="May";
+    var obj={
+        n:"Rose",
+        prop:{
+            n:"jack",
+            getFun:function(){
+                return this.n;
+            }
+        }
+    }
+    console.log(obj.prop.getFun());
+    var test=obj.prop.getFun;
+    console.log(test());
+
+
+
+    var a=b={n:1};
+    a.n=2;
+    console.log(a.n);
+    console.log(b.n);
+</script>
+<body>
+
+</body>
+</html>

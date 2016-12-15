@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html ng-app>
+<head lang="en">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/bootstrap.css"/>
+    <title>angulur</title>
+</head>
+<body>
+    <div class="container">
+        <h3 class="text-warning">运算</h3>
+        <p>{{1+2}}</p>
+        <p>{{2-1}}</p>
+        <p>{{2*4}}</p>
+        <p>{{2/4}}</p>
+        <p>{{2%4}}</p>
+        <!--<p ng-init="a=4">A:{{a++}}</p>-->
+        <h3 class="text-danger">判断</h3>
+        <p>{{3>4}}</p>
+        <p>{{!(3>4 && 4>3)}}</p>
+        <p>B:{{b=9}}</p>
+        <!--<p>{{b+=1}}</p>-->
+
+        <!--<span ng-init="age=20"></span>-->
+        <span class="ng-init:age=16"></span>
+        <p>{{age>18 ? "成年":"未成年"}}</p>      <!--age大于18吗？大于输出 成年 不大于输出 未成年-->
+        <br/>
+        <p>数组ARR:{{[10,20,30,40][3]}}</p>
+        <p>对象Obj：{{{"name":"Tom","age":18,"fex":"nan"}.fex}}</p>
+        <p ng-init="str='lovespellweillwein'">字符串长度：{{str.length}}</p>
+        <p>下标Sub：{{str.substring(2,8)}}</p>           <!--选出”lovespellweillwein“的下标2到下标8显示；-->
+
+    </div>
+<script src="../js/jquery-1.11.3.js"></script>
+<script src="../js/angular.js"></script>
+
+</body>
+</html>

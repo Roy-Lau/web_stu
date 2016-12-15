@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>闭包</title>
+    <script>
+        /*********************史上最简单的闭包****************/
+        function a(){
+            return function(){
+                return 1;
+            }
+        };
+        b=a();
+        alert(b())
+    </script>
+</head>
+<body>
+
+</body>
+</html>

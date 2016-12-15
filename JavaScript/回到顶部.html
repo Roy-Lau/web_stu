@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>scrollBy慢速滚动返回顶部</title>
+</head>
+<style>
+  div{
+    width: 100px;
+  height: 80px;
+  background-color: #0066CC;
+  font-size: 2em;
+  position: fixed;bottom: 20px;}
+    a{
+        background-color: yellow;
+        position: fixed;
+        right: 30px;
+        bottom:20px;}
+</style>
+<body style="height: 10000px;">
+<h1>滑动到底部后，点击top回滚到顶部</h1>
+<div onclick="javascript:returnTop();">topDiv</div>
+<a href="javascript:returnTop();">topA</a>
+</body>
+<script>
+    /********************scrollBy慢速滚动返回顶部**********************/
+    var sdelay=0;
+    function returnTop() {
+        window.scrollBy(0,-100);
+        if(document.body.scrollTop>0) {
+            sdelay= setTimeout('returnTop()',80);
+        }
+    }
+</script>
+</html>

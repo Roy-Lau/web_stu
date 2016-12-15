@@ -1,0 +1,71 @@
+<html>
+<head>
+ <meta charset="UTF-8" />
+    <title>树状图(Treemap)</title>
+    <script src="js/jquery-2.1.4.js"></script>
+    <script src="js/highlight-9.1.0.min.js"></script>
+<script src="http://code.highcharts.com/modules/treemap.js"></script>    
+<script src="http://code.highcharts.com/modules/heatmap.js"></script>  
+</head>
+<body>
+<div id="container" style="width: 550px; height: 400px; margin: 0 auto"></div>
+<script language="JavaScript">
+$(document).ready(function() {    
+   var title = {
+      text: 'Highcharts Treemap'   
+   };       
+   
+   var colorAxis = {
+      minColor: '#FFFFFF',
+      maxColor: Highcharts.getOptions().colors[0]
+   };
+   
+   var series= [{
+     type: "treemap",
+     layoutAlgorithm: 'squarified',
+     data: [{
+        name: 'A',
+        value: 6,
+        colorValue: 1
+     }, {
+        name: 'B',
+        value: 6,
+        colorValue: 2
+     }, {
+        name: 'C',
+        value: 4,
+        colorValue: 3
+     }, {
+        name: 'D',
+        value: 3,
+        colorValue: 4
+     }, {
+        name: 'E',
+        value: 2,
+        colorValue: 5
+     }, {
+        name: 'F',
+        value: 2,
+        colorValue: 6
+     }, {
+        name: 'G',
+        value: 1,
+        colorValue: 7
+     }]
+   }];     
+      
+   var json = {};     
+   json.title = title;          
+   json.colorAxis = colorAxis;   
+   json.series = series;       
+   
+   $('#container').highcharts(json);
+});
+   /*设置 series 的 type 属性为 treemap ，series.type 描述了数据列类型。默认值为 "line"。
+
+  var chart = {
+     type: 'treemap'
+  };*/
+</script>
+</body>
+</html>

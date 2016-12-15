@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body{width:700px;margin: 0 auto;}
+        .bgc1{background:white;}
+        .bgc2{background:#ccc;text-align:center;font:500;}
+    </style>
+</head>
+<script>
+    function zengjia(){
+        var tr = document.createElement("tr");
+        var oldNode = document.getElementById("shunjian");
+        var tBody1 = document.getElementById("tbody1");
+        tBody1.insertBefore(tr,oldNode);
+        tr.innerHTML = "<td>幸福从天而降</td><td>¥18.50</td>";
+    }
+
+    function shanchu(){
+        var tBody = document.getElementById("tbody1");
+        var trArr = tBody.getElementsByTagName("tr");
+        tBody.removeChild(trArr[0]);
+    }
+
+    function xiugai(){
+        var tHead = document.getElementById("shuming");
+             if(tHead.className == "bgc1"){
+                 tHead.className = "bgc2";
+             } else{
+                  tHead.className = "bgc1";
+             }
+    }
+
+    function fuzhi(){
+        var tBody = document.getElementById("tbody1");
+        var trArr = tBody.getElementsByTagName("tr");
+        var copyLine = trArr[trArr.length-1].cloneNode(true);
+        tBody.appendChild(copyLine);
+    }
+</script>
+<body>
+     <table border="1" align="center" cellspacing="0" width="400px">
+         <thead id = "shuming">
+             <td>书名</td>
+             <td>价格</td>
+         </thead>
+         <tbody id = "tbody1">
+             <tr id = "fengjing">
+                <td>看得见风景的房间</td>
+                <td>¥30.00</td>
+             </tr>
+             <tr id = "shunjian">
+                 <td>60个瞬间</td>
+                 <td>¥32.00</td>
+             </tr>
+         </tbody>
+     </table>
+     <div align="center">
+         <input type="button" value="增加一行" onclick="zengjia()"/>
+         <input type="button" value="删除第2行" onclick="shanchu()"/>
+         <input type="button" value="修改标题样式" onclick="xiugai()"/>
+         <input type="button" value="复制最后一行" onclick="fuzhi()"/>
+     </div>
+
+
+</body>
+</html>

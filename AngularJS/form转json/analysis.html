@@ -1,0 +1,159 @@
+﻿<!DOCTYPE html>
+<html ng-app="Md1">
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="jquery-1.11.3.js"></script>
+    <script src="jquery.serializejson.js"></script>
+    <title>form转为json</title>
+</head>
+<body>
+<div>
+    <!--点击显示数据 把form json传到后台-->
+    <button class="btn btn-success" onclick="btn()">显示数据</button>
+
+    <form id="example" enctype='application/json'>
+        <input name='name' value='Tom'>
+        <input name='name' value='Jack'>
+        <input name='name2' value='Rons'>
+        <select name='hind'>
+            <option selected>Bitable</option>
+            <option>Kickable</option>
+        </select>
+        <input type='checkbox' name='shiny' checked>
+    </form>
+
+    <form id="example1" enctype='application/json'>
+        <input name='name' value='Bender'>
+        <select name='hind'>
+            <option selected>Bitable</option>
+            <option>Kickable</option>
+        </select>
+        <input type='checkbox' name='shiny' checked>
+    </form>
+    <form id="example2" enctype='application/json'>
+        <input type='number' name='bottle-on-wall' value='1'>
+        <input type='number' name='bottle-on-wall' value='2'>
+        <input type='number' name='bottle-on-wall' value='3'>
+    </form>
+    <form id="example3" enctype='application/json'>
+        <input name='pet[species]' value='Dahut'>
+        <input name='pet[name]' value='Hypatia'>
+        <input name='kids[1]' value='Thelma'>
+        <input name='kids[0]' value='Ashley'>
+    </form>
+    <form id="example4" enctype='application/json'>
+        <input name='hearbeat[0]' value='thunk'>
+        <input name='hearbeat[2]' value='thunk'>
+    </form>
+    <form id="example5" enctype='application/json'>
+        <input name='pet[0][species]' value='Dahut'>
+        <input name='pet[0][name]' value='Hypatia'>
+        <input name='pet[1][species]' value='Felis Stultus'>
+        <input name='pet[1][name]' value='Billie'>
+    </form>
+    <form id="example6" enctype='application/json'>
+        <input name='wow[such][deep][3][much][power][!]' value='Amaze'>
+    </form>
+    <form id="example7" enctype='application/json'>
+        <input name='mix' value='scalar'>
+        <input name='mix[0]' value='array 1'>
+        <input name='mix[2]' value='array 2'>
+        <input name='mix[key]' value='key key'>
+        <input name='mix[car]' value='car key'>
+    </form>
+    <form id="example8" enctype='application/json'>
+        <input name='highlander[]' value='one'>
+    </form>
+    <form id="example9" enctype='application/json'>
+        <input type='file' name='file' multiple>
+    </form>
+    <form id="example10" enctype='application/json'>
+        <input name='error[good]' value='BOOM!'>
+        <input name='error[bad]' value='BOOM BOOM!'>
+    </form>
+    <p id="results"></p>
+    <p>第一个：OK，第二个：false，第三个：OK，第四个：OK，第五个：OK，第六个：OK，第七个：第一有问题，第八个：OK，第九个：false，第十个：</p>
+</div>
+<script>
+
+        function btn() {
+//        alert($("#example2 input").val());
+//            alert($("#example2 input").attr("name")[1]);
+
+//            $(function(){
+//                $("#example2 input").each(function(FOR){
+//                            if($(this).attr("name")==$(this).attr("name")){
+//                               var params = $("#example2").serializeArray();
+//
+//                                for(var i=0;i<=1;i++){
+//                                    alert(params[i].name + FOR)
+//                                    for(var j=0;j<=params.length;j++){
+//                                        var FOR = params[j].value;
+//                                        return FOR;
+//                                    }
+//                                }
+//                            }
+//                        }
+//                );
+//            });
+
+//        控制台输出form的json
+//          console.log( $("form").serializeArray())
+//        弹出form json
+//            var jsonObj = $("form").serializeArray();
+//            var k = $.param(jsonObj);
+//            alert(JSON.stringify(k));
+//            alert(k);
+//           页面输出
+//            x=$("form").serializeArray();
+//            $.each(x, function(i, field){
+//                $("#results").append(field.name + ":" + field.value + " " +"<br />");
+//            });
+//                  var params = $("#example1").serializeArray();
+//                  var j = {};
+//                  for (var item in params) {
+//                      j[params[item].name] = params[item].value;
+//              }
+//            jquery.serializejson输出效果
+//            var j = $("#example4").serializeJSON({useIntKeysAsArrayIndex: true});//第四个解决方法，
+            var j = $("#example6").serializeJSON();
+              $("#results").html(JSON.stringify(j))
+
+//                $.ajax({
+//                  url:'后台路径',
+//                  data:JSON.stringify(j),
+//                  type:'post',
+//                  dataType:'json',
+//                  headers:{
+//                      Accept:"application/json",
+//                      "Content-Type":"application/json"
+//                  },
+//                  processData:false,
+//                  cache:false
+//                }).done(function (data) {
+//              });
+//            另一种方法弹出
+//            $.fn.serializeObject = function()
+//            {
+//                var o = {};
+//                var a = this.serializeArray();
+//                $.each(a, function() {
+//                    if (o[this.name]) {
+//                        if (!o[this.name].push) {
+//                            o[this.name] = [o[this.name]];
+//                        }
+//                        o[this.name].push(this.value || '');
+//                    } else {
+//                        o[this.name] = this.value || '';
+//                    }
+//                });
+//                return o;
+//            };
+//            var jsonuserinfo = $('#example10').serializeObject();
+//            alert(JSON.stringify(jsonuserinfo));
+
+        };
+</script>
+</body>
+</html>
+<!--w3c form json-->
