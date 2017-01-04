@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<script>
+var txt="";
+function message()
+{
+try
+  {  adddlert("Welcome guest!");
+  }
+catch(err)
+  {
+  txt="这个页面上有一个错误.\n\n";
+  txt+="错误描述: " + err.message + "\n\n";
+  txt+="单击“确定”继续.\n\n";
+  alert(txt);
+  }
+}
+</script>
+</head>
+
+<body>
+<input type="button" value="View message" onclick="message()">
+</body>
+
+</html>
