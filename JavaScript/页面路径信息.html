@@ -1,0 +1,37 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>location</title>
+</head>
+ <script type="text/javascript">
+    //返回从#开始的URL值
+    var myhash = window.location.hash;
+    //返回主机名和当前URL的端口号；
+    var myhost = window.location.host;
+    //返回当前URL的主机名
+    var myhname =window.location.hostname;
+    //返回完整的URL
+    var myurl = window.location.href;
+    //返回当前URL的路径部分
+    var mypname = window.location.pathname;
+    //返回当前URL的端口号
+    var myport = window.location.port;
+    //返回当前URL的协议
+    var mypcol = window.location.protocol;
+    //返回从?开始的URL
+    var mysch = window.location.search;
+    
+    document.write('当前页面从#开始的URL值为：'+myhash+'<br>');
+    document.write('当前页面主机名和当前URL的端口号为：'+myhost+'<br>');
+    document.write('当前页面当前URL的主机名为：'+myhname+'<br>');
+    document.write('当前页面完整的URL为：'+myurl+'<br>');
+    document.write('当前页面URL的路径部分为：'+mypname+'<br>');
+    document.write('当前页面URL的端口号为：'+myport+'<br>');
+    document.write('当前页面URL的协议为：'+mypcol+'<br>');
+    document.write('当前页面从?开始的URL为：'+mysch+'<br>');
+ </script>
+</head>
+<body>
+</body>
+</html>
