@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+	<title>marquee滚动</title>
+</head>
+<body>
+<div class="box">
+	<dl>
+		<dt>文字滚动（默认）</dt>
+		<dd>
+			<marquee>我默认向左滚动……</marquee>
+		</dd>
+	</dl>
+	<dl>
+		<dt>文字滚动实例（向右）：</dt>
+		<dd>
+			<marquee direction="right" scrolldelay="500">我向右滚动……</marquee>
+			<!-- 延迟500ms -->
+		</dd>
+	</dl>
+	<dl>
+		<dt>文字滚动示例（默认方向，滚动方式为alternate，循环3次，速度为2</dt>
+		<dd>
+			<marquee behavior="alternate" loop="3" scrollamount="2">我来回滚动……</marquee>
+		</dd>
+	</dl>
+	<dl>
+		<dt>文字滚动示例（向上）：</dt>
+		<dd>
+			<marquee direction="up" bgcolor="#CCFF66" width="250" height="55">我在区域内滚动，向上哟……</marquee>
+		</dd>
+	</dl>
+</div>
+<br>
+<br>
+<br>
+<div class="box2">
+				<h1>鼠标放上停止滚动:</h1>
+	<marquee onmouseover="this.stop();" onmouseout="this.start();" bgcolor="#00FF11"
+				scrollamout="1" scrolldelay="100" direction="up" loop="-1" behavior="scrll" width="30%">
+				<!-- loop='-1'表示无限循环滚动 -->
+		<p>
+			<a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<a><br>
+
+			<a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<a><br>
+			
+		</p>
+	</marquee>
+</div>
+<br>
+<br>
+<br>
+	<h1>无缝滚动</h1>
+<div id="box3" style="height: 300px;overflow: hidden;">
+		<ul id="cont1">
+		<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</li>
+		<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</li>
+		<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</li>
+		<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</li>
+		<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</li>
+	</ul>	
+	<ul id="cont2">
+		
+	</ul>
+</div>
+
+<br>
+<br>
+<br>
+	<h1>单行滚动</h1>
+<div id="box4" style="height: 300px;overflow: hidden;">
+		<ul id="cont">
+		<li style="height: 60px;color:blue;">
+		    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</li>
+		<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</li>
+		<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</li>
+		<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</li>
+		<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</li>
+	</ul>	
+</div>
+</body>
+<script type="text/javascript">
+	var area = document.getElementById("box3")
+	var ul1 = document.getElementById("cont1")
+	var ul2 = document.getElementById("cont2")
+	ul2.innerHTML= ul1.innerHTML;
+	function scrollup(){
+		if (area.scrollTop >= ul1.offsetHeight){
+			area.scrollTop = 0;
+		}else{
+			area.scrollTop++;
+		}
+	};
+	var time = 50;
+	var myscroll =setInterval("scrollup()",time)
+	area.onmouseover =function(){
+		clearInterval(myscroll);
+	}
+	area.onmouseout  =function(){
+		myscroll = setInterval("scrollup()",time)
+	}
+	// ______________________box4__________________________________`
+	var area1 = document.getElementById("box4")
+	var UL = document.getElementById("cont")
+	var LH = 60;
+	UL.innerHTML += UL.innerHTML;
+	area1.scrollTop = 0;
+    var Time;
+    function startMove(){
+        area1.scrollTop++;
+        Time = setInterval("scrollUp()",time)
+    }
+	function scrollUp(){
+		if(area1.scrollTop % LH == 0){
+			clearInterval(Time);
+            setTimeout("startMove()",2000)
+        }else{
+            area1.scrollTop++;
+            if(area1.scrollTop >= area1.scrollHeight/2){
+                area1.scrollTop = 0;
+            }
+        }
+	}
+setTimeout("startMove()",2000);
+</script>
+</html>
