@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>算</title>
+    <script>
+    var line = 4;
+    var result = "";
+    for (var i = 1; i <= line; i++) {
+        for (var j = 1; j <= i; j++) {
+            var num = ((i - j) * line + i - (i - j) * (i - j + 1) / 2);
+            result += num + " ";
+        }
+        result += '<br>';
+    }
+    document.write(result)
+    </script>
+
+    <body>
+    </body>
+
+</html>
