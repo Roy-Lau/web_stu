@@ -1,0 +1,10 @@
+ jqueryMobile模块整理—图标（icons）
+1、以下各种为icon特有属性，使用方法及效果如图
+
+    添加.ui-corner-all类显示圆角
+    添加.ui-shadow类显示阴影
+    添加.ui-btn-icon-notext类去除按钮文本
+    添加.ui-alt-icon类可显示黑色icon
+    添加.ui-shadow-icon类给添加icon阴影，但是需要配合主题.ui-btn-b使用（jqm自带白色和黑色两套图标。）
+    添加.ui-nodisc-icon类去除按钮自带背景色
+    添加.ui-shadow-inset类给按钮添加内部阴影
