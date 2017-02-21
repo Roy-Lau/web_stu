@@ -48,10 +48,14 @@
 <script src="http://apps.bdimg.com/libs/angular.js/1.5.0-beta.0/angular.js"></script>
 <script>
     var app = angular.module("myApp", []);
+  
+
+
     app.controller("myCtrl", function ($scope, $http) {
 //        $http.get("http://172.27.161.110:8080/sysFunction_getParentFunctionList.action").then(function (response) {
             //数据源
 //            $scope.data = response.data.records;
+
         $scope.data = [
             {"Name": "用户管理","status": "A","target": "www.baidu.com","status_date": "1477634049000" },//status_date的值是年月日时分秒转换来的
             {"Name": "产品管理","status": "B","target": "www.baidu.com","status_date": "1477634049000" },
@@ -77,6 +81,7 @@
             {"Name": "产品管理","status": "K","target": "www.baidu.com","status_date": "1479634049000" },
         ]
 
+      
         //分页总数
             $scope.pageSize = 5;
             $scope.pages = Math.ceil($scope.data.length / $scope.pageSize); //分页数
@@ -85,9 +90,11 @@
             $scope.selPage = 1;
             //设置表格数据源(分页)
             $scope.setData = function () {
-                $scope.items = $scope.data.slice(($scope.pageSize * ($scope.selPage - 1)), ($scope.selPage * $scope.pageSize));//通过当前页数筛选出表格当前显示数据
+                $scope.items= $scope.data.slice(($scope.pageSize * ($scope.selPage - 1)), ($scope.selPage * $scope.pageSize));//通过当前页数筛选出表格当前显示数据
             }
-            $scope.items = $scope.data.slice(0, $scope.pageSize);
+
+               $scope.items = $scope.data.slice(0, $scope.pageSize);
+
             //分页要repeat的数组
             for (var i = 0; i < $scope.newPages; i++) {
                 $scope.pageList.push(i + 1);
@@ -122,8 +129,11 @@
             $scope.Next = function () {
                 $scope.selectPage($scope.selPage + 1);
             };
+
 //        });
+
     })
+
 </script>
 </body>
 </html>
