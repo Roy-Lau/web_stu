@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<script>
+    var xmlhttp;
+
+    function doAjax() {
+        var urlStr = "http://192.168.1.109:8080/Chapter13/JsonpAjaxServlet";
+        xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = processReuqest;
+        xmlhttp.open("get", urlStr, true);
+        xmlhttp.send(null);
+    }
+
+    function processReuqest() {
+        if (xmlhttp.readyState == 4 & xmlhttp.status == 200) {
+            var userStr = xmlhttp.responseText;
+            userStr = JSON.parse(userStr);
+            alert(userStr);
+        } else {
+            alert("请求处理返回的数据有错误");
+        }
+    }
+</script>
+
+<body>
+    <input type="button" value="按钮" onclick="doAjax()">
+</body>
+
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>四则运算</title>
+    <script>
+    function shuanfa(num, num1, symbol) {
+        if (symbol == "*") {
+            return num * num1;
+        } else if (symbol == "/") {
+            return num / num1;
+        } else if (symbol == "+") {
+            return parseInt(num) + parseInt(num1); //parseInt转化为number形式， 加号两边都是number的情况下做加号运算，有任意一遍是字符串的时候 是连加符！
+        } else if (symbol == "-") {
+            return num - num1;
+        }
+    }
+
+    function show() {
+        alert(shuanfa(prompt('请输入第一个数'), prompt('请输入第二个数'), prompt('请输入符号')))
+    }
+    </script>
+
+    <body>
+        <input type="button" value="弹出四则运算" onclick="show()" />
+    </body>
+
+</html>

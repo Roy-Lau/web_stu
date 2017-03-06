@@ -1,0 +1,32 @@
+﻿<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>计时器</title>
+    <script type="text/javascript">
+    function clock() {
+      // 获取当前时间，并赋值给变量time
+        var time = new Date();
+      // 将当前时间放到ID为 clock 的输入框内
+        document.getElementById("clock").value = time;
+    }
+    // 每100毫秒执行一次clock方法， 赋值给oldTime
+    var oldTime = setInterval("clock()", 100);
+
+    // 清除oldTime方法
+    function stopTime() {
+        clearInterval(oldTime)
+    }
+    </script>
+</head>
+
+<body>
+    <h1></h1>
+    <form>
+        <input type="text" id="clock" size="50" />
+        <input type="button" value="Stop" onclick="stopTime()" />
+    </form>
+</body>
+
+</html>

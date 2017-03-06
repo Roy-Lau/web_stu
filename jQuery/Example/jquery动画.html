@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+	<title>jquery动画</title>
+    <script src="public/jquery-1.12.1.min.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$("#statr").click(function(){
+				$("div").animate({
+					left:'300px'		//固定值
+					// opacity:'0.5'
+				},3000)
+				$("div").animate({
+					width:'+=300px',	//相对值
+					height:'+=300px',	//相对值
+					left:'-=100px'		//相对值
+				},2000)
+				$("div").animate({
+					width:'toggle',		//预定义值（toggle，hide，show）
+					height:'toggle'		//预定义值
+				},function(){
+					alert("华丽丽的执行完毕！")//所有动画执行完毕后，执行此事件。
+				})
+			})
+			// 停止动画stop(是否清除动画队列，是否立即完成当前动画)
+			$("#stop1").click(function(){
+				$("div").stop();				//默认stop的值全为false  点一下停一个动画
+			})
+			$("#stop2").click(function(){		//点击 停止所有动画
+				$("div").stop(true);
+			})
+			$("#stop3").click(function(){		//结束所有动画
+				$("div").stop(true,true);
+			})
+		})
+	</script>
+</head>
+<body>
+<input type="button" id="statr" value="开始动画！">
+<input type="button" id="stop1" value="停一个！"><!--双击-->
+<input type="button" id="stop2" value="全停！">
+<input type="button" id="stop3" value="结束动画！">
+<div style="width: 100px;height: 100px;background-color:blue;position: absolute;">
+注意：不加position: absolute，动画无法执行!</div>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>jQuery安装（引入）cdn</title>
+    <script src="jquery-1.12.1.min.js"></script>
+    <!--本地的cdn-->
+    <!--<script src="http://apps.bdimg.com/libs/accounting.js/0.3.2/accounting.min.js"></script> //百度的cdn-->
+    <script>
+        var n1 = 2,
+            n2 = 3,
+            s1 = "2",
+            s2 = "3",
+            b1 = true,      // true是数字1
+            b2 = false;     // false是数字0
+        console.log(n1 + n2);                               // 2 + 3 = 5
+
+        console.log(n1 + s2);                               // 2 + "3" = 23
+
+        console.log(s2 - s1);                               // "3" - "2" = 1
+
+        console.log(s1 - s2);                               // "2" - "3" = -1
+
+        console.log(n1 + n2 + s2);                          // 2 + 3  + "3" = 53
+
+        console.log(n1 + s2 + n2);                          // 2 + "3" +3 = 233
+
+        console.log(s2 - b1);                               // "3" - true = 2
+
+        console.log(s2 + b1);                               // "3" + true = 3true
+
+        console.log("这是：" + Number(s1) * Number(b2));    // 20 0     有待研究
+
+        var str;
+        console.log(s1 + str);                              // "2" + undefind = 2undefined
+
+        console.log(s2 - str);                              // "3" - str = NaN
+
+        console.log(n1 * str);                              // 2 * str = NaN
+
+        var n  = 3;
+        console.log(n++ + ++n + n++);                       // 3 + 5 + 5 = 13
+
+        var n  = 3;
+        console.log(++n + n++ + ++n);                       // 4 + 4 + 6 = 14
+
+    </script>
+    <style>
+
+    </style>
+</head>
+
+<body>
+</body>
+
+</html>

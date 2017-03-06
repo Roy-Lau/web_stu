@@ -1,37 +1,37 @@
- jquery²Ù×÷select(È¡Öµ£¬ÉèÖÃÑ¡ÖĞ£©
+ï»¿ jqueryæ“ä½œselect(å–å€¼ï¼Œè®¾ç½®é€‰ä¸­ï¼‰
 
-jquery²Ù×÷select(Ôö¼Ó£¬É¾³ı£¬Çå¿Õ)  
+jqueryæ“ä½œselect(å¢åŠ ï¼Œåˆ é™¤ï¼Œæ¸…ç©º)  
 
 http://huapengpeng1989412.blog.163.com/blog/static/58828754201342841940720/
 
- jQuery»ñÈ¡SelectÑ¡ÔñµÄTextºÍValue: 
+ jQueryè·å–Selecté€‰æ‹©çš„Textå’ŒValue: 
 
 	
-$("#select_id").change(function(){//code...}); //ÎªSelectÌí¼ÓÊÂ¼ş£¬µ±Ñ¡ÔñÆäÖĞÒ»ÏîÊ±´¥·¢
+$("#select_id").change(function(){//code...}); //ä¸ºSelectæ·»åŠ äº‹ä»¶ï¼Œå½“é€‰æ‹©å…¶ä¸­ä¸€é¡¹æ—¶è§¦å‘
  
-var checkText=$("#select_id").find("option:selected").text(); //»ñÈ¡SelectÑ¡ÔñµÄtext
+var checkText=$("#select_id").find("option:selected").text(); //è·å–Selecté€‰æ‹©çš„text
  
-var checkValue=$("#select_id").val(); //»ñÈ¡SelectÑ¡ÔñµÄValue
+var checkValue=$("#select_id").val(); //è·å–Selecté€‰æ‹©çš„Value
  
-var checkIndex=$("#select_id ").get(0).selectedIndex; //»ñÈ¡SelectÑ¡ÔñµÄË÷ÒıÖµ
+var checkIndex=$("#select_id ").get(0).selectedIndex; //è·å–Selecté€‰æ‹©çš„ç´¢å¼•å€¼
  
-var maxIndex=$("#select_id option:last").attr("index"); //»ñÈ¡Select×î´óµÄË÷ÒıÖµ
+var maxIndex=$("#select_id option:last").attr("index"); //è·å–Selectæœ€å¤§çš„ç´¢å¼•å€¼
 
-jQueryÌí¼Ó/É¾³ıSelectµÄOptionÏî£º 
+jQueryæ·»åŠ /åˆ é™¤Selectçš„Optioné¡¹ï¼š 
 	
-$("#select_id").append("<option value='Value'>Text</option>"); //ÎªSelect×·¼ÓÒ»¸öOption(ÏÂÀ­Ïî)
+$("#select_id").append("<option value='Value'>Text</option>"); //ä¸ºSelectè¿½åŠ ä¸€ä¸ªOption(ä¸‹æ‹‰é¡¹)
  
-$("#select_id").prepend("<option value='0'>ÇëÑ¡Ôñ</option>"); //ÎªSelect²åÈëÒ»¸öOption(µÚÒ»¸öÎ»ÖÃ)
+$("#select_id").prepend("<option value='0'>è¯·é€‰æ‹©</option>"); //ä¸ºSelectæ’å…¥ä¸€ä¸ªOption(ç¬¬ä¸€ä¸ªä½ç½®)
  
-$("#select_id option:last").remove(); //É¾³ıSelectÖĞË÷ÒıÖµ×î´óOption(×îºóÒ»¸ö)
+$("#select_id option:last").remove(); //åˆ é™¤Selectä¸­ç´¢å¼•å€¼æœ€å¤§Option(æœ€åä¸€ä¸ª)
  
-$("#select_id option[index='0']").remove(); //É¾³ıSelectÖĞË÷ÒıÖµÎª0µÄOption(µÚÒ»¸ö)
+$("#select_id option[index='0']").remove(); //åˆ é™¤Selectä¸­ç´¢å¼•å€¼ä¸º0çš„Option(ç¬¬ä¸€ä¸ª)
  
-$("#select_id option[value='3']").remove(); //É¾³ıSelectÖĞValue='3'µÄOptiona
+$("#select_id option[value='3']").remove(); //åˆ é™¤Selectä¸­Value='3'çš„Optiona
  
-$("#select_id option[text='4']").remove(); //É¾³ıSelectÖĞText='4'µÄOptiona
+$("#select_id option[text='4']").remove(); //åˆ é™¤Selectä¸­Text='4'çš„Optiona
 
-ÄÚÈİÇå¿Õ£º
+å†…å®¹æ¸…ç©ºï¼š
 	
 $("#charCity").empty();
 
@@ -39,108 +39,108 @@ $("#charCity").empty();
 
 http://blog.csdn.net/nairuohe/article/details/6307367
 
-Ã¿Ò»´Î²Ù×÷selectµÄÊ±ºò£¬×ÜÊÇÒª³öÀ´·­Ò»ÏÂ×ÊÁÏ£¬²»Èç×Ô¼º×Ü½áÒ»ÏÂ£¬ÒÔºó¾Í·­ÕâÀïÁË¡£
+æ¯ä¸€æ¬¡æ“ä½œselectçš„æ—¶å€™ï¼Œæ€»æ˜¯è¦å‡ºæ¥ç¿»ä¸€ä¸‹èµ„æ–™ï¼Œä¸å¦‚è‡ªå·±æ€»ç»“ä¸€ä¸‹ï¼Œä»¥åå°±ç¿»è¿™é‡Œäº†ã€‚
 
-±ÈÈç<select class="selector"></select>
+æ¯”å¦‚<select class="selector"></select>
 
-1¡¢ÉèÖÃvalueÎªpxxµÄÏîÑ¡ÖĞ
+1ã€è®¾ç½®valueä¸ºpxxçš„é¡¹é€‰ä¸­
 
      $(".selector").val("pxx");
 
-2¡¢ÉèÖÃtextÎªpxxµÄÏîÑ¡ÖĞ
+2ã€è®¾ç½®textä¸ºpxxçš„é¡¹é€‰ä¸­
 
     $(".selector").find("option[text='pxx']").attr("selected",true);
 
-    ÕâÀïÓĞÒ»¸öÖĞÀ¨ºÅµÄÓÃ·¨£¬ÖĞÀ¨ºÅÀïµÄµÈºÅµÄÇ°ÃæÊÇÊôĞÔÃû³Æ£¬²»ÓÃ¼ÓÒıºÅ¡£ºÜ¶àÊ±ºò£¬ÖĞÀ¨ºÅµÄÔËÓÃ¿ÉÒÔÊ¹µÃÂß¼­±äµÃºÜ¼òµ¥¡£
+    è¿™é‡Œæœ‰ä¸€ä¸ªä¸­æ‹¬å·çš„ç”¨æ³•ï¼Œä¸­æ‹¬å·é‡Œçš„ç­‰å·çš„å‰é¢æ˜¯å±æ€§åç§°ï¼Œä¸ç”¨åŠ å¼•å·ã€‚å¾ˆå¤šæ—¶å€™ï¼Œä¸­æ‹¬å·çš„è¿ç”¨å¯ä»¥ä½¿å¾—é€»è¾‘å˜å¾—å¾ˆç®€å•ã€‚
 
-3¡¢»ñÈ¡µ±Ç°Ñ¡ÖĞÏîµÄvalue
+3ã€è·å–å½“å‰é€‰ä¸­é¡¹çš„value
 
     $(".selector").val();
 
-4¡¢»ñÈ¡µ±Ç°Ñ¡ÖĞÏîµÄtext
+4ã€è·å–å½“å‰é€‰ä¸­é¡¹çš„text
 
     $(".selector").find("option:selected").text();
 
-    ÕâÀïÓÃµ½ÁËÃ°ºÅ£¬ÕÆÎÕËüµÄÓÃ·¨²¢¾ÙÒ»·´ÈıÒ²»áÈÃ´úÂë±äµÃ¼ò½à¡£
+    è¿™é‡Œç”¨åˆ°äº†å†’å·ï¼ŒæŒæ¡å®ƒçš„ç”¨æ³•å¹¶ä¸¾ä¸€åä¸‰ä¹Ÿä¼šè®©ä»£ç å˜å¾—ç®€æ´ã€‚
 
  
 
-ºÜ¶àÊ±ºòÓÃµ½selectµÄ¼¶Áª£¬¼´µÚ¶ş¸öselectµÄÖµËæ×ÅµÚÒ»¸öselectÑ¡ÖĞµÄÖµ±ä»¯¡£ÕâÔÚjqueryÖĞÊÇ·Ç³£¼òµ¥µÄ¡£
+å¾ˆå¤šæ—¶å€™ç”¨åˆ°selectçš„çº§è”ï¼Œå³ç¬¬äºŒä¸ªselectçš„å€¼éšç€ç¬¬ä¸€ä¸ªselecté€‰ä¸­çš„å€¼å˜åŒ–ã€‚è¿™åœ¨jqueryä¸­æ˜¯éå¸¸ç®€å•çš„ã€‚
 
-Èç£º
-¸´ÖÆ´úÂë
+å¦‚ï¼š
+å¤åˆ¶ä»£ç 
 
 $(".selector1").change(function(){
-     // ÏÈÇå¿ÕµÚ¶ş¸ö
+     // å…ˆæ¸…ç©ºç¬¬äºŒä¸ª
       $(".selector2").empty();
-     // Êµ¼ÊµÄÓ¦ÓÃÖĞ£¬ÕâÀïµÄoptionÒ»°ã¶¼ÊÇÓÃÑ­»·Éú³É¶à¸öÁË
+     // å®é™…çš„åº”ç”¨ä¸­ï¼Œè¿™é‡Œçš„optionä¸€èˆ¬éƒ½æ˜¯ç”¨å¾ªç¯ç”Ÿæˆå¤šä¸ªäº†
       var option = $("<option>").val(1).text("pxx");
       $(".selector2").append(option);
 });
 
-¸´ÖÆ´úÂë
+å¤åˆ¶ä»£ç 
 
  
 
 http://www.cnblogs.com/yaoshiyou/archive/2010/08/24/1806939.html
 
-jQuery»ñÈ¡SelectÑ¡ÔñµÄTextºÍValue:
-Óï·¨½âÊÍ£º
+jQueryè·å–Selecté€‰æ‹©çš„Textå’ŒValue:
+è¯­æ³•è§£é‡Šï¼š
 
-$("#select_id").change(function(){//code...});   //ÎªSelectÌí¼ÓÊÂ¼ş£¬µ±Ñ¡ÔñÆäÖĞÒ»ÏîÊ±´¥·¢
-var checkText=$("#select_id").find("option:selected").text();  //»ñÈ¡SelectÑ¡ÔñµÄText
-var checkValue=$("#select_id").val();  //»ñÈ¡SelectÑ¡ÔñµÄValue
-var checkIndex=$("#select_id ").get(0).selectedIndex;  //»ñÈ¡SelectÑ¡ÔñµÄË÷ÒıÖµ
-var maxIndex=$("#select_id option:last").attr("index");  //»ñÈ¡Select×î´óµÄË÷ÒıÖµ
+$("#select_id").change(function(){//code...});   //ä¸ºSelectæ·»åŠ äº‹ä»¶ï¼Œå½“é€‰æ‹©å…¶ä¸­ä¸€é¡¹æ—¶è§¦å‘
+var checkText=$("#select_id").find("option:selected").text();  //è·å–Selecté€‰æ‹©çš„Text
+var checkValue=$("#select_id").val();  //è·å–Selecté€‰æ‹©çš„Value
+var checkIndex=$("#select_id ").get(0).selectedIndex;  //è·å–Selecté€‰æ‹©çš„ç´¢å¼•å€¼
+var maxIndex=$("#select_id option:last").attr("index");  //è·å–Selectæœ€å¤§çš„ç´¢å¼•å€¼
 
 
-jQueryÉèÖÃSelectÑ¡ÔñµÄ TextºÍValue:
-Óï·¨½âÊÍ£º
+jQueryè®¾ç½®Selecté€‰æ‹©çš„ Textå’ŒValue:
+è¯­æ³•è§£é‡Šï¼š
 
-$("#select_id ").get(0).selectedIndex=1;  //ÉèÖÃSelectË÷ÒıÖµÎª1µÄÏîÑ¡ÖĞ
-$("#select_id ").val(4);   // ÉèÖÃSelectµÄValueÖµÎª4µÄÏîÑ¡ÖĞ
-$("#select_id option[text='jQuery']").attr("selected", true);   //ÉèÖÃSelectµÄTextÖµÎªjQueryµÄÏîÑ¡ÖĞ
+$("#select_id ").get(0).selectedIndex=1;  //è®¾ç½®Selectç´¢å¼•å€¼ä¸º1çš„é¡¹é€‰ä¸­
+$("#select_id ").val(4);   // è®¾ç½®Selectçš„Valueå€¼ä¸º4çš„é¡¹é€‰ä¸­
+$("#select_id option[text='jQuery']").attr("selected", true);   //è®¾ç½®Selectçš„Textå€¼ä¸ºjQueryçš„é¡¹é€‰ä¸­
 
  
 
-jQueryÌí¼Ó/É¾³ıSelectµÄOptionÏî£º
-Óï·¨½âÊÍ£º
-¸´ÖÆ´úÂë
+jQueryæ·»åŠ /åˆ é™¤Selectçš„Optioné¡¹ï¼š
+è¯­æ³•è§£é‡Šï¼š
+å¤åˆ¶ä»£ç 
 
-$("#select_id").append("<option value='Value'>Text</option>");  //ÎªSelect×·¼ÓÒ»¸öOption(ÏÂÀ­Ïî)
-$("#select_id").prepend("<option value='0'>ÇëÑ¡Ôñ</option>");  //ÎªSelect²åÈëÒ»¸öOption(µÚÒ»¸öÎ»ÖÃ)
-$("#select_id option:last").remove();  //É¾³ıSelectÖĞË÷ÒıÖµ×î´óOption(×îºóÒ»¸ö)
-$("#select_id option[index='0']").remove();  //É¾³ıSelectÖĞË÷ÒıÖµÎª0µÄOption(µÚÒ»¸ö)
-$("#select_id option[value='3']").remove();  //É¾³ıSelectÖĞValue='3'µÄOption
-$("#select_id option[text='4']").remove();  //É¾³ıSelectÖĞText='4'µÄOption
+$("#select_id").append("<option value='Value'>Text</option>");  //ä¸ºSelectè¿½åŠ ä¸€ä¸ªOption(ä¸‹æ‹‰é¡¹)
+$("#select_id").prepend("<option value='0'>è¯·é€‰æ‹©</option>");  //ä¸ºSelectæ’å…¥ä¸€ä¸ªOption(ç¬¬ä¸€ä¸ªä½ç½®)
+$("#select_id option:last").remove();  //åˆ é™¤Selectä¸­ç´¢å¼•å€¼æœ€å¤§Option(æœ€åä¸€ä¸ª)
+$("#select_id option[index='0']").remove();  //åˆ é™¤Selectä¸­ç´¢å¼•å€¼ä¸º0çš„Option(ç¬¬ä¸€ä¸ª)
+$("#select_id option[value='3']").remove();  //åˆ é™¤Selectä¸­Value='3'çš„Option
+$("#select_id option[text='4']").remove();  //åˆ é™¤Selectä¸­Text='4'çš„Option
 
-¸´ÖÆ´úÂë
+å¤åˆ¶ä»£ç 
 
  
 
 http://www.cnblogs.com/SAL2928/archive/2008/10/28/1321285.html
 
-jquery radioÈ¡Öµ£¬checkboxÈ¡Öµ£¬selectÈ¡Öµ£¬radioÑ¡ÖĞ£¬checkboxÑ¡ÖĞ£¬selectÑ¡ÖĞ£¬¼°ÆäÏà¹Ø 
-»ñ È¡Ò»×éradio±»Ñ¡ÖĞÏîµÄÖµ 
+jquery radioå–å€¼ï¼Œcheckboxå–å€¼ï¼Œselectå–å€¼ï¼Œradioé€‰ä¸­ï¼Œcheckboxé€‰ä¸­ï¼Œselecté€‰ä¸­ï¼ŒåŠå…¶ç›¸å…³ 
+è· å–ä¸€ç»„radioè¢«é€‰ä¸­é¡¹çš„å€¼ 
 var item = $('input[name=items][checked]').val(); 
-»ñ È¡select±»Ñ¡ÖĞÏîµÄÎÄ±¾ 
+è· å–selectè¢«é€‰ä¸­é¡¹çš„æ–‡æœ¬ 
 var item = $("select[name=items] option[selected]").text(); 
-selectÏÂÀ­¿òµÄµÚ¶ş¸öÔªËØÎªµ±Ç°Ñ¡ÖĞÖµ 
+selectä¸‹æ‹‰æ¡†çš„ç¬¬äºŒä¸ªå…ƒç´ ä¸ºå½“å‰é€‰ä¸­å€¼ 
 $('#select_id')[0].selectedIndex = 1; 
-radioµ¥Ñ¡×éµÄµÚ¶ş¸öÔªËØÎªµ±Ç°Ñ¡ÖĞÖµ 
+radioå•é€‰ç»„çš„ç¬¬äºŒä¸ªå…ƒç´ ä¸ºå½“å‰é€‰ä¸­å€¼ 
 $('input[name=items]').get(1).checked = true; 
-»ñÈ¡Öµ£º 
-ÎÄ±¾¿ò£¬ÎÄ±¾ÇøÓò£º$("#txt").attr("value")£» 
-¶àÑ¡¿ò checkbox£º$("#checkbox_id").attr("value")£» 
-µ¥Ñ¡×éradio£º   $("input[type=radio][checked]").val(); 
-ÏÂÀ­¿òselect£º $('#sel').val(); 
-¿ØÖÆ±íµ¥ÔªËØ£º 
-ÎÄ±¾¿ò£¬ÎÄ±¾ÇøÓò£º$("#txt").attr("value",'');//Çå¿ÕÄÚÈİ 
-$("#txt").attr("value",'11');//Ìî³äÄÚÈİ 
-¶àÑ¡¿òcheckbox£º $("#chk1").attr("checked",'');//²»´ò¹´ 
-$("#chk2").attr("checked",true);//´ò¹´ 
-if($("#chk1").attr('checked')==undefined) //ÅĞ¶ÏÊÇ·ñÒÑ¾­´ò¹´ 
-µ¥Ñ¡×é radio£º    $("input[type=radio]").attr("checked",'2');//ÉèÖÃvalue=2µÄÏîÄ¿Îªµ±Ç°Ñ¡ÖĞÏî 
-ÏÂÀ­¿ò select£º   $("#sel").attr("value",'-sel3');//ÉèÖÃvalue=-sel3µÄÏîÄ¿Îªµ±Ç°Ñ¡ÖĞÏî 
-$("<option value='1'>1111</option><option value='2'>2222</option>").appendTo("#sel")//Ìí¼ÓÏÂÀ­¿òµÄoption 
-$("#sel").empty()£»//Çå¿ÕÏÂÀ­¿ò
+è·å–å€¼ï¼š 
+æ–‡æœ¬æ¡†ï¼Œæ–‡æœ¬åŒºåŸŸï¼š$("#txt").attr("value")ï¼› 
+å¤šé€‰æ¡† checkboxï¼š$("#checkbox_id").attr("value")ï¼› 
+å•é€‰ç»„radioï¼š   $("input[type=radio][checked]").val(); 
+ä¸‹æ‹‰æ¡†selectï¼š $('#sel').val(); 
+æ§åˆ¶è¡¨å•å…ƒç´ ï¼š 
+æ–‡æœ¬æ¡†ï¼Œæ–‡æœ¬åŒºåŸŸï¼š$("#txt").attr("value",'');//æ¸…ç©ºå†…å®¹ 
+$("#txt").attr("value",'11');//å¡«å……å†…å®¹ 
+å¤šé€‰æ¡†checkboxï¼š $("#chk1").attr("checked",'');//ä¸æ‰“å‹¾ 
+$("#chk2").attr("checked",true);//æ‰“å‹¾ 
+if($("#chk1").attr('checked')==undefined) //åˆ¤æ–­æ˜¯å¦å·²ç»æ‰“å‹¾ 
+å•é€‰ç»„ radioï¼š    $("input[type=radio]").attr("checked",'2');//è®¾ç½®value=2çš„é¡¹ç›®ä¸ºå½“å‰é€‰ä¸­é¡¹ 
+ä¸‹æ‹‰æ¡† selectï¼š   $("#sel").attr("value",'-sel3');//è®¾ç½®value=-sel3çš„é¡¹ç›®ä¸ºå½“å‰é€‰ä¸­é¡¹ 
+$("<option value='1'>1111</option><option value='2'>2222</option>").appendTo("#sel")//æ·»åŠ ä¸‹æ‹‰æ¡†çš„option 
+$("#sel").empty()ï¼›//æ¸…ç©ºä¸‹æ‹‰æ¡†

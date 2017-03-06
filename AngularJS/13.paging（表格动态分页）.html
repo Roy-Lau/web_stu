@@ -3,8 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
    <link rel="stylesheet" href="../css/bootstrap.css"/>
-    <script src="../js/jquery-1.11.3.js"></script>
-    <script src="../js/angular.js"></script>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
     <title>表格分页——动态请求数据</title>
 </head>
 <body>
@@ -48,52 +47,20 @@
 <script src="http://apps.bdimg.com/libs/angular.js/1.5.0-beta.0/angular.js"></script>
 <script>
     var app = angular.module("myApp", []);
-  
-
-
-    app.controller("myCtrl", function ($scope, $http) {
-//        $http.get("http://172.27.161.110:8080/sysFunction_getParentFunctionList.action").then(function (response) {
-            //数据源
-//            $scope.data = response.data.records;
-
-        $scope.data = [
-            {"Name": "用户管理","status": "A","target": "www.baidu.com","status_date": "1477634049000" },//status_date的值是年月日时分秒转换来的
-            {"Name": "产品管理","status": "B","target": "www.baidu.com","status_date": "1477634049000" },
-            {"Name": "系统管理","status": "C","target": "www.baidu.com","status_date": "1477633049000" },
-            {"Name": "功能管理","status": "D","target": "www.baidu.com","status_date": "1477634059000" },
-            {"Name": "属性管理","status": "E","target": "www.baidu.com","status_date": "1477634069000" },
-            {"Name": "逻辑管理","status": "F","target": "www.baidu.com","status_date": "1477664549000" },
-            {"Name": "客户管理","status": "G","target": "www.baidu.com","status_date": "1477674049000" },
-            {"Name": "余额管理","status": "H","target": "www.baidu.com","status_date": "1477684049000" },
-            {"Name": "产品管理","status": "I","target": "www.baidu.com","status_date": "1477694049000" },
-            {"Name": "产品管理","status": "J","target": "www.baidu.com","status_date": "1477634049000" },
-            {"Name": "产品管理","status": "K","target": "www.baidu.com","status_date": "1477674049000" },
-            {"Name": "用户管理","status": "A","target": "www.baidu.com","status_date": "1477354049000" },
-            {"Name": "产品管理","status": "B","target": "www.baidu.com","status_date": "1477534049000" },
-            {"Name": "系统管理","status": "C","target": "www.baidu.com","status_date": "1477254049000" },
-            {"Name": "功能管理","status": "D","target": "www.baidu.com","status_date": "1477224049000" },
-            {"Name": "属性管理","status": "E","target": "www.baidu.com","status_date": "1442634049000" },
-            {"Name": "逻辑管理","status": "F","target": "www.baidu.com","status_date": "1456634049000" },
-            {"Name": "客户管理","status": "G","target": "www.baidu.com","status_date": "1434634049000" },
-            {"Name": "余额管理","status": "H","target": "www.baidu.com","status_date": "1464634049000" },
-            {"Name": "产品管理","status": "I","target": "www.baidu.com","status_date": "1443634049000" },
-            {"Name": "产品管理","status": "J","target": "www.baidu.com","status_date": "1427634049000" },
-            {"Name": "产品管理","status": "K","target": "www.baidu.com","status_date": "1479634049000" },
-        ]
-
-      
-        //分页总数
+ app.service("pageFunc",function(){
+       this.pages = function(Data){
+             //分页总数
             $scope.pageSize = 5;
-            $scope.pages = Math.ceil($scope.data.length / $scope.pageSize); //分页数
+            $scope.pages = Math.ceil(Data.length / $scope.pageSize); //分页数
             $scope.newPages = $scope.pages > 5 ? 5 : $scope.pages;
             $scope.pageList = [];
             $scope.selPage = 1;
             //设置表格数据源(分页)
             $scope.setData = function () {
-                $scope.items= $scope.data.slice(($scope.pageSize * ($scope.selPage - 1)), ($scope.selPage * $scope.pageSize));//通过当前页数筛选出表格当前显示数据
+                $scope.items= Data.slice(($scope.pageSize * ($scope.selPage - 1)), ($scope.selPage * $scope.pageSize));//通过当前页数筛选出表格当前显示数据
             }
 
-               $scope.items = $scope.data.slice(0, $scope.pageSize);
+               $scope.items = Data.slice(0, $scope.pageSize);
 
             //分页要repeat的数组
             for (var i = 0; i < $scope.newPages; i++) {
@@ -129,6 +96,42 @@
             $scope.Next = function () {
                 $scope.selectPage($scope.selPage + 1);
             };
+        }
+    })
+
+
+    app.controller("myCtrl", function ($scope, $http, pageFunc) {
+//        $http.get("http://172.27.161.110:8080/sysFunction_getParentFunctionList.action").then(function (response) {
+            //数据源
+//            $scope.data = response.data.records;
+
+       pageFunc.pages([
+            {"Name": "用户管理","status": "A","target": "www.baidu.com","status_date": "1477634049000" },//status_date的值是年月日时分秒转换来的
+            {"Name": "产品管理","status": "B","target": "www.baidu.com","status_date": "1477634049000" },
+            {"Name": "系统管理","status": "C","target": "www.baidu.com","status_date": "1477633049000" },
+            {"Name": "功能管理","status": "D","target": "www.baidu.com","status_date": "1477634059000" },
+            {"Name": "属性管理","status": "E","target": "www.baidu.com","status_date": "1477634069000" },
+            {"Name": "逻辑管理","status": "F","target": "www.baidu.com","status_date": "1477664549000" },
+            {"Name": "客户管理","status": "G","target": "www.baidu.com","status_date": "1477674049000" },
+            {"Name": "余额管理","status": "H","target": "www.baidu.com","status_date": "1477684049000" },
+            {"Name": "产品管理","status": "I","target": "www.baidu.com","status_date": "1477694049000" },
+            {"Name": "产品管理","status": "J","target": "www.baidu.com","status_date": "1477634049000" },
+            {"Name": "产品管理","status": "K","target": "www.baidu.com","status_date": "1477674049000" },
+            {"Name": "用户管理","status": "A","target": "www.baidu.com","status_date": "1477354049000" },
+            {"Name": "产品管理","status": "B","target": "www.baidu.com","status_date": "1477534049000" },
+            {"Name": "系统管理","status": "C","target": "www.baidu.com","status_date": "1477254049000" },
+            {"Name": "功能管理","status": "D","target": "www.baidu.com","status_date": "1477224049000" },
+            {"Name": "属性管理","status": "E","target": "www.baidu.com","status_date": "1442634049000" },
+            {"Name": "逻辑管理","status": "F","target": "www.baidu.com","status_date": "1456634049000" },
+            {"Name": "客户管理","status": "G","target": "www.baidu.com","status_date": "1434634049000" },
+            {"Name": "余额管理","status": "H","target": "www.baidu.com","status_date": "1464634049000" },
+            {"Name": "产品管理","status": "I","target": "www.baidu.com","status_date": "1443634049000" },
+            {"Name": "产品管理","status": "J","target": "www.baidu.com","status_date": "1427634049000" },
+            {"Name": "产品管理","status": "K","target": "www.baidu.com","status_date": "1479634049000" },
+
+        ])
+
+
 
 //        });
 
