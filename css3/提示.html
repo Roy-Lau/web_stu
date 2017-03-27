@@ -1,0 +1,82 @@
+<html>
+
+<head>
+</head>
+<title></title>
+<style>
+.bubble-box {
+    background: #EEE;
+    width: 200px;
+    margin-bottom: 30px;
+}
+
+.bubble-box .wrap {
+    background: #EEE;
+    border-radius: 8%;
+    /* 修正IE6 */
+    _position: relative;
+    _z-index: 10;
+}
+
+
+/* arrow-effect */
+
+.arrow-left {
+    border-left: 20px solid #FFF;
+    border-top: 20px solid #EEE;
+    margin-top: 20px;
+}
+
+.arrow-right {
+    border-right: 20px solid #FFF;
+    border-top: 20px solid #EEE;
+}
+
+.arrow-top {
+    border-left: 20px solid #EEE;
+    border-top: 20px solid #FFF;
+    margin-left: 20px;
+}
+
+.arrow-bottom {
+    border-left: 20px solid #EEE;
+    border-bottom: 20px solid #FFF;
+    margin-left: 20px;
+}
+
+.arrow-left .wrap,
+.arrow-right .wrap {
+    width: 180px;
+    padding: 12px 10px 12px 10px;
+    margin-top: -40px;
+}
+
+.arrow-top,
+.arrow-bottom {
+    width: 140px;
+}
+
+.arrow-top .wrap,
+.arrow-bottom .wrap {
+    width: 180px;
+    padding: 12px 10px 12px 10px;
+    margin-left: -40px;
+}
+</style>
+
+<body>
+    <div class="bubble-box arrow-top">
+        <div class="wrap">css bubble -- 箭头在上方</div>
+    </div>
+    <div class="bubble-box arrow-right">
+        <div class="wrap">css bubble -- 箭头在右方</div>
+    </div>
+    <div class="bubble-box arrow-bottom">
+        <div class="wrap">css bubble -- 箭头在下方</div>
+    </div>
+    <div class="bubble-box arrow-left">
+        <div class="wrap">css bubble -- 箭头在左方</div>
+    </div>
+</body>
+
+</html>
