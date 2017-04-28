@@ -1,0 +1,38 @@
+首先确保所有的 HTML 元素都有 box-sizing 属性且设置为 border-box。
+
+确保边距和边框包含在元素的宽度和高度间。
+
+添加如下代码：
+
+* {
+    box-sizing: border-box;
+}
+
+ 12 列的网格系统可以更好的控制响应式网页。
+
+首先我们可以计算每列的百分比: 100% / 12 列 = 8.33%。
+.col-1 {width: 8.33%;}
+.col-2 {width: 16.66%;}
+.col-3 {width: 25%;}
+.col-4 {width: 33.33%;}
+.col-5 {width: 41.66%;}
+.col-6 {width: 50%;}
+.col-7 {width: 58.33%;}
+.col-8 {width: 66.66%;}
+.col-9 {width: 75%;}
+.col-10 {width: 83.33%;}
+.col-11 {width: 91.66%;}
+.col-12 {width: 100%;}
+ 所有的列向左浮动，间距(padding) 为 15px：
+[class*="col-"] {
+    float: left;
+    padding: 15px;
+    border: 1px solid red;
+}
+
+列中行为左浮动，并添加清除浮动：
+.row:after {
+    content: "";
+    clear: both;
+    display: block;
+}

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>锚点连接-css-平滑过渡</title>
+	<style>
+		div{
+		  width: 100px;
+		  height: 100px;
+		  border-radius: 50%;
+		}
+		#container{
+		  margin-top: 10px;
+		  outline: 1px solid red;
+		  position: relative;
+		}
+		#tag1,#tag2,#tag3{
+		  transition: all ease-out 1s;
+		  position: absolute;
+		  top:0
+		  left:0;
+		  right:0;
+		  bottom:0;
+		  opacity: 0;
+		  
+		}
+		#tag1{
+		  background: #f66;
+		  opacity: 1;
+		  z-index: 1;
+		}
+		#tag2{
+		  background: orange;
+		}
+		#tag3{
+		  background: gray;
+		}
+		#container>div:target{
+		  z-index: 1000;
+		  opacity: 1;
+		}
+	</style>
+</head>
+<body>
+	<a href="#tag1">Tag1</a>
+	<a href="#tag2">Tag2</a>
+	<a href="#tag3">Tag3</a>
+
+	<div id="container">
+	  <div id="tag1"></div>
+	  <div id="tag2"></div>
+	  <div id="tag3"></div>
+	</div>
+</body>
+</html>
