@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>smple-ajax</title>
+	<script src="smple-ajax.js"></script>
+</head>
+<script>
+
+window.onload = function () {
+	ajax(
+			'test.txt',
+			// 'test.json',
+			// 'test.xml', 	// ajax默认格式
+			'GET',
+			function(data){
+				console.log(data)
+			},
+			function(status){
+				console.log(status)
+			}
+		)
+}
+</script>
+<body>
+	
+</body>
+</html>
