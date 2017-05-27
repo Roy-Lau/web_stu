@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>test tab list</title>
+    <style>
+    	.tabs ul{list-style: none;float: left;}
+        .tabs ul li a:hover{color: yellow;}
+        .tab-1,.tab-2,.tab-3{display: none;}
+        .on{display: block;}
+    </style>
+    </head>
+
+<body>
+    <div class='tabs'>
+        <ul>
+            <li><a href="#tab-1"> Tab 1</a></li>
+            <li><a href="#tab-2"> Tab 2</a></li>
+            <li><a href="#tab-3"> Tab 3</a></li>
+        </ul>
+        <ul class='horizontal'>
+            <li class="tab-1 on"><a><img src="http://iph.href.lu/250x200?text=文字1" alt=""></a></li>
+            <li class="tab-2"><a><img src="http://iph.href.lu/250x200?text=文字2" alt=""></a></li>
+            <li class="tab-3"><a><img src="http://iph.href.lu/250x200?text=文字3" alt=""></a></li>
+        </ul>
+    </div>
+
+</body>
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script>
+$(function(){
+    $(".tabs ul li").hover(function(){
+         $(".horizontal li").eq($(".tabs ul li").index(this)).addClass("on").siblings().removeClass('on'); 
+    },function(){
+         $(".horizontal li").eq($(".tabs ul li").index(this)).siblings().removeClass('on');
+    })
+})
+
+</script>
+</html>
