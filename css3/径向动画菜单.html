@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>径向动画菜单</title>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        background-color: #292a38;
+        font-family: 'Macrosoft Yahei';
+    }
+
+    h1 {
+        text-align: center;
+        color: #fff;
+        margin-top: 40px;
+    }
+
+    .nav-warp {
+        position: relative;
+        width: 200px;
+        height: 200px;
+        margin: 120px auto 20px;
+        border: 2px dotted #4E5061;
+        border-radius: 100%;
+    }
+
+    .nav-warp .main-nav {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%); /* 偏移对象自身的一半宽高(点我)  */
+        text-align: center;
+        text-decoration: none;
+        color: #fff;
+        border-radius: 3px;
+        text-shadow: 1px 1px 0px #000;
+        background: #15a5f3;
+        font-size: 12px;
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        cursor: pointer;
+    }
+
+    .nav-warp nav {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, .3);
+        transform: scale(0);
+        transition: all 0.5s ease-out;
+        opacity: 0;
+    }
+
+    .nav-warp.active nav {
+        transform: scale(1);
+        opacity: 1;
+    }
+    /*子菜单样式*/
+
+    .nav-warp nav >a {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        text-decoration: none;
+        border-radius: 3px;
+        text-shadow: 1px 1px 0px #000;
+        color: #fff;
+        background-color: #f44283;
+        transform: translate(-50%, -50%);
+    }
+
+	/*   修正子菜单的位置
+		.nav-warp nav .nav-item1 {
+		    top: 0;
+		    left: 0;
+		}
+
+		.nav-warp nav .nav-item2 {
+		    top: 0;
+		    left: 100%;
+		}
+
+		.nav-warp nav .nav-item3 {
+		    top: 100%;
+		    left: 100%;
+		}
+
+		.nav-warp nav .nav-item4 {
+		    top: 100%;
+		    left: 0;
+		}
+	*/
+    </style>
+</head>
+
+<body>
+    <h1>径向动画菜单</h1>
+    <div class="nav-warp">
+        <nav>
+            <a href="" class="nav-item1">1</a>
+            <a href="" class="nav-item2">2</a>
+            <a href="" class="nav-item3">3</a>
+            <a href="" class="nav-item4">4</a>
+        </nav>
+        <a href="" class="main-nav">点我</a>
+    </div>
+</body>
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script>
+$(".nav-warp").on('click', '.main-nav', function(e) {
+    e.preventDefault();
+    var self = $(this),
+        navWarp = self.closest('.nav-warp'),
+        navs = navWarp.find('nav a');
+    // 当菜单没被激活时
+    if (!navWarp.hasClass('active')) {
+    	// 圆的半径raduis
+    		var width = navWarp.height(),
+    			radius  = width/2;
+    	// 圆形菜单的起始、终止角度
+    		var startAngle =0,
+    			endAngle = 360;
+    	// 两个子菜单的夹角
+    		var total = navs.length,
+    			gap = (endAngle-sartAngle)/total;
+		// 计算终止子菜单的最终位置
+			$.each(navs,function(index,item){
+				// 当前菜单与X轴正向夹角 0 , (夹角，弧度)
+				var　myAngle = (startAngle + gap * index) + (Math.PI / 100); // 0
+				// 计算当前子菜单相对于左上角(0, 0)的坐标(x,y)
+			})
+    }
+    navWarp.toggleClass('active')
+})
+</script>
+
+</html>
