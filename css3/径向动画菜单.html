@@ -34,7 +34,8 @@
         position: absolute;
         left: 50%;
         top: 50%;
-        transform: translate(-50%, -50%); /* 偏移对象自身的一半宽高(点我)  */
+        transform: translate(-50%, -50%);
+        /* 偏移对象自身的一半宽高(点我)  */
         text-align: center;
         text-decoration: none;
         color: #fff;
@@ -53,8 +54,8 @@
         width: 100%;
         height: 100%;
         background: rgba(255, 255, 255, .3);
-        transform: scale(0);
         transition: all 0.5s ease-out;
+        transform: scale(0);
         opacity: 0;
     }
 
@@ -77,8 +78,7 @@
         background-color: #f44283;
         transform: translate(-50%, -50%);
     }
-
-	/*   修正子菜单的位置
+    /*   修正子菜单的位置
 		.nav-warp nav .nav-item1 {
 		    top: 0;
 		    left: 0;
@@ -119,25 +119,39 @@
 $(".nav-warp").on('click', '.main-nav', function(e) {
     e.preventDefault();
     var self = $(this),
-        navWarp = self.closest('.nav-warp'),
-        navs = navWarp.find('nav a');
+        navWarp = self.closest('.nav-warp'), // 动画效果的父容器
+        navs = navWarp.find('nav a');		 // 所有父容器的子菜单
+
+    var isLoated = false;
     // 当菜单没被激活时
     if (!navWarp.hasClass('active')) {
-    	// 圆的半径raduis
-    		var width = navWarp.height(),
-    			radius  = width/2;
-    	// 圆形菜单的起始、终止角度
-    		var startAngle =0,
-    			endAngle = 360;
-    	// 两个子菜单的夹角
-    		var total = navs.length,
-    			gap = (endAngle-sartAngle)/total;
-		// 计算终止子菜单的最终位置
-			$.each(navs,function(index,item){
-				// 当前菜单与X轴正向夹角 0 , (夹角，弧度)
-				var　myAngle = (startAngle + gap * index) + (Math.PI / 100); // 0
-				// 计算当前子菜单相对于左上角(0, 0)的坐标(x,y)
-			})
+        // 圆的半径raduis
+        var width = navWarp.width(),
+            radius = width / 2;
+        // 圆形菜单的起始、终止角度
+        var startAngle = 0,
+            endAngle = 360;
+        // 两个子菜单的夹角
+        var total = navs.length,
+            gap = (endAngle - startAngle) / total;
+        // 角度 --> 弧度
+        var radian = Math.PI / 180;
+
+
+        // 计算终止子菜单的最终位置
+        $.each(navs, function(index, item) {
+            // 当前菜单与X轴正向夹角 0 , (夹角，弧度)
+            var myAngle = (startAngle + gap * index) * radian; // 0
+            // 计算当前子菜单相对于左上角(0, 0)的坐标(x,y)
+            var myX = radius + radius * Math.cos( myAngle ), // x = r + rcos(0)
+                myY = radius + radius * Math.sin( myAngle ); // x = r + rsos(0)
+            // 设置当前子菜单的位置(left,top) = (x,y)
+            $(this).css({
+                left: myX + 'px',
+                top: myY + 'px'
+            });
+        })
+        isLoated = true;
     }
     navWarp.toggleClass('active')
 })
