@@ -1,0 +1,43 @@
+		*{margin:0;padding:0;}
+		.d0{width:1903px;height:1475px;}
+		.d0_1{width:50%;margin:0 auto;}
+		.d1{height:75px;border:1px solid red;}
+		.di,.d1_1,.u1 li,.dl1,.dl1 dt,.dl1 dd{float:left;}
+		.d1_1{margin-top:23px;}
+		.dl1{margin-top:44px;}
+		.dl1 dd{font-size:0.75em;}
+		.u1{margin-left:60px;border:1px solid red;}
+		.u1 li{list-style:none;margin-top:44px;margin-right:20px;font-size:0.75em;list-style:url(../images/dian.jpg);}
+		.u1 a{text-decoration:none;color:gray;}
+		.i0{list-style-image:url(../images/dian.jpg);}
+		.i1{list-style-image:url(../images/shouji.jpg)}
+		.i2{list-style-image:url(../images/pad.jpg);}
+		.u2{clear:left;}
+
+		.u2,.u2_1{width:950px;margin:0 auto;}
+		.u2,.u2 li,u2_1,u2_1 li{float:left;}
+		.u2_1{display:none;}
+		.u2 li{list-style:none;margin-right:65px;font-size:0.875em;font-family:Î¢ÈíÑÅºÚ;font-weight:700px;}
+		.u2{margin-right:130px;height:37px;margin-top:12px;}
+		.u2 a{text-decoration:none;color:black;}
+		.u2{position:relative;border:1px solid red;}
+		.u2_1{position:absolute;}
+		.u2 li:hover .u2_1{display:block;}
+		.u2_1 li{list-style:none;margin-right:1em;font-size:0.75em;}
+		.u2_1{margin-right:0;margin-top:20px;height:50px;}
+		.i4{margin-top:70px;}		
+
+		.d3{width:700px;margin-top:32px;font-size:0.75em;float:left;}
+		.d3_2{margin-top:12px;color:gray;}
+		.d3_3{margin-top:33px;color:gray;}
+		.d3_4{margin-top:42px;}
+		.d3_5{margin-top:60px;color:gray;}
+		
+		.u3,.u3 li{float:left;}
+		.u3{margin-left:52px;margin-top:52px;width:80px;height:460px;}
+		.u3 li{list-style:none;margin-top:12px;font-size:0.75em;list-style:url(../images/dian.jpg);}
+		.u3 a{text-decoration:none;color:gray;}
+
+		.d4{font-size:0.75em;color:#676767;text-align:center;clear:left;
+			width:100%;height:82px;
+			background-color:#d6d6d6;margin-top:900px;}
