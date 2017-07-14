@@ -5,39 +5,67 @@
     <meta charset="UTF-8">
     <title>斐波那契数列</title>
     <script>
-    //        方法一     递归法（节省代码，耗内存。）
-    function fibonacci_1(a) {
-        if (a <= 2) {
-            return 1;
-        }
-        return fibonacci_1(a - 1) + fibonacci_1(a - 2);
-    }
-    //        方法二       非递归（代码量大，运行快！）
-    function fibonacci_2(a) {
-        var b = [1, 1];
-        if (a <= 2) {
-            return 1;
-        }
-        for (var i = 1; i < b.length; i++) {
-            b[i] = b[i - 1] + b[i - 2];
-        }
-        return b[a - 1];
-    }
+    // 斐波那契数列: 前面两项的和等于后一项的值
 
-    // 方法三：递归
+    // 简单的递归(三目)（节省代码，耗内存。）
+    /*
+     *   函数被调用了453次，输出了11次。
+     *   而她自身有442次去计算可能已被计算过的值
+     *   有没有什么可以让她具备记忆功能？可以减少他的运算量？
+     */
     var fibonacci_3 = function(n) {
-        return n <= 2 ? n : fibonacci_3(n - 1) + fibonacci_3(n - 2)
+        return n < 2 ? n : fibonacci_3(n - 1) + fibonacci_3(n - 2)
     }
 
-    for (var i = 1; i <= 20; i++) {
-        document.writeln('递归法(if) ：' + i + ' ： ' + fibonacci_1(i) + '<br>')
-    }
-    for (var i = 1; i <= 20; i++) {
-        document.writeln('非递归(for) ：' + i + ' ： ' + fibonacci_2(i) + '<br>')
-    }
-    for (var i = 1; i <= 20; i++) {
+    for (var i = 0; i <= 10; i++) {
         document.writeln('递归(三目) ： ' + i + ' ： ' + fibonacci_3(i) + '<br>')
     }
+
+
+
+    // 记忆功能(闭包，数组)（代码量大，运行快！）
+    /*
+     *   定义一个数组memo保存我们的储存结果，储蓄结果可以隐藏在闭包中。
+     *   当函数调用时，首先看是否已经知道储存结果，如果已知道，就立即返回这个结果。
+     *   这个函数返回同样的结果，但她被调用了29次，11次输出结果，18去取得之前储存的结果
+     *   但是，这样的函数不易阅读 理解。我们是不是可以把它封装一下呢？
+     */
+    var fibonacci_memory = function() {
+        var memo = [0, 1];
+        var fib = function(n) {
+            var result = memo[n];
+            if (result.constructor !== Number) {
+                result = fib(n - 1) + fib(n - 2);
+                memo[n] = result;
+            }
+            return result;
+        }
+        return fib;
+    }();
+
+    /*
+     *  我们可以把这种形式一般化，编写一个函数来帮助我们构造带记忆的函数。memoizer函数将取得memo数组和fundamental函数。她返回一个管理memo储存和在需要时调用fundamental函数的shell函数。我们传递这个shell函数和该函数的参数给fundamental函数；
+     */
+    var memoizer = function(memo, fundamental) {
+        var shell = function(n) {
+            var result = memo[n];
+            if (result.constructor !== Number) {
+                result = fundamental(shell, n);
+                memo[n] = result;
+            }
+            return result
+        };
+        return shell;
+    };
+    // 我们可以用memoizer来定义fibonacci函数，提供其初始的memo数组和fundamental函数：
+    var fibonacci = memoizer([0, 1], function(shell, n) {
+            return shell(n - 1) + shell(n - 2);
+        })
+    // 通过设计能产出其他函数的函数，科技极大的减少我们必须要做的工作，
+    // 例如：要产生一个可以记忆的阶乘函数，我们只需提供基本的阶乘公式的即可
+    var fundamental = memoizer([1, 1], function(shell, n) {
+        return n * shell(n - 1);
+    })
     </script>
 </head>
 
