@@ -34,7 +34,7 @@
         var memo = [0, 1];
         var fib = function(n) {
             var result = memo[n];
-            if (result.constructor !== Number) {
+            if (typeof result !== 'number' ) {
                 result = fib(n - 1) + fib(n - 2);
                 memo[n] = result;
             }
@@ -43,6 +43,9 @@
         return fib;
     }();
 
+    for (var i = 0; i <= 10; i++) {
+        document.writeln('记忆功能(闭包，数组) ： ' + i + ' ： ' + fibonacci_memory(i) + '<br>')
+    }
     /*
      *  我们可以把这种形式一般化，编写一个函数来帮助我们构造带记忆的函数。memoizer函数将取得memo数组和fundamental函数。她返回一个管理memo储存和在需要时调用fundamental函数的shell函数。我们传递这个shell函数和该函数的参数给fundamental函数；
      */

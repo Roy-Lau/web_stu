@@ -9,8 +9,11 @@ angular.module('app').directive('appPaging', [function() {
             list: '='
         },
         link: function(scope,element,attr) {
-        	console.log(element)
-        	console.log(attr)
+        	// console.log(element)
+            // console.log(attr)
+            // console.log(scope.list)
+
+
             // //分页总数
             // scope.pageSize = 5;
             // scope.pages = Math.ceil(scope.data.length / scope.pageSize); //分页数
