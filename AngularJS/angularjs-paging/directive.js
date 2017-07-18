@@ -8,11 +8,15 @@ angular.module('app').directive('appPaging', [function() {
         scope: {
             list: '='
         },
-        link: function(scope,element,attr) {
-        	// console.log(element)
+        link: function(scope, element, attr) {
+            // console.log(element)
             // console.log(attr)
-            // console.log(scope.list)
-
+            scope.$watch('com', function(newVal) {
+                console.log(scope.list)
+            });
+            scope.Click = function () {
+                alert('test')
+            }
 
             // //分页总数
             // scope.pageSize = 5;
