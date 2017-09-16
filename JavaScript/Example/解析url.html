@@ -1,0 +1,30 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+</head>
+<body>
+	<input type="text" id="url" placeholder="请输入url" />
+	<button id="parse-url">解析url</button>
+	<code id="text"></code>
+</body>
+<script type="text/javascript">
+	var
+		urlVal = document.getElementById('url').value,
+		parseUrl = document.getElementById('parse-url'),
+		text = document.getElementById('text'),
+		parse_url = /^(?:([A-Za-z]+):)?(\/{0,3})([0-9.\-A-Za-z]+)(?::(\d+))?(?:\/([^?#]*))?(?:\?([^#]*))?(?:#(.*))?$/;
+
+		parseUrl.onclick = function(){
+			var result = parse_url.exec(urlVal),
+				names = ["url","scheme","slash","host","port","path","query","hash"],
+				blanks = '		';
+			console.log(result)
+				for (var i = 0; i < names.length; i++) {
+					// text.innerText = names[i] + ':' + blanks.substring(names[i].length,result[i]);
+					document.writeln(names[i] +":"+ blanks.substring(names[i].length),result[i]);
+				}
+		}
+</script>
+</html>
