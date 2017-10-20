@@ -1,20 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="UTF-8">
-	<title>三列布局</title>
-<style type="text/css">
-	body{ margin:0; padding:0; font-size:30px; font-weight:bold}
-	div{ line-height:50px}
-	.left{ width:200px; height:600px; background:#ccc; position: absolute; left:0; top:0}
-	.main{ height:600px; margin: 0 310px 0 210px;background:blue;}
-	.right{ height:600px; width:300px; position:absolute; top:0; right:0; background:#FCC;}
-</style>
+    <meta charset="UTF-8">
+    <title>三列布局</title>
+    <style type="text/css">
+    /*公共样式*/
+
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    .layout {
+        margin-top: 20px;
+    }
+
+    .layout div {
+        height: 150px;
+    }
+
+    .left {
+        background-color: red;
+        width: 300px;
+    }
+
+    .center {
+        background-color: blue;
+    }
+
+    .right {
+        background-color: yellow;
+        width: 300px;
+    }
+    /* 浮动布局 */
+
+    .layout .float .left {
+        float: left;
+    }
+
+    .layout .float .center {}
+
+    .layout .float .right {
+        float: right;
+    }
+    /* 定位布局 */
+
+    .layout .position>div {
+        position: absolute;
+    }
+
+    .layout .position .left {
+        left: 0;
+        width: 300px
+    }
+
+    .layout .position .center {
+        left: 300px;
+        right: 300px;
+    }
+
+    .layout .position .right {
+        right: 0;
+    }
+    /*弹性盒子*/
+
+    .layout .flxbox {
+        display: flex;
+        margin-top: 200px;
+    }
+
+    .layout .flxbox .left {}
+
+    .layout .flxbox .center {
+        flex: 1;
+    }
+
+    .layout .flxbox .right {}
+    /*表格布局*/
+
+    .layout .table {
+        width: 100%;
+        display: table;
+    }
+
+    .layout .table>div {
+        display: table-cell;
+    }
+    /*网格布局*/
+
+    .layout .grid {
+        display: grid;
+        width: 100%;
+        grid-template-rows: 100px;
+        grid-template-columns: 300px auto 300px;
+    }
+    </style>
 </head>
 
 <body>
-    <div class="left">left</div>
-    <div class="main">设计首页的第一步是设计版面布局。就象传统的报刊杂志编辑一样，我们将网页看作一张报纸，一本杂志来进行排版布局。 虽然动态网页技术的发展使得我们开始趋向于学习场景编剧，但是固定的网页版面设计基础依然是必须学习和掌握的。它们的基本原理是共通的，你可以领会要点，举一反三。</div>
-    <div class="right">right</div>
+    <!-- 浮动布局 -->
+    <section class="layout">
+        <article class="float">
+            <div class="left">left</div>
+            <div class="right">right</div>
+            <div class="center">
+                <h2>浮动布局</h2> 设计首页的第一步是设计版面布局。就象传统的报刊杂志编辑一样，我们将网页看作一张报纸，一本杂志来进行排版布局。 虽然动态网页技术的发展使得我们开始趋向于学习场景编剧，但是固定的网页版面设计基础依然是必须学习和掌握的。它们的基本原理是共通的，你可以领会要点，举一反三。</div>
+        </article>
+    </section>
+    <!-- 定位布局 -->
+    <section class="layout">
+        <article class="position">
+            <div class="left">left</div>
+            <div class="center">
+                <h2>定位布局</h2> 设计首页的第一步是设计版面布局。就象传统的报刊杂志编辑一样，我们将网页看作一张报纸，一本杂志来进行排版布局。 虽然动态网页技术的发展使得我们开始趋向于学习场景编剧，但是固定的网页版面设计基础依然是必须学习和掌握的。它们的基本原理是共通的，你可以领会要点，举一反三。</div>
+            <div class="right">right</div>
+        </article>
+    </section>
+    <!-- 弹性盒子布局 -->
+    <section class="layout">
+        <article class="flxbox">
+            <div class="left">left</div>
+            <div class="center">
+                <h2>弹性盒子布局</h2> 设计首页的第一步是设计版面布局。就象传统的报刊杂志编辑一样，我们将网页看作一张报纸，一本杂志来进行排版布局。 虽然动态网页技术的发展使得我们开始趋向于学习场景编剧，但是固定的网页版面设计基础依然是必须学习和掌握的。它们的基本原理是共通的，你可以领会要点，举一反三。</div>
+            <div class="right">right</div>
+        </article>
+    </section>
+    <!-- 表格布局 -->
+    <section class="layout">
+        <article class="table">
+            <div class="left">left</div>
+            <div class="center">
+                <h2>表格布局</h2> 设计首页的第一步是设计版面布局。就象传统的报刊杂志编辑一样，我们将网页看作一张报纸，一本杂志来进行排版布局。 虽然动态网页技术的发展使得我们开始趋向于学习场景编剧，但是固定的网页版面设计基础依然是必须学习和掌握的。它们的基本原理是共通的，你可以领会要点，举一反三。</div>
+            <div class="right">right</div>
+        </article>
+    </section>
+    <!-- 网格布局 -->
+    <section class="layout">
+        <article class="grid">
+            <div class="left">left</div>
+            <div class="center">
+                <h2>网格布局</h2> 设计首页的第一步是设计版面布局。就象传统的报刊杂志编辑一样，我们将网页看作一张报纸，一本杂志来进行排版布局。 虽然动态网页技术的发展使得我们开始趋向于学习场景编剧，但是固定的网页版面设计基础依然是必须学习和掌握的。它们的基本原理是共通的，你可以领会要点，举一反三。</div>
+            <div class="right">right</div>
+        </article>
+    </section>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
 </body>
+
 </html>
