@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>原型链</title>
+</head>
+
+<body>
+</body>
+<script>
+	// 创建对象的三种方法
+    // 方法一：字面量对象
+    var o1 = { name: 'o1' }
+    var o11 = new Object({ name: 'o11' })
+    // 方法二：使用显示的构造函数
+    var M = function(name) {
+        this.name = name
+    }
+    var o2 = new M('o2')
+    // 方法三：
+    var P = { name: 'o3' }
+    var o3 = Object.create(P)
+</script>
+
+</html>
