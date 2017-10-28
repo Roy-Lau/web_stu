@@ -1,21 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="UTF-8">
-	<title>二列布局</title>
-<style type="text/css">
-	body{ margin:0; padding:0; font-size:30px; font-weight:bold}
-	div{ text-align:center; line-height:50px}
-	.main{ width:960px; height:600px; margin:0 auto}
-	.left{ width:300px; height:600px; background:#ccc; float: left;}/*左浮动样式*/
-	.right{ width:660px; height:600px; background:#FCC; float: right;}/*右浮动样式*/
-</style>
+    <meta charset="UTF-8">
+    <title>二列布局</title>
+    <style type="text/css">
+    body{margin: 0;padding: 0;font-size: 20px;font-weight: bold;}
+    .layout{margin-top: 20px; background-color: grey;}
+    .left{width: 100px; height: 120px; background-color: yellow;}
+    .content{ height: 120px;background-color: blue; }
+    /*浮动布局*/
+    .float{}
+    .float .left{float: left; }
+    .float .content{}
+    /*定位布局*/
+    .position>div{position: absolute;}
+    .position .left{left: 0;}
+    .position .content{left: 100px;}
+    /*弹性盒子*/
+    .flxbox{ display: flex; margin-top: 160px;}
+    .flxbox .left{}
+    .flxbox .content{flex: 1;}
+    /*表格布局*/
+    .table{display: table;}
+    .table .left{display: table-cell;}
+    .table .content{display: table-cell;}
+    /*网格布局*/
+    .grid{display: grid;
+        width: 100%;
+        grid-template-rows: 100px;
+        grid-template-columns: 100px auto;}
+    .grid .left{}
+    .grid .content{}
+    </style>
 </head>
 
 <body>
-	<div class="main">
-	    <div class="left">left</div>
-	    <div class="right">right</div>
-	</div>
+	<!-- 浮动布局 -->
+    <section class="layout">
+        <article class="float">
+            <div class="left">浮动布局 </div>
+            <div class="content">content Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas eligendi aliquid delectus vitae aperiam expedita autem itaque, dignissimos tempora perspiciatis obcaecati nobis, officia velit cupiditate eum, qui iusto quo in.</div>
+        </article>
+    </section>
+    <!-- 定位布局 -->
+    <section class="layout">
+        <article class="position">
+            <div class="left">定位布局</div>
+            <div class="content">content Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas eligendi aliquid delectus vitae aperiam expedita autem itaque, dignissimos tempora perspiciatis obcaecati nobis, officia velit cupiditate eum, qui iusto quo in.</div>
+        </article>
+    </section>
+    <!-- 弹性盒子 -->
+    <section class="layout">
+        <article class="flxbox">
+            <div class="left">弹性盒子</div>
+            <div class="content">content Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas eligendi aliquid delectus vitae aperiam expedita autem itaque, dignissimos tempora perspiciatis obcaecati nobis, officia velit cupiditate eum, qui iusto quo in.</div>
+        </article>
+    </section>
+    <!-- 表格布局 -->
+    <section class="layout">
+        <article class="table">
+            <div class="left">表格布局</div>
+            <div class="content">content Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas eligendi aliquid delectus vitae aperiam expedita autem itaque, dignissimos tempora perspiciatis obcaecati nobis, officia velit cupiditate eum, qui iusto quo in.</div>
+        </article>
+    </section>
+    <!-- 网格布局 -->
+    <section class="layout">
+        <article class="grid">
+            <div class="left">网格布局</div>
+            <div class="content">content Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas eligendi aliquid delectus vitae aperiam expedita autem itaque, dignissimos tempora perspiciatis obcaecati nobis, officia velit cupiditate eum, qui iusto quo in.</div>
+        </article>
+    </section>
 </body>
+
 </html>
