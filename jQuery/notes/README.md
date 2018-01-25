@@ -49,44 +49,44 @@
 
 #### 第2章 DOM节点的创建
 
-1. [jq_创建节点及节点属性.md](./jqDOM/1. jq_创建节点及节点属性.md)
+1. [jq_创建节点及节点属性.md](./jqDOM/1.jq_创建节点及节点属性.md)
 
 #### 第3章 DOM节点的插入
 
 
-2. [jq_DOM内部插入`append()`与`appendTo()`](./jqDOM/2. jq_DOM内部插入append()与appendTo().md)
-3. [jq_DOM外部插入`after()`与`before()`](./jqDOM/3. jq_DOM外部插入after()与before().md)
-4. [jq_DOM内部插入`prepend()`与`prependTo()`](./jqDOM/4. jq_DOM内部插入prepend()与prependTo().md)
-5. [jq_DOM外部插入`insertAfter()`与`insertBefore()`](./jqDOM/5. jq_DOM外部插入insertAfter()与insertBefore().md)
+2. [jq_DOM内部插入`append()`与`appendTo()`](./jqDOM/2.jq_DOM内部插入append()与appendTo().md)
+3. [jq_DOM外部插入`after()`与`before()`](./jqDOM/3.jq_DOM外部插入after()与before().md)
+4. [jq_DOM内部插入`prepend()`与`prependTo()`](./jqDOM/4.jq_DOM内部插入prepend()与prependTo().md)
+5. [jq_DOM外部插入`insertAfter()`与`insertBefore()`](./jqDOM/5.jq_DOM外部插入insertAfter()与insertBefore().md)
 
 #### 第4章 DOM节点的删除
 
 
-6. [jq_DOM节点删除之`empty()`的基本用法](./jqDOM/6. jq_DOM节点删除之empty()的基本用法.md)
-7. [jq_DOM节点删除之`remove()`的有参用法和无参用法](./jqDOM/7. jq_DOM节点删除之remove()的有参用法和无参用法.md)
-8. [jq_DOM节点删除之`empty`和`remove`区别](./jqDOM/8. jq_DOM节点删除之empty和remove区别.md)
-9. [jq_DOM节点删除之保留数据的删除操作`detach()`](./jqDOM/9. jq_DOM节点删除之保留数据的删除操作detach().md)
-10. [jq_DOM节点删除之`detach()`和`remove()`区别](./jqDOM/10. jq_DOM节点删除之detach()和remove()区别.md)
+6. [jq_DOM节点删除之`empty()`的基本用法](./jqDOM/6.jq_DOM节点删除之empty()的基本用法.md)
+7. [jq_DOM节点删除之`remove()`的有参用法和无参用法](./jqDOM/7.jq_DOM节点删除之remove()的有参用法和无参用法.md)
+8. [jq_DOM节点删除之`empty`和`remove`区别](./jqDOM/8.jq_DOM节点删除之empty和remove区别.md)
+9. [jq_DOM节点删除之保留数据的删除操作`detach()`](./jqDOM/9.jq_DOM节点删除之保留数据的删除操作detach().md)
+10. [jq_DOM节点删除之`detach()`和`remove()`区别](./jqDOM/10.jq_DOM节点删除之detach()和remove()区别.md)
 
 #### 第5章 DOM节点的复制与替换
 
 
-11. [jq_DOM拷贝`clone()`](./jqDOM/11. jq_DOM拷贝clone().md)
-12. [jq_DOM替换`replaceWith()`和replaceAll()](./jqDOM/12. jq_DOM替换replaceWith()和replaceAll().md)
-13. [jq_DOM包裹`wrap()`方法](./jqDOM/13. jq_DOM包裹wrap()方法.md)
-14. [jq_DOM包裹`unwrap()`方法](./jqDOM/14. jq_DOM包裹unwrap()方法.md)
-15. [jq_DOM包裹`wrapAll()`方法](./jqDOM/15. jq_DOM包裹wrapAll()方法.md)
-16. [jq_DOM包裹`wrapInner()`方法](./jqDOM/16. jq_DOM包裹wrapInner()方法.md)
+11. [jq_DOM拷贝`clone()`](./jqDOM/11.jq_DOM拷贝clone().md)
+12. [jq_DOM替换`replaceWith()`和replaceAll()](./jqDOM/12.jq_DOM替换replaceWith()和replaceAll().md)
+13. [jq_DOM包裹`wrap()`方法](./jqDOM/13.jq_DOM包裹wrap()方法.md)
+14. [jq_DOM包裹`unwrap()`方法](./jqDOM/14.jq_DOM包裹unwrap()方法.md)
+15. [jq_DOM包裹`wrapAll()`方法](./jqDOM/15.jq_DOM包裹wrapAll()方法.md)
+16. [jq_DOM包裹`wrapInner()`方法](./jqDOM/16.jq_DOM包裹wrapInner()方法.md)
 
 #### 第6章 jQuery遍历
 
-17. [jq_遍历之`children()`方法](./jqDOM/17. jq_遍历之children()方法.md)
-18. [jq_遍历之`find()`方法](./jqDOM/18. jq_遍历之find()方法.md)
-19. [jq_遍历之`parent()`方法](./jqDOM/19. jq_遍历之parent()方法.md)
-20. [jq_遍历之`parents()`方法](./jqDOM/20. jq_遍历之parents()方法.md)
-21. [jq_遍历之`closest()`方法](./jqDOM/21. jq_遍历之closest()方法.md)
-22. [jq_遍历之`next()`方法](./jqDOM/22. jq_遍历之next()方法.md)
-23. [jq_遍历之`prev()`方法](./jqDOM/23. jq_遍历之prev()方法.md)
-24. [jq_遍历之`siblings()`方法](./jqDOM/24. jq_遍历之siblings()方法.md)
-25. [jq_遍历之`add()`方法](./jqDOM/25. jq_遍历之add()方法.md)
-26. [jq_遍历之`each()`方法](./jqDOM/26. jq_遍历之each()方法.md)
+17. [jq_遍历之`children()`方法](./jqDOM/17.jq_遍历之children()方法.md)
+18. [jq_遍历之`find()`方法](./jqDOM/18.jq_遍历之find()方法.md)
+19. [jq_遍历之`parent()`方法](./jqDOM/19.jq_遍历之parent()方法.md)
+20. [jq_遍历之`parents()`方法](./jqDOM/20.jq_遍历之parents()方法.md)
+21. [jq_遍历之`closest()`方法](./jqDOM/21.jq_遍历之closest()方法.md)
+22. [jq_遍历之`next()`方法](./jqDOM/22.jq_遍历之next()方法.md)
+23. [jq_遍历之`prev()`方法](./jqDOM/23.jq_遍历之prev()方法.md)
+24. [jq_遍历之`siblings()`方法](./jqDOM/24.jq_遍历之siblings()方法.md)
+25. [jq_遍历之`add()`方法](./jqDOM/25.jq_遍历之add()方法.md)
+26. [jq_遍历之`each()`方法](./jqDOM/26.jq_遍历之each()方法.md)
