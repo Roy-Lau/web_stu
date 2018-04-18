@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta http-equiv="X-UA-Compitable" content="IE=edge">
+    <!--这一行代码时为了兼容老版本的IE：新版本的IE启用老版本的IE内核-->
+    <link rel="stylesheet" href="../css/bootstrap.css"/>
+    <!--引入css的Bootstrap-->
+    <title></title>
+
+</head>
+<body>
+<h3>巨幕</h3>
+<div class="jumbotron">
+    <h1>Hello, world!</h1>
+    <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+    <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+</div>
+<h3>页头</h3>
+<div class="page-header">
+    <h1>Example page header <small>Subtext for header</small></h1>
+</div>
+<h3>缩略图</h3>
+<div class="row">
+    <div class="col-xs-6 col-md-1">
+        <a href="#" class="thumbnail">
+            <img src="../imags/logo_ndphotos.png" alt="...">
+        </a>
+    </div>
+    <div class="col-xs-6 col-md-3">
+        <a href="#" class="thumbnail">
+            <img src="../imags/logo_ndphotos.png" alt="...">
+        </a>
+    </div>
+    <div class="col-xs-6 col-md-3">
+        <a href="#" class="thumbnail">
+            <img src="../imags/logo_ndphotos.png" alt="...">
+        </a>
+    </div>
+</div>
+
+<!--[if lte IE 9]-->        <!--&lt;!&ndash;如果用户使用是的IE9以下的版本的浏览器，就解析下面的文件&ndash;&gt;-->
+<script src="../js/html5shiv.min.js"></script>
+<!--引入html5shiv.min文件，为了让老版本的IE（<9）支持HTML5新标签-->
+<script src="../js/respond.min.js"></script>
+<!--引入respond.min文件，为了让老版本的IE（<9）支持CSS3MediaQuery-->
+<!--[endif]-->
+<script src="../js/jquery-1.12.1.min.js"></script>
+<!--引入js文件  js必须在bootstrap的上面-->
+<script src="../js/bootstrap.js"></script>
+<!--引入bootstrap.js文件  bootstrap是基于js的-->
+
+</body>
+</html>

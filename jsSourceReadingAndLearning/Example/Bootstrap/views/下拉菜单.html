@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="X-UA-Compitable" content="IE=edge">
+  <!--这一行代码时为了兼容老版本的IE：新版本的IE启用老版本的IE内核-->
+  <link rel="stylesheet" href="../css/bootstrap.css" />
+  <!--引入css的Bootstrap-->
+  <title>点击按钮出现下拉菜单</title>
+</head>
+
+<body>
+  <div class="dropdown">
+    <h3>点击按钮出现下拉菜单</h3>
+    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+      <!-- data-toggle="dropdown" 点击事件，-->
+      首页
+      <span class="caret"></span>
+      <!--下拉箭头-->
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+      <li><a href="#">产品介绍</a></li>
+      <li><a href="#">新闻中心</a></li>
+      <li><a href="#">公司概况</a></li>
+      <li><a href="#">关于我们</a></li>
+      <li><a href="#">联系我们</a></li>
+    </ul>
+  </div>
+  <h3>单按钮下拉菜单</h3>
+  <!-- Single button -->
+  <div class="btn-group">
+    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Action <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+      <li><a href="#">Action</a></li>
+      <li><a href="#">Another action</a></li>
+      <li><a href="#">Something else here</a></li>
+      <li role="separator" class="divider"></li>
+      <li><a href="#">Separated link</a></li>
+    </ul>
+  </div>
+  <h3>分裂式按钮下拉菜单</h3>
+  <!-- Split button -->
+  <div class="btn-group">
+    <button type="button" class="btn btn-danger">Action</button>
+    <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <span class="caret"></span>
+      <span class="sr-only">Toggle Dropdown</span>
+    </button>
+    <ul class="dropdown-menu">
+      <li><a href="#">Action</a></li>
+      <li><a href="#">Another action</a></li>
+      <li><a href="#">Something else here</a></li>
+      <li role="separator" class="divider"></li>
+      <li><a href="#">Separated link</a></li>
+    </ul>
+  </div>
+  <div class="dropup">
+    <h3>点击按钮出现上弹菜单</h3>
+    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Dropup
+      <span class="caret"></span>
+      <!--上弹箭头-->
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+      <li><a href="#">Action</a></li>
+      <li><a href="#">Another action</a></li>
+      <li><a href="#">Something else here</a></li>
+      <li><a href="#">Separated link</a></li>
+    </ul>
+  </div>
+  <div class="dropdown">
+    <h3>标题——在任何下拉菜单中均可通过添加标题来标明一组动作。</h3>
+    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu3" data-toggle="dropdown" aria-expanded="true">
+      <!-- data-toggle="dropdown" 点击事件，-->
+      dorpdown
+      <span class="caret"></span>
+      <!--下拉箭头-->
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenu3">
+      <li><a href="#">Action</a></li>
+      <li><a href="#">Another action</a></li>
+      <li class="dropdown-header">Dropdown header</li>
+      <!--无法选中-->
+      <li><a href="#">Something else here</a></li>
+      <li><a href="#">Separated link</a></li>
+      <li class="dropdown-header">Dropdown header</li>
+      <!--无法选中-->
+      <li><a href="#">Separated link</a></li>
+    </ul>
+  </div>
+  <div class="dropdown">
+    <h3>分隔线</h3>
+    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+      Dropdown
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuDivider">
+      <a href="#">Action</a></li>
+      <li><a href="#">Another action</a></li>
+      <li><a href="#">Something else here</a></li>
+      <li><a href="#">Separated link</a></li>
+      <li role="separator" class="divider"></li>
+      <!--分隔线-->
+      <li><a href="#">Something else here</a></li>
+      <li><a href="#">Separated link</a></li>
+    </ul>
+  </div>
+  <div class="dropdown">
+    <h3>禁用的菜单项</h3>
+    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu5" data-toggle="dropdown" aria-expanded="true">
+      <!-- data-toggle="dropdown" 点击事件，-->
+      dorpdown
+      <span class="caret"></span>
+      <!--下拉箭头-->
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenu4">
+      <li><a href="#">Regular link</a></li>
+      <li class="disabled"><a href="#">Disabled link</a></li>
+      <!--禁用此行-->
+      <li><a href="#">Another link</a></li>
+    </ul>
+  </div>
+  <h3>延伸几个小图标</h3>
+  <div class="dropup">
+    <span class="caret"></span>
+    <!--下拉箭头-->
+  </div>
+  <div class="dropdown">
+    <span class="caret"></span>
+    <!--上弹箭头-->
+  </div>
+  <!--[if lte IE 9]-->
+  <!--&lt;!&ndash;如果用户使用是的IE9以下的版本的浏览器，就解析下面的文件&ndash;&gt;-->
+  <script src="../js/html5shiv.min.js"></script>
+  <!--引入html5shiv.min文件，为了让老版本的IE（<9）支持HTML5新标签-->
+  <script src="../js/respond.min.js"></script>
+  <!--引入respond.min文件，为了让老版本的IE（<9）支持CSS3MediaQuery-->
+  <!--[endif]-->
+  <script src="../js/jquery-1.12.1.min.js"></script>
+  <!--引入js文件  js必须在bootstrap的上面-->
+  <script src="../js/bootstrap.js"></script>
+  <!--引入bootstrap.js文件  bootstrap是基于js的-->
+</body>
+
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta http-equiv="X-UA-Compitable" content="IE=edge">
+    <!--这一行代码时为了兼容老版本的IE：新版本的IE启用老版本的IE内核-->
+    <link rel="stylesheet" href="../css/bootstrap.css"/>
+    <!--引入css的Bootstrap-->
+    <title></title>
+
+</head>
+<body>
+    <h3>警告框</h3>
+    <div class="alert alert-success" role="alert">Well done! You successfully read this important alert message.</div>
+    <div class="alert alert-info" role="alert">Heads up! This alert needs your attention, but it's not super important.</div>
+    <div class="alert alert-warning" role="alert">Warning! Better check yourself, you're not looking too good.</div>
+    <div class="alert alert-danger" role="alert">Oh snap! Change a few things up and try submitting again.</div>
+    <h3>可关闭警告框</h3>
+    <div class="alert alert-warning alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <strong>Warning!</strong> Better check yourself, you're not looking too good.<br />
+        <strong>Warning!</strong> Better check yourself, you're not looking too good.<br />
+        <strong>Warning!</strong> Better check yourself, you're not looking too good.<br />
+    </div>
+
+    <div class="alert alert-danger ">
+        <span class="close" data-dismiss="alert">&times;</span>
+        <span class="glyphicon glyphicon-alert"></span>
+        此浏览器不支持该视频！！
+    </div>
+    <h3>警告框中的链接</h3>
+    <div class="alert alert-success" role="alert">
+        劝君莫
+        <a href="#" class="alert-link">惜金</a>
+        缕衣，
+    </div>
+    <div class="alert alert-info" role="alert">
+        劝君
+        <a href="#" class="alert-link">惜取</a>
+        少年时。
+    </div>
+    <div class="alert alert-warning" role="alert">
+        花开
+        <a href="#" class="alert-link">堪折直须折，</a>
+    </div>
+    <div class="alert alert-danger" role="alert">
+        <a href="#" class="alert-link">莫待无花</a>
+        空折枝！
+    </div>
+
+
+<!--[if lte IE 9]-->        <!--&lt;!&ndash;如果用户使用是的IE9以下的版本的浏览器，就解析下面的文件&ndash;&gt;-->
+<script src="../js/html5shiv.min.js"></script>
+<!--引入html5shiv.min文件，为了让老版本的IE（<9）支持HTML5新标签-->
+<script src="../js/respond.min.js"></script>
+<!--引入respond.min文件，为了让老版本的IE（<9）支持CSS3MediaQuery-->
+<!--[endif]-->
+<script src="../js/jquery-1.12.1.min.js"></script>
+<!--引入js文件  js必须在bootstrap的上面-->
+<script src="../js/bootstrap.js"></script>
+<!--引入bootstrap.js文件  bootstrap是基于js的-->
+
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta http-equiv="X-UA-Compitable" content="IE=edge">
+    <!--这一行代码时为了兼容老版本的IE：新版本的IE启用老版本的IE内核-->
+    <link rel="stylesheet" href="../css/bootstrap.css"/>
+    <!--引入css的Bootstrap-->
+    <title>仿bootstrap导航条</title>
+
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">bootstrap</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                    <li><a href="#"  data-toggle="dropdown">起步</a></li>
+                    <li><a href="#" class="list-group-item">全局css样式</a></li>
+                    <li><a href="#" class="list-group-item">组件</a></li>
+                    <li><a href="#" class="list-group-item">js插件</a></li>
+                    <li><a href="#" class="list-group-item">定制</a></li>
+                    <li><a href="#" class="list-group-item">网站实例</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#" class="self-navbar-right">bootstrap中文网</a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+
+<!--[if lte IE 9]-->        <!--&lt;!&ndash;如果用户使用是的IE9以下的版本的浏览器，就解析下面的文件&ndash;&gt;-->
+<script src="../js/html5shiv.min.js"></script>
+<!--引入html5shiv.min文件，为了让老版本的IE（<9）支持HTML5新标签-->
+<script src="../js/respond.min.js"></script>
+<!--引入respond.min文件，为了让老版本的IE（<9）支持CSS3MediaQuery-->
+<!--[endif]-->
+<script src="../js/jquery-1.12.1.min.js"></script>
+<!--引入js文件  js必须在bootstrap的上面-->
+<script src="../js/bootstrap.js"></script>
+<!--引入bootstrap.js文件  bootstrap是基于js的-->
+
+</body>
+</html>

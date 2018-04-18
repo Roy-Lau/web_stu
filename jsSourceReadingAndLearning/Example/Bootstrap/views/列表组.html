@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta http-equiv="X-UA-Compitable" content="IE=edge">
+    <!--这一行代码时为了兼容老版本的IE：新版本的IE启用老版本的IE内核-->
+    <link rel="stylesheet" href="../css/bootstrap.css"/>
+    <!--引入css的Bootstrap-->
+    <title></title>
+
+</head>
+<body>
+<h3>基本列表</h3>
+<ul class="list-group">
+    <li class="list-group-item">Cras justo odio</li>
+    <li class="list-group-item">Dapibus ac facilisis in</li>
+    <li class="list-group-item">Morbi leo risus</li>
+    <li class="list-group-item">Porta ac consectetur ac</li>
+    <li class="list-group-item">Vestibulum at eros</li>
+</ul>
+<h3>徽章</h3>
+<ul class="list-group">
+    <li class="list-group-item">
+        <span class="badge">14</span>
+        Cras justo odio
+    </li>
+    <li class="list-group-item">
+    <span class="badge">8</span>
+    Dapibus ac facilisis in
+    </li>
+    <li class="list-group-item">
+        <span class="badge">2</span>
+        Morbi leo risus
+    </li>
+</ul>
+<h3>链接</h3>
+<div class="list-group">
+    <a href="#" class="list-group-item active">
+        Cras justo odio
+    </a>
+    <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
+    <a href="#" class="list-group-item">Morbi leo risus</a>
+    <a href="#" class="list-group-item">Porta ac consectetur ac</a>
+    <a href="#" class="list-group-item">Vestibulum at eros</a>
+</div>
+<h3>按钮</h3>
+<div class="list-group">
+    <button type="button" class="list-group-item">Cras justo odio</button>
+    <button type="button" class="list-group-item">Dapibus ac facilisis in</button>
+    <button type="button" class="list-group-item">Morbi leo risus</button>
+    <button type="button" class="list-group-item">Porta ac consectetur ac</button>
+    <button type="button" class="list-group-item">Vestibulum at eros</button>
+</div>
+<h3>被禁用的条目</h3>
+<div class="list-group">
+    <a href="#" class="list-group-item disabled">
+        Cras justo odio
+    </a>
+    <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
+    <a href="#" class="list-group-item">Morbi leo risus</a>
+    <a href="#" class="list-group-item">Porta ac consectetur ac</a>
+    <a href="#" class="list-group-item">Vestibulum at eros</a>
+</div>
+<h3>情景类</h3>
+<ul class="list-group">
+    <li class="list-group-item list-group-item-success">Dapibus ac facilisis in</li>
+    <li class="list-group-item list-group-item-info">Cras sit amet nibh libero</li>
+    <li class="list-group-item list-group-item-warning">Porta ac consectetur ac</li>
+    <li class="list-group-item list-group-item-danger">Vestibulum at eros</li>
+</ul>
+<div class="list-group">
+    <a href="#" class="list-group-item list-group-item-success">Dapibus ac facilisis in</a>
+    <a href="#" class="list-group-item list-group-item-info">Cras sit amet nibh libero</a>
+    <a href="#" class="list-group-item list-group-item-warning">Porta ac consectetur ac</a>
+    <a href="#" class="list-group-item list-group-item-danger">Vestibulum at eros</a>
+</div>
+<h3>定制内容</h3>
+<div class="list-group">
+    <a href="#" class="list-group-item active">
+        <h4 class="list-group-item-heading">List group item heading</h4>
+        <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+    </a>
+    <a href="#" class="list-group-item ">
+        <h4 class="list-group-item-heading">List group item heading</h4>
+        <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+    </a>
+    <a href="#" class="list-group-item ">
+        <h4 class="list-group-item-heading">List group item heading</h4>
+        <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+    </a>
+</div>
+
+<!--[if lte IE 9]-->        <!--&lt;!&ndash;如果用户使用是的IE9以下的版本的浏览器，就解析下面的文件&ndash;&gt;-->
+<script src="../js/html5shiv.min.js"></script>
+<!--引入html5shiv.min文件，为了让老版本的IE（<9）支持HTML5新标签-->
+<script src="../js/respond.min.js"></script>
+<!--引入respond.min文件，为了让老版本的IE（<9）支持CSS3MediaQuery-->
+<!--[endif]-->
+<script src="../js/jquery-1.12.1.min.js"></script>
+<!--引入js文件  js必须在bootstrap的上面-->
+<script src="../js/bootstrap.js"></script>
+<!--引入bootstrap.js文件  bootstrap是基于js的-->
+
+</body>
+</html>
