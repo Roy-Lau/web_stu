@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="./libs/css/jquery.mobile.min.css"/>
+    <script src="./libs/js/jquery.min.js"></script>
+    <script src="./libs/js/jquery.mobile.min.js"></script>
+    <title>jqm 页面跳转例子（需启动服务器）</title>
+</head>
+<body>
+    <!-- page1 伪页面 start -->
+    <div data-role="page" id="page1">
+        <div data-role="header" >
+            <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-b">按钮</a>
+            <h3>主题</h3>
+            <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-b">按钮</a>
+        </div>
+        <ol data-role="main">
+            <h1>页面1</h1>
+            <li><a href="#page2" data-transition="flip">跳转到page2</a></li>  <!--方法1-->
+            <li><a href="2.html" data-transition="flip">跳转到2.html</a></li>  <!--方法2-->
+            <li><a href="2.html" data-transition="slide">slide：向左滑动</a></li>  <!--方法2-->
+            <li><a href="2.html" data-transition="slideup">slideup: 向上滑动</a></li>  <!--方法2-->
+            <li><a href="2.html" data-transition="slidedown">slidedown：向下滑动</a></li>  <!--方法2-->
+            <li><a href="2.html" data-transition="turn">turn：翻动动画</a></li>  <!--方法2-->
+            <li><a href="2.html" data-transition="flow">flow：流动动画</a></li>  <!--方法2-->
+            <li><a href="2.html" data-transition="pop">pop：弹出动画</a></li>  <!--方法2-->
+            <li><a href="2.html" data-transition="slidefade">slidefade：滑动+渐隐动画</a></li>  <!--方法2-->
+            <li><a href="2.html" data-rel="dialog">dialog：将下一个页面以模态框的形式弹出</a></li>  <!--方法2-->
+        </ol>
+        <div data-role="footer" data-position="fixed">footer</div>
+    </div>
+    <!-- page1 伪页面 end -->
+    <!-- page2 伪页面 start -->
+    <div data-role="page" id="page2">
+        <div data-role="header" >header</div>
+        <div data-role="main">
+            <h1>页面1</h1>
+            <a href="#page1">跳转到1翻页+动画.html</a>  <!--方法1-->
+        </div>
+        <div data-role="footer" data-position="fixed">footer</div>
+    </div>
+    <!-- page2 伪页面 end -->
+</body>
+</html>

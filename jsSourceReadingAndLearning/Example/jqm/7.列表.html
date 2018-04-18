@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="../node_modules/jquery-mobile/dist/jquery.mobile.min.css"/>
+    <script src="../node_modules/jquery/dist//jquery.min.js"></script>
+    <script src="../node_modules/jquery-mobile/dist/jquery.mobile.min.js"></script>
+    <title>列表视图</title>
+    <style>
+        h3{color:red;}
+    </style>
+</head>
+<body>
+<h3>列表视图</h3>
+    <ul data-role="listview">
+        <li>首页</li>
+        <li>设置</li>
+        <li>个人中心</li>
+    </ul>
+<h3>列表视图 右边带箭头</h3>
+    <ul data-role="listview">
+        <li><a href="#">首页  </a> </li>
+        <li><a href="#">设置  </a> </li>
+        <li><a href="#">个人中心</a></li>
+    </ul>
+<h3>列表视图 右边带箭头 边框圆角</h3>
+<ul data-role="listview" data-inset="true">
+    <li><a href="#">首页  </a> </li>
+    <li><a href="#">设置  </a> </li>
+    <li><a href="#">个人中心</a></li>
+</ul>
+<h3>列表视图 右边带箭头 边框圆角 带搜索框</h3>
+<ul data-role="listview" data-inset="true" data-filter="true">
+    <li data-icon="delete"><a href="#">首页</a></li>
+    <li data-icon="custom" id="skull"><a href="#">设置</a></li>
+    <li data-icon="gear"><a href="#">个人中心</a></li>
+</ul>
+
+
+
+
+
+</body>
+</html>

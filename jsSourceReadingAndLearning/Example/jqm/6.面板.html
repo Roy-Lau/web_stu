@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="../node_modules/jquery-mobile/dist/jquery.mobile.min.css"/>
+    <script src="../node_modules/jquery/dist//jquery.min.js"></script>
+    <script src="../node_modules/jquery-mobile/dist/jquery.mobile.min.js"></script>
+    <title>面板</title>
+    <style>
+        #p1{background: linear-gradient(yellow,red);}
+        #p2{background: linear-gradient(white,indigo);}
+    </style>
+</head>
+<body>
+<!--按出现的位置来分(data-position)：
+left（默认值）
+right
+按与Page的关系来分(data-display)：
+Overlay(覆盖式)
+Reveal(掀开式) 默认
+Push(推动式)-->
+    <a href="#p1" data-role="button">凤求凰</a>
+    <a href="#p2" data-role="button">白头吟</a>
+<div data-role="panel" id="p1" data-position="left" data-display="Overlay">
+    <ul>
+        <li>有一美人兮，见之不忘。</li>
+        <li>一日不见兮，思之如狂。</li>
+        <li>凤飞翱翔兮，四海求凰。</li>
+        <li>无奈佳人兮，不在东墙。</li>
+        <li>将琴代语兮，聊写衷肠。</li>
+        <li>何日见许兮，慰我彷徨。</li>
+        <li>愿言配德兮，携手相将。</li>
+        <li>不得於飞兮，使我沦亡。</li>
+        <li>凤兮凤兮归故乡，<br/>遨游四海求其凰。</li>
+    </ul>
+</div>
+<div data-role="panel" id="p2" data-position="right" data-display="Push">
+    <ul>
+        <li>皑如山上雪，皎若云间月。</li>
+        <li>闻君有两意，故来相决绝。</li>
+        <li>今日斗酒会，明旦沟水头。</li>
+        <li>躞蹀御沟上，沟水东西流。</li>
+        <li>凄凄复凄凄，嫁娶不须啼。</li>
+        <li>愿得一心人，白头不相离。</li>
+        <br/>
+        <li>竹竿何袅袅，鱼尾何簁簁！</li>
+        <li>男儿重意气，何用钱刀为！</li>
+    </ul>
+</div>
+</body>
+</html>

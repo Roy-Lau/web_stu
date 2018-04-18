@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<title>table export</title>
+</head>
+<body>
+	<table id="tableid">
+		<tbody>
+			<tr>
+				<td>文字</td>
+				<td>咨询</td>
+				<td>410224199103334596</td>
+			</tr>
+			<tr>
+				<td>文字</td>
+				<td>咨询</td>
+				<td>410224199103334596</td>
+			</tr>
+			<tr>
+				<td>文字</td>
+				<td>咨询</td>
+				<td>410224199103334596</td>
+			</tr>
+			<tr>
+				<td>文字</td>
+				<td>测试</td>
+				<td>410224199103334596</td>
+			</tr>
+			<tr>
+				<td>文字</td>
+				<td>咨询</td>
+				<td>410224199103334596</td>
+			</tr>
+			<tr>
+				<td>文字</td>
+				<td>咨询</td>
+				<td>410224199103334596</td>
+			</tr>
+		</tbody>
+	</table>
+	<!--<table id="table2">-->
+		<!--<thead>-->
+			<!--<tr>-->
+				<!--<td>标题一</td>-->
+				<!--<td>标题二</td>-->
+				<!--<td>标题三</td>-->
+			<!--</tr>-->
+		<!--</thead>-->
+		<!--<tbody>-->
+			<!--<tr>-->
+				<!--<td><a href="http://w3cboy.com" target="_blank">文字</a></td>-->
+				<!--<td>咨询</td>-->
+				<!--<td>测试</td>-->
+			<!--</tr>-->
+			<!--<tr>-->
+				<!--<td><a href="http://w3cboy.com" target="_blank">文字</a></td>-->
+				<!--<td>咨询</td>-->
+				<!--<td>测试</td>-->
+			<!--</tr>-->
+			<!--<tr>-->
+				<!--<td><a href="http://w3cboy.com" target="_blank">文字</a></td>-->
+				<!--<td>咨询</td>-->
+				<!--<td>测试</td>-->
+			<!--</tr>-->
+			<!--<tr>-->
+				<!--<td><a href="http://w3cboy.com" target="_blank">410224199105211613</a></td>-->
+				<!--<td>咨询</td>-->
+				<!--<td>测试</td>-->
+			<!--</tr>-->
+			<!--<tr>-->
+				<!--<td><a href="http://w3cboy.com" target="_blank">410224199105211613</a></td>-->
+				<!--<td>咨询</td>-->
+				<!--<td>测试</td>-->
+			<!--</tr>-->
+			<!--<tr>-->
+				<!--<td><a href="http://w3cboy.com" target="_blank">文字</a></td>-->
+				<!--<td>咨询</td>-->
+				<!--<td>测试</td>-->
+			<!--</tr>-->
+		<!--</tbody>-->
+	<!--</table>-->
+	<!--<div>-->
+	<button id="export" data-type="json" >导出json</button>
+	<button id="export" data-type="txt">导出txt</button>
+	<button id="export" data-type="csv">导出csv</button>
+	<button id="export" data-type="xls">导出excel</button>
+	<button id="export" data-type="doc">导出word</button>
+	<!--</div>-->
+	<!-- <script src="Blob.js"></script> -->
+	<script src="FileSaver.js"></script>
+	<script src="tableExport.js"></script>
+	<script>
+		var $exportLink = document.getElementById('export');
+		$exportLink.addEventListener('click', function(e){
+			tableExport('tableid', '文件名', e.target.getAttribute('data-type'));
+		}, false);
+
+	</script>
+
+</body>
+</html>
