@@ -84,7 +84,7 @@
    *
    * @param  {Function} func     [description]
    * @param  {[type]} context  [description]
-   * @param  {[type]} argCount [description]
+   * @param  {Number} argCount [数字]
    * @return {[type]}          [description]
    */
   var optimizeCb = function(func, context, argCount) {
@@ -123,7 +123,7 @@
   var cb = function(value, context, argCount) {
     if (value == null) return _.identity;
     if (_.isFunction(value)) return optimizeCb(value, context, argCount);  // 如果value是一个函数，返回优化回调
-    if (_.isObject(value)) return _.matcher(value);
+    if (_.isObject(value)) return _.matcher(value); // 如果value是一个对象，返回一个
     return _.property(value);
   };
 
@@ -132,13 +132,20 @@
    *
    * @param  {[type]} value   [description]
    * @param  {[type]} context [description]
-   * @return {[type]}         [description]
+   * @return {Function}         [返回一个回调函数]
    */
   _.iteratee = function(value, context) {
     return cb(value, context, Infinity);
   };
 
   // An internal function for creating assigner functions.
+  /**
+   * 创建一个分配器功能的内部函数。
+   *
+   * @param  {Function} keysFunc      [description]
+   * @param  {Boolean} undefinedOnly [description]
+   * @return {[Function,Object]}               [description]
+   */
   var createAssigner = function(keysFunc, undefinedOnly) {
     return function(obj) {
       var length = arguments.length;
@@ -157,6 +164,11 @@
   };
 
   // An internal function for creating a new object that inherits from another.
+  /**
+   * 创建一个继承另一个新对象的内部函数。
+   * @param  {Object} prototype [原型]
+   * @return {[type]}           [description]
+   */
   var baseCreate = function(prototype) {
     if (!_.isObject(prototype)) return {};
     if (nativeCreate) return nativeCreate(prototype);
@@ -329,6 +341,18 @@
 
   // Convenience version of a common use case of `filter`: selecting only objects
   // containing specific `key:value` pairs.
+  /**
+   * “筛选器”的常用用例的便利版本：只选择包含特定的“键：值”对的对象。
+   *
+   * @example1 将对象转化为数组
+   *    _.where({author: "Shakespeare", year: 1611})
+   *    => ["Shakespeare", 1611]
+   * @example2 第二个参数还没发现怎么使用
+   *
+   * @param  {Object} obj   [description]
+   * @param  {[type]} attrs [description]
+   * @return {[Array]}       [将对象的value以数组的方式返回]
+   */
   _.where = function(obj, attrs) {
     return _.filter(obj, _.matcher(attrs));
   };
@@ -1253,6 +1277,12 @@
   };
 
   // Is a given variable an object?
+  /**
+   * 判断传入的参数是不是对象
+   *
+   * @param  {Object}  obj [接收一个对象]
+   * @return {Boolean}     [{ture：是对象，false:不是对象}]
+   */
   _.isObject = function(obj) {
     var type = typeof obj;
     return type === 'function' || type === 'object' && !!obj;
@@ -1347,8 +1377,15 @@
 
   // Returns a predicate for checking whether an object has a given set of
   // `key:value` pairs.
+  /**
+   * 匹配器
+   * 返回一个谓词，用于检查一个对象是否有一组给定的 键值对。
+   *
+   * @param  {Object} attrs [key:value，类型的对象]
+   * @return {[type]}       [description]
+   */
   _.matcher = _.matches = function(attrs) {
-    attrs = _.extendOwn({}, attrs);
+    attrs = _.extendOwn({}, attrs); // 扩展 `attrs` 为一个键值对 对象
     return function(obj) {
       return _.isMatch(obj, attrs);
     };
@@ -1372,11 +1409,16 @@
   };
 
   // A (possibly faster) way to get the current timestamp as an integer.
+  /**
+   * 一个优化的方式来获得一个当前时间的整数时间戳。 可用于实现定时/动画功能。
+   *
+   * @return {Date} [返回一个毫秒的时间戳]
+   */
   _.now = Date.now || function() {
     return new Date().getTime();
   };
 
-   // List of HTML entities for escaping.
+  // List of HTML entities for escaping.
   var escapeMap = {
     '&': '&amp;',
     '<': '&lt;',
