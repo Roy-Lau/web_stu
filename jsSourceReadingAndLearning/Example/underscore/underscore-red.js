@@ -635,6 +635,7 @@
   };
 
   // Array Functions
+  // 数组函数
   // ---------------
 
   // Get the first element of an array. Passing **n** will return the first N
@@ -885,6 +886,7 @@
   };
 
   // Function (ahem) Functions
+  // 与函数有关的函数
   // ------------------
 
   // Determines whether to execute a function as a constructor
@@ -1093,6 +1095,7 @@
   _.once = _.partial(_.before, 2);
 
   // Object Functions
+  // 对象函数
   // ----------------
 
   // Keys in IE < 9 that won't be iterated by `for key in ...` and thus missed.
@@ -1320,15 +1323,40 @@
   };
 
   // Returns whether an object has a given set of `key:value` pairs.
+  /**
+   * @title 是否匹配
+   * 告诉你properties中的键和值是否包含在object中。
+   *
+   * @param  {Object}  object [description]
+   * @param  {Object}  attrs  [description]
+   * @return {Boolean}        [是否包含]
+   *
+   * @example
+   * var stooge = {name: 'moe', age: 32};
+   * _.isMatch(stooge, {age: 32});
+   * > true
+   */
   _.isMatch = function(object, attrs) {
     var keys = _.keys(attrs),
       length = keys.length;
+
+    // 如果传入的对象为空，返回非 `length`
     if (object == null) return !length;
+
+    // 转化为对象
     var obj = Object(object);
+
+    // 循环
     for (var i = 0; i < length; i++) {
+
+      // 获取每次的 `key`
       var key = keys[i];
+
+      // 如果 `attrs`的值 和 `obj` 的值 不相等，且 `attrs`的key 不在 `obj` 内。返回 `false`
       if (attrs[key] !== obj[key] || !(key in obj)) return false;
     }
+
+    // 如果以上条件都满足，返回 `true`
     return true;
   };
 
@@ -1490,8 +1518,11 @@
   };
 
   // Add some isType methods: isArguments, isFunction, isString, isNumber, isDate, isRegExp, isError.
-  _.each(['Arguments', 'Function', 'String', 'Number', 'Date', 'RegExp', 'Error'], function(name) {
+  // 添加一些判断类型方法：`isArguments, isFunction, isString, isNumber, isDate, isRegExp, isError.`
+  _.each(['Arguments', 'Function', 'String', 'Number', 'Date', 'RegExp', 'Error'], function(name) { // 遍历数组
+    // 拼接数组项（前面加is），并赋值个 `_`
     _['is' + name] = function(obj) {
+      // 判断每个数组项的类型
       return toString.call(obj) === '[object ' + name + ']';
     };
   });
@@ -1511,6 +1542,7 @@
 
   // Optimize `isFunction` if appropriate. Work around some typeof bugs in old v8,
   // IE 11 (#1621), and in Safari 8 (#1929).
+  // 如果合适的话，优化`isFunction`。在旧V8中工作一些类型的bug，即IE 11（#1621）和Safari 8（#1929）。
   if (typeof /./ != 'function' && typeof Int8Array != 'object') {
     _.isFunction = function(obj) {
       return typeof obj == 'function' || false;
@@ -1518,11 +1550,20 @@
   }
 
   // Is a given object a finite number?
+  // 如果object是一个有限(无穷与无穷小之间)的数字，返回true。
+  /**
+   * @example
+   *  _.isFinite(-101);
+   * > true
+   * _.isFinite(-Infinity);
+   * > false
+   */
   _.isFinite = function(obj) {
     return isFinite(obj) && !isNaN(parseFloat(obj));
   };
 
   // Is the given value `NaN`? (NaN is the only number which does not equal itself).
+  // 判断传入的对象是否是 `NaN`， (NaN 是唯一一个不等于自身的数字).
   _.isNaN = function(obj) {
     // 1. 首先，传入的对象必须是个`Number`类型的
     // 2. 且 自身不等于自身
@@ -1561,6 +1602,7 @@
   };
 
   // Utility Functions
+  // 实用功能(Utility Functions)
   // -----------------
 
   // Run Underscore.js in *noConflict* mode, returning the `_` variable to its
@@ -1818,6 +1860,7 @@
   // If Underscore is called as a function, it returns a wrapped object that
   // can be used OO-style. This wrapper holds altered versions of all the
   // underscore functions. Wrapped objects may be chained.
+  // 如果下划线被称为函数，它将返回一个可以使用 `OO-style` 的被包装对象。这个包装器保存所有下划线函数的更改版本。包裹的对象可以链接。
 
   // Helper function to continue chaining intermediate results.
   /**
@@ -1825,7 +1868,7 @@
    *
    * @param  {[type]} instance [迭代]
    * @param  {Object} obj      [对象]
-   * @return {Boolean}          [description]
+   * @return {Boolean}         [description]
    */
   var result = function(instance, obj) {
     return instance._chain ? _(obj).chain() : obj;
