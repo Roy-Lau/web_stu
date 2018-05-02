@@ -617,8 +617,15 @@
   };
 
   // Return the number of elements in an object.
+  /**
+   * 返回一个对象的长度
+   * @param  {Object} obj [description]
+   * @return {Number}     [对象的长度]
+   */
   _.size = function(obj) {
+    // 如果传入的对象等于 `null` 则返回 0
     if (obj == null) return 0;
+    // 如果传入的对象那个是一个类数组,返回传入对象的长度。否则返回对象 `keys` 的长度。
     return isArrayLike(obj) ? obj.length : _.keys(obj).length;
   };
 
@@ -936,7 +943,7 @@
   _.bindAll = function(obj) {
     var i, length = arguments.length,
       key;
-    if (length <= 1) throw new Error('bindAll must be passed function names');
+    if (length <= 1) throw new Error('bindAll must be passed function names'); // bindAll 必须传递函数名
     for (i = 1; i < length; i++) {
       key = arguments[i];
       obj[key] = _.bind(obj[key], obj);
@@ -1123,12 +1130,12 @@
     // Constructor单独处理部分.
     var prop = 'constructor';
 
-    // 如果对象和keys都存在constructor属性，则把他存入keys数组当中
+    // 如果对象和 `keys` 都存在 `constructor` 属性，则把他存入 `keys` 数组当中
     if (_.has(obj, prop) && !_.contains(keys, prop)) keys.push(prop);
 
     while (nonEnumIdx--) {
       prop = nonEnumerableProps[nonEnumIdx];
-      // nonEnumerableProps中的属性出现在obj中，并且和原型中的同名方法不等，再者keys中不存在该属性，就添加进去
+      // `nonEnumerableProps` 中的属性出现在 `obj` 中，并且和原型中的同名方法不等，再者 `keys` 中不存在该属性，就添加进去
       if (prop in obj && obj[prop] !== proto[prop] && !_.contains(keys, prop)) {
         keys.push(prop);
       }
@@ -1607,6 +1614,13 @@
 
   // Run Underscore.js in *noConflict* mode, returning the `_` variable to its
   // previous owner. Returns a reference to the Underscore object.
+  /**
+   * 改名。将 `_` 全局变量 改为其的名字
+   *
+   * @return {[type]} [description]
+   * @example
+   * var underscore = _.noConflict();
+   */
   _.noConflict = function() {
     root._ = previousUnderscore;
     return this;
@@ -1735,7 +1749,9 @@
       return testRegexp.test(string) ? string.replace(replaceRegexp, escaper) : string;
     };
   };
+  // 处理 HTML
   _.escape = createEscaper(escapeMap);
+  // 反处理 HTML
   _.unescape = createEscaper(unescapeMap);
 
   // If the value of the named `property` is a function then invoke it with the
@@ -1758,19 +1774,41 @@
 
   // By default, Underscore uses ERB-style template delimiters, change the
   // following template settings to use alternative delimiters.
+  // 模板配置
   _.templateSettings = {
+    /* 三种渲染模板 */
+    /*
+      js
+
+      <% %> - to execute some code (执行一些代码),
+      包裹的是一些可执行的 `JavaScript` 语句，比如 `if-else` 语句，`for` 循环语句，等等。
+    */
     evaluate: /<%([\s\S]+?)%>/g,
+    /*
+      varaible
+
+      <%= %> 中的内容是插入变量，这里如果不指定score（通过settings.variable来指定），则是从obj中获取。
+      interpolate: /\{\{(.+?)\}\}/g ( 自定义成 {{ }} 的形式 )
+    */
     interpolate: /<%=([\s\S]+?)%>/g,
+    /*
+      html
+
+      <%- %> - to print some values HTML escaped （打印一些HTML转义的值）
+      和前者相比，多了步 HTML 实体编码的过程，可以有效防止 XSS 攻击。
+    */
     escape: /<%-([\s\S]+?)%>/g
   };
 
   // When customizing `templateSettings`, if you don't want to define an
   // interpolation, evaluation or escaping regex, we need one that is
   // guaranteed not to match.
+  // 当自定义 `templateSettings` 时，如果不想定义插值、评估或逃避正则表达式，则需要一个保证不匹配的方法。
   var noMatch = /(.)^/;
 
   // Certain characters need to be escaped so that they can be put into a
   // string literal.
+  // 需要获取命中部分是否有 ` ', \\ , \r, \n, \u2028 和\u2029` (行分隔符 和段落分隔符)。如果有的话，需要做一步转义
   var escapes = {
     "'": "'",
     '\\': '\\',
@@ -1792,26 +1830,36 @@
   // NB: `oldSettings` only exists for backwards compatibility.
   _.template = function(text, settings, oldSettings) {
     if (!settings && oldSettings) settings = oldSettings;
+    // 获取可以解析的内容。如果没有提供的话，用默认的配置
     settings = _.defaults({}, settings, _.templateSettings);
 
     // Combine delimiters into one regular expression via alternation.
+    // 将占位符构造为正则表达式。获取可以解析的全部部分。
+    // `evaluate` 是 `js` ，`interpolate` 是变量，`escape` 是 `html`
     var matcher = RegExp([
       (settings.escape || noMatch).source,
       (settings.interpolate || noMatch).source,
       (settings.evaluate || noMatch).source
     ].join('|') + '|$', 'g');
 
+    /* 解析模版: */
     // Compile the template source, escaping string literals appropriately.
     var index = 0;
+    // 开始构造function 的内容。
     var source = "__p+='";
+    // 依次读取模版的内容，然后把匹配到的内容抽取出来。
     text.replace(matcher, function(match, escape, interpolate, evaluate, offset) {
+      // 需要做二次过滤，因为模版中可能有js不能执行的部分，如换行符等。
       source += text.slice(index, offset).replace(escaper, escapeChar);
       index = offset + match.length;
 
+      // 这一块 是对html做过滤。如果是escape，那么调用_.escape方法。
       if (escape) {
         source += "'+\n((__t=(" + escape + "))==null?'':_.escape(__t))+\n'";
+        // 如果是变量，那么直接得到_t = interpolate
       } else if (interpolate) {
         source += "'+\n((__t=(" + interpolate + "))==null?'':__t)+\n'";
+        // 如果是js，可以直接执行。
       } else if (evaluate) {
         source += "';\n" + evaluate + "\n__p+='";
       }
@@ -1819,15 +1867,20 @@
       // Adobe VMs need the match returned to produce the correct offest.
       return match;
     });
+    // 分析完模版，获取可执行的source
     source += "';\n";
 
+    /* 指定数据源： */
     // If a variable is not specified, place data values in local scope.
+    // 如果没有指定 `varable` ，那么从 `obj` 中取数据否则从前面拼装一段 取 `arguments` 的过程。
+    // 在 `_p` 前面 先获取 `arguments` 。然后再执行`source`
     if (!settings.variable) source = 'with(obj||{}){\n' + source + '}\n';
 
     source = "var __t,__p='',__j=Array.prototype.join," +
       "print=function(){__p+=__j.call(arguments,'');};\n" +
       source + 'return __p;\n';
 
+    /* 封装函数： */
     try {
       var render = new Function(settings.variable || 'obj', '_', source);
     } catch (e) {
@@ -1836,11 +1889,15 @@
     }
 
     var template = function(data) {
+      // 封装方法
       return render.call(this, data, _);
     };
 
     // Provide the compiled source as a convenience for precompilation.
+    // 指定arguments
     var argument = settings.variable || 'obj';
+    // 把模版内容保存在 `source` 属性里面。
+    // tops： 执行 `source` 还可以用 `eval()` 来执行，但是本身 `eval` 执行效率很低。先包装为一个 `function`，再调用 `apply`，效率会提升很多。
     template.source = 'function(' + argument + '){\n' + source + '}';
 
     return template;
@@ -1855,16 +1912,17 @@
     return instance;
   };
 
-  // OOP
+  // OOP 面向对象编程
   // ---------------
   // If Underscore is called as a function, it returns a wrapped object that
   // can be used OO-style. This wrapper holds altered versions of all the
   // underscore functions. Wrapped objects may be chained.
-  // 如果下划线被称为函数，它将返回一个可以使用 `OO-style` 的被包装对象。这个包装器保存所有下划线函数的更改版本。包裹的对象可以链接。
+  // 如果下划线被称为函数，它将返回一个可以使用 `OO-style` 的被包装对象。
+  // 这个包装器保存所有下划线函数的更改版本。包裹的对象可以链接。
 
   // Helper function to continue chaining intermediate results.
   /**
-   * 返回_.chain里是否调用的结果, 如果为true, 则返回一个被包装的Underscore对象, 否则返回对象本身
+   * 返回 `_.chain` 里是否调用的结果, 如果为 `true` , 则返回一个被包装的 `Underscore` 对象, 否则返回对象本身
    *
    * @param  {[type]} instance [迭代]
    * @param  {Object} obj      [对象]
@@ -1916,6 +1974,7 @@
   // Add all accessor Array functions to the wrapper.
   // 将所有访问器数组函数添加到包装器中。
   _.each(['concat', 'join', 'slice'], function(name) {
+    // 方法引用
     var method = ArrayProto[name];
     _.prototype[name] = function() {
       // 返回Array对象或者封装后的Array
