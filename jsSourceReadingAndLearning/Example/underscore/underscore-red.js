@@ -59,9 +59,9 @@
   // Export the Underscore object for **Node.js**, with
   // backwards-compatibility for the old `require()` API. If we're in
   // the browser, add `_` as a global object.
-  // 导出 node.js 环境用的 下划线对象
-  // 如果  `Underscore` 在 `require()` API环境下，兼容 `require()` API
-  // 浏览器环境下，添加 `_` 为全局对象。
+  // 这一部分代码是为了在 `node.js` 环境下将 `underscore` 作为一个模块使用，
+  // 并向后兼容旧版的模块 `API` ，即 `require` 。如果在浏览器环境中，则将 `underscore` 以 `_` 暴露到全局。
+  // 值得注意的是使用nodeType来确保exports和module并不是HTML的元素。
   if (typeof exports !== 'undefined') {
     if (typeof module !== 'undefined' && module.exports) {
       exports = module.exports = _;
@@ -90,9 +90,13 @@
    * @return {[type]}          [description]
    */
   var optimizeCb = function(func, context, argCount) {
+
+    // `void 0` 返回 `undefined` ，即未传入上下文信息时直接返回相应的函数
     if (context === void 0) return func;
+
+    // 如果传入了 `argCount` ，那么参数数量为 `argCount` ，如果传入等价为 `null` ，则为 `3` ，包括未传值得情况
     switch (argCount == null ? 3 : argCount) {
-      // 为单值的情况，例如times函数
+      // 1个参数的时候，只需要传递当前值(为单值的情况，例如times函数)
       case 1:
         return function(value) {
           return func.call(context, value);
@@ -102,17 +106,33 @@
         return function(value, other) {
           return func.call(context, value, other);
         };
-        // 3个参数用于一些迭代器函数，例如map函数
       case 3:
+      /**
+       * 3个参数用于一些迭代器函数，例如map函数
+       *
+       * @param  {[type]} value      [当前值]
+       * @param  {[type]} index      [当前索引]
+       * @param  {[type]} collection [整个集合]
+       * @return {[type]}            [description]
+       */
         return function(value, index, collection) {
           return func.call(context, value, index, collection);
         };
       case 4:
-        // 4个参数用于reduce和reduceRight函数
+        /**
+         * 4个参数用于reduce和reduceRight函数
+         *
+         * @param  {[type]} accumulator [累计值]
+         * @param  {[type]} value       [当前值]
+         * @param  {[type]} index       [当前索引]
+         * @param  {[type]} collection  [整个集合]
+         * @return {[type]}             [description]
+         */
         return function(accumulator, value, index, collection) {
           return func.call(context, accumulator, value, index, collection);
         };
     }
+    // 如果都不符合上述的任一条件，直接使用apply调用相关函数
     return function() {
       return func.apply(context, arguments);
     };
@@ -212,7 +232,7 @@
 
   /**
    * @title 获取属性值
-   * 如果对象obj不为null，返回obj的一个属性key的值
+   * 通过传入键名，返回可以访问以传入对象为参数，并可以获取该对象相应键值对的函数
    *
    * @param  {String} key [description]
    * @return {Object}     [description]
@@ -235,7 +255,7 @@
 
   /**
    * js的精确整数最大为: 9007199254740991
-   * @type {Number}
+   * @type {Number} 正无穷大
    */
   var MAX_ARRAY_INDEX = Math.pow(2, 53) - 1;
   /**
@@ -291,28 +311,33 @@
   _.each = _.forEach = function(obj, iteratee, context) {
 
     // 优化遍历函数`iteratee`，将 `iteratee` 中的 `this` 动态设置为 `context`
+    //
+    // 先处理一下传入的迭代函数，回顾一下，这里如果没有context，则直接使用iteratee作为函数遍历，
+    // 否则迭代函数将以当前值、当前索引、完整集合作为参数进行调用
     iteratee = optimizeCb(iteratee, context);
 
     var i, length;
-    // 如果传入的对象是一个集合
+    // 如果传入的是类数组对象，则遍历每一个位置
     if (isArrayLike(obj)) {
       for (i = 0, length = obj.length; i < length; i++) {
-        iteratee(obj[i], i, obj);
+        iteratee(obj[i], i, obj); // 参数是值、索引、完整集合
       }
+     // 否则遍历每一个键值对
     } else {
       // 获取传入对象的keys值(Array类型)
       var keys = _.keys(obj);
       for (i = 0, length = keys.length; i < length; i++) {
-        iteratee(obj[keys[i]], keys[i], obj);
+        iteratee(obj[keys[i]], keys[i], obj); // 参数是值、键、完整集合
       }
     }
-    return obj;
+    return obj; // 返回对象自身
   };
 
   // Return the results of applying the iteratee to each element.
   // 返回将迭代器应用于每个元素的结果。
   /**
-   * [collect description]
+   * map 会对集合内的元素依次使用用户提供的回调函数进行处理，然后返回处理后的新的集合。
+   *
    * @param  {Object} obj      [description]
    * @param  {Function} iteratee 迭代
    * @param  {[type]} context  [执行上下文]
@@ -332,12 +357,23 @@
    * > 3 "b" {a:2,b:3}
    */
   _.map = _.collect = function(obj, iteratee, context) {
+
+    // 根据 `iteratee` 决定是返回等价、函数调用、属性匹配或者属性访问
     iteratee = cb(iteratee, context);
+
+    // 类数组对象如果为 `false` ，否则 则取对象全部键
     var keys = !isArrayLike(obj) && _.keys(obj),
+      // 类数组对象为 `length` 属性，否则为对象键值对数量
       length = (keys || obj).length,
+      // 要返回的新的集合
       results = Array(length);
+
     for (var index = 0; index < length; index++) {
+
+      // 类数组对象取索引，否则取键名
       var currentKey = keys ? keys[index] : index;
+
+      // 放入对应位置的值经过 `iteratee` 处理后的值
       results[index] = iteratee(obj[currentKey], currentKey, obj);
     }
     return results;
@@ -345,41 +381,95 @@
 
   // Create a reducing function iterating left or right.
   // 创建左或右迭代的还原函数。
+  /**
+   * 抽象递归过程
+   * @param  {Number} dir [1: 左递归, -1: 右递归]
+   * @return {[type]}     [description]
+   */
   function createReduce(dir) {
     // Optimized iterator function as using arguments.length
     // in the main function will deoptimize the, see #1991.
+    /**
+     * 迭代器(包装递归)
+     *
+     * @param  {[type]} obj      [description]
+     * @param  {[type]} iteratee [description]
+     * @param  {[type]} memo     [description]
+     * @param  {[type]} keys     [description]
+     * @param  {[type]} index    [description]
+     * @param  {[type]} length   [description]
+     * @return {[type]}          [description]
+     */
     function iterator(obj, iteratee, memo, keys, index, length) {
+      // 根据方向递归遍历
       for (; index >= 0 && index < length; index += dir) {
         var currentKey = keys ? keys[index] : index;
         memo = iteratee(memo, obj[currentKey], currentKey, obj);
       }
       return memo;
     }
-
+    /**
+     * 传入要遍历的对象、迭代器、记录、上下文
+     *
+     * @param  {Object} obj      [要遍历的对象]
+     * @param  {[type]} iteratee [迭代器]
+     * @param  {[type]} memo     [记录]
+     * @param  {[type]} context  [上下文]
+     * @return {Function}        [累加器的迭代函数]
+     */
     return function(obj, iteratee, memo, context) {
       iteratee = optimizeCb(iteratee, context, 4);
       var keys = !isArrayLike(obj) && _.keys(obj),
         length = (keys || obj).length,
         index = dir > 0 ? 0 : length - 1;
-      // Determine the initial value if none is provided.
+      // Determine the initial value if none is provided.(如果没有提供，则确定初始值。)
+      // 前三次的时候创建 `memo` 用来存储
       if (arguments.length < 3) {
         memo = obj[keys ? keys[index] : index];
         index += dir;
       }
+      // 返回迭代为累加器的迭代函数
       return iterator(obj, iteratee, memo, keys, index, length);
     };
   }
 
   // **Reduce** builds up a single result from a list of values, aka `inject`,
   // or `foldl`.
+  // 从左往右递归
   _.reduce = _.foldl = _.inject = createReduce(1);
 
   // The right-associative version of reduce, also known as `foldr`.
+  // 从右往左递归
   _.reduceRight = _.foldr = createReduce(-1);
 
   // Return the first value which passes a truth test. Aliased as `detect`.
+  // 传入三个参数，分别是要查找的对象、判断条件、上下文
+  /**
+   * 查找函数
+   *
+   * @param  {[type]} obj       [查找的对象]
+   * @param  {[type]} predicate [判断条件]
+   * @param  {[type]} context   [上下文]
+   * @return {[type]}           [description]
+   *
+   * @example1  {Object}
+   * _.find({name:'roylau',age:18},function(item, key, obj){
+   *   console.log(item, key, obj)
+   * })
+   * > roylau name {name: "roylau", age: 18}
+   * > 18 "age" {name: "roylau", age: 18}
+   *
+   * @example2 {Array}
+   * _.find([1,2,3],function(item, index ,arr){
+   *    console.log(item, index ,arr)
+   * })
+   * > 1 0 [1, 2, 3]
+   * > 2 1 [1, 2, 3]
+   * > 3 2 [1, 2, 3]
+   */
   _.find = _.detect = function(obj, predicate, context) {
     var key;
+    // 数组则查找索引(findIndex)，对象查找键(findKey)
     if (isArrayLike(obj)) {
       key = _.findIndex(obj, predicate, context);
     } else {
@@ -390,26 +480,61 @@
 
   // Return all the elements that pass a truth test.
   // Aliased as `select`.
+  /**
+   * 从原数组中寻找符合条件的并组成新的数组返回
+   *
+   * @param  {Object} obj         要查询的对象
+   * @param  {Function} predicate 判断函数
+   * @param  {[type]} context     上下文
+   * @return {Array}           [description]
+   */
   _.filter = _.select = function(obj, predicate, context) {
+
+    // 要返回的新数组
     var results = [];
+
+    // 处理预测函数
     predicate = cb(predicate, context);
+
+    // 遍历处理
     _.each(obj, function(value, index, list) {
+      // 复合条件的放入数组
       if (predicate(value, index, list)) results.push(value);
     });
     return results;
   };
 
   // Return all the elements for which a truth test fails.
+  /**
+   * 对 `filter` 函数的判断函数取反
+   *
+   * @param  {Object} obj       [要处理的对象]
+   * @param  {[type]} predicate [判断函数]
+   * @param  {[type]} context   [上下文]
+   * @return {[type]}           [description]
+   */
   _.reject = function(obj, predicate, context) {
     return _.filter(obj, _.negate(cb(predicate)), context);
   };
 
   // Determine whether all of the elements match a truth test.
   // Aliased as `all`.
+  /**
+   * 判断是不是所有项目都符合条件，全部符合才返回 `true`，否则返回 `false`。
+   *
+   * @param  {Object} obj       [要处理的对象]
+   * @param  {[type]} predicate [判断函数]
+   * @param  {[type]} context   [上下文]
+   * @return {Boolean}          [description]
+   */
   _.every = _.all = function(obj, predicate, context) {
+
+    // 处理判断函数
     predicate = cb(predicate, context);
     var keys = !isArrayLike(obj) && _.keys(obj),
       length = (keys || obj).length;
+
+    // 依次遍历，一旦有不符合的就返回false
     for (var index = 0; index < length; index++) {
       var currentKey = keys ? keys[index] : index;
       if (!predicate(obj[currentKey], currentKey, obj)) return false;
@@ -419,10 +544,20 @@
 
   // Determine if at least one element in the object matches a truth test.
   // Aliased as `any`.
+  /**
+   * 只要存在复合条件的项目就返回 `true`，否则返回 `false`。
+   *
+   * @param  {[type]} obj       [description]
+   * @param  {[type]} predicate [description]
+   * @param  {[type]} context   [description]
+   * @return {[type]}           [description]
+   */
   _.some = _.any = function(obj, predicate, context) {
     predicate = cb(predicate, context);
     var keys = !isArrayLike(obj) && _.keys(obj),
       length = (keys || obj).length;
+
+    // 依次遍历，一旦有符合的就返回 `true`
     for (var index = 0; index < length; index++) {
       var currentKey = keys ? keys[index] : index;
       if (predicate(obj[currentKey], currentKey, obj)) return true;
@@ -808,11 +943,31 @@
   };
 
   // Generator function to create the findIndex and findLastIndex functions
+  /**
+   * 查找索引的抽象
+   *
+   * @param  {Number} dir   [1 or -1]
+   * @return {Function}     [回调函数]
+   */
   function createPredicateIndexFinder(dir) {
+    /**
+     * 返回 回调函数
+     *
+     * @param  {Array} array      [要的处理的数组]
+     * @param  {Object} predicate [判断条件(key or index)]
+     * @param  {[type]} context   [上下文]
+     * @return {Number}           [index or -1]
+     */
     return function(array, predicate, context) {
+
+      // 假设函数会进行迭代执行
       predicate = cb(predicate, context);
+
       var length = getLength(array);
+
+      // 根据 `dir` 判断方向
       var index = dir > 0 ? 0 : length - 1;
+      // 依次遍历
       for (; index >= 0 && index < length; index += dir) {
         if (predicate(array[index], index, array)) return index;
       }
@@ -821,7 +976,9 @@
   }
 
   // Returns the first index on an array-like that passes a predicate test
+  // 查找从左往右第一个符合的
   _.findIndex = createPredicateIndexFinder(1);
+  // 查找从右往左第一个符合的
   _.findLastIndex = createPredicateIndexFinder(-1);
 
   // Use a comparator function to figure out the smallest index at which
@@ -1057,9 +1214,10 @@
   };
 
   // Returns a negated version of the passed-in predicate.
+  // 对传入的判断函数，将其判断条件取反然后返回新的判断函数。
   _.negate = function(predicate) {
     return function() {
-      return !predicate.apply(this, arguments);
+      return !predicate.apply(this, arguments); // 对结果取反
     };
   };
 
@@ -1258,6 +1416,7 @@
   _.extendOwn = _.assign = createAssigner(_.keys);
 
   // Returns the first key on an object that passes a predicate test
+  // 查找键
   _.findKey = function(obj, predicate, context) {
     predicate = cb(predicate, context);
     var keys = _.keys(obj),
@@ -1615,7 +1774,7 @@
   // Run Underscore.js in *noConflict* mode, returning the `_` variable to its
   // previous owner. Returns a reference to the Underscore object.
   /**
-   * 改名。将 `_` 全局变量 改为其的名字
+   * 改名。将 `_` 全局变量 改为其他名字
    *
    * @return {[type]} [description]
    * @example
@@ -1659,7 +1818,7 @@
 
   // Generates a function for a given object that returns a given property.
   /**
-   * 和_.property相反。需要一个对象，并返回一个函数,这个函数将返回一个提供的属性的值。
+   * 和 `_.property` 相反。需要一个对象，并返回一个函数,这个函数将返回一个提供的属性的值。
    *
    * @param  {Object} obj [description]
    * @return {Object}     [description]
@@ -1803,12 +1962,12 @@
   // When customizing `templateSettings`, if you don't want to define an
   // interpolation, evaluation or escaping regex, we need one that is
   // guaranteed not to match.
-  // 当自定义 `templateSettings` 时，如果不想定义插值、评估或逃避正则表达式，则需要一个保证不匹配的方法。
+  // 当自定义 `templateSettings` 时，如果不想定义插值、评估或逃避正则表达式，则需要一个保证 **不匹配** 的方法。
   var noMatch = /(.)^/;
 
   // Certain characters need to be escaped so that they can be put into a
   // string literal.
-  // 需要获取命中部分是否有 ` ', \\ , \r, \n, \u2028 和\u2029` (行分隔符 和段落分隔符)。如果有的话，需要做一步转义
+  // 需要获取命中部分是否有 ` ', \\ , \r, \n, \u2028 和 \u2029` (行分隔符 和段落分隔符)。如果有的话，需要做一步转义
   var escapes = {
     "'": "'",
     '\\': '\\',
@@ -1828,6 +1987,13 @@
   // Underscore templating handles arbitrary delimiters, preserves whitespace,
   // and correctly escapes quotes within interpolated code.
   // NB: `oldSettings` only exists for backwards compatibility.
+  /**
+   * [template description]
+   * @param  {String} text        模板文本
+   * @param  {Object} settings    默认配置
+   * @param  {Object} oldSettings 旧的配置
+   * @return {[type]}             [description]
+   */
   _.template = function(text, settings, oldSettings) {
     if (!settings && oldSettings) settings = oldSettings;
     // 获取可以解析的内容。如果没有提供的话，用默认的配置
@@ -1847,7 +2013,16 @@
     var index = 0;
     // 开始构造function 的内容。
     var source = "__p+='";
-    // 依次读取模版的内容，然后把匹配到的内容抽取出来。
+    /**
+     * 依次读取模版的内容，然后把匹配到的内容抽取出来。
+     *
+     * @param  {RegExp} match       匹配的子串
+     * @param  {String} escape      HTML
+     * @param  {Object} interpolate 变量
+     * @param  {Object} evaluate    js 代码
+     * @param  {Number} offset      匹配到的子字符串在原字符串中的偏移量。（比如，如果原字符串是“abcd”，匹配到的子字符串是“bc”，那么这个参数将是1）
+     * @return {Object}             match
+     */
     text.replace(matcher, function(match, escape, interpolate, evaluate, offset) {
       // 需要做二次过滤，因为模版中可能有js不能执行的部分，如换行符等。
       source += text.slice(index, offset).replace(escaper, escapeChar);
@@ -1865,6 +2040,7 @@
       }
 
       // Adobe VMs need the match returned to produce the correct offest.
+      // Adobe VMs 需要返回匹配来产生正确的偏移量。
       return match;
     });
     // 分析完模版，获取可执行的source
