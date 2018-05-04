@@ -107,14 +107,14 @@
           return func.call(context, value, other);
         };
       case 3:
-      /**
-       * 3个参数用于一些迭代器函数，例如map函数
-       *
-       * @param  {[type]} value      [当前值]
-       * @param  {[type]} index      [当前索引]
-       * @param  {[type]} collection [整个集合]
-       * @return {[type]}            [description]
-       */
+        /**
+         * 3个参数用于一些迭代器函数，例如map函数
+         *
+         * @param  {[type]} value      [当前值]
+         * @param  {[type]} index      [当前索引]
+         * @param  {[type]} collection [整个集合]
+         * @return {[type]}            [description]
+         */
         return function(value, index, collection) {
           return func.call(context, value, index, collection);
         };
@@ -322,7 +322,7 @@
       for (i = 0, length = obj.length; i < length; i++) {
         iteratee(obj[i], i, obj); // 参数是值、索引、完整集合
       }
-     // 否则遍历每一个键值对
+      // 否则遍历每一个键值对
     } else {
       // 获取传入对象的keys值(Array类型)
       var keys = _.keys(obj);
@@ -509,7 +509,7 @@
    * 对 `filter` 函数的判断函数取反
    *
    * @param  {Object} obj       [要处理的对象]
-   * @param  {[type]} predicate [判断函数]
+   * @param  {Function} predicate [判断函数]
    * @param  {[type]} context   [上下文]
    * @return {[type]}           [description]
    */
@@ -523,7 +523,7 @@
    * 判断是不是所有项目都符合条件，全部符合才返回 `true`，否则返回 `false`。
    *
    * @param  {Object} obj       [要处理的对象]
-   * @param  {[type]} predicate [判断函数]
+   * @param  {Function} predicate [判断函数]
    * @param  {[type]} context   [上下文]
    * @return {Boolean}          [description]
    */
@@ -534,7 +534,7 @@
     var keys = !isArrayLike(obj) && _.keys(obj),
       length = (keys || obj).length;
 
-    // 依次遍历，一旦有不符合的就返回false
+    // 依次遍历，一旦有不符合的就返回 `false`
     for (var index = 0; index < length; index++) {
       var currentKey = keys ? keys[index] : index;
       if (!predicate(obj[currentKey], currentKey, obj)) return false;
@@ -547,12 +547,14 @@
   /**
    * 只要存在复合条件的项目就返回 `true`，否则返回 `false`。
    *
-   * @param  {[type]} obj       [description]
-   * @param  {[type]} predicate [description]
-   * @param  {[type]} context   [description]
-   * @return {[type]}           [description]
+   * @param  {Object} obj       [要处理的对象]
+   * @param  {Function} predicate [判断函数]
+   * @param  {[type]} context   [上下文]
+   * @return {Boolean}           [description]
    */
   _.some = _.any = function(obj, predicate, context) {
+
+    // 处理判断函数
     predicate = cb(predicate, context);
     var keys = !isArrayLike(obj) && _.keys(obj),
       length = (keys || obj).length;
@@ -567,58 +569,138 @@
 
   // Determine if the array or object contains a given item (using `===`).
   // Aliased as `includes` and `include`.
+  /**
+   * 判断集合里是否包含(使用===检测)某一项。
+   *
+   * @param  {Object} obj       [是否存在于此对象]
+   * @param  {[type]} item      [需要判断的项]
+   * @param  {Number} fromIndex [开始判断的位置]
+   * @param  {[type]} guard     [description]
+   * @return {Boolean}          [true:包含，false:不包含]
+   *
+   * @example
+   * _.contains([1, 2, 3], 3);
+   * > true
+   */
   _.contains = _.includes = _.include = function(obj, item, fromIndex, guard) {
+    // 如果是对象，取其键值对的值重组数组
     if (!isArrayLike(obj)) obj = _.values(obj);
+    // 如果 `fromIndex` 不是数字 或 `guard` 不存在, 将 `fromIndex` 重置为 `0`
     if (typeof fromIndex != 'number' || guard) fromIndex = 0;
+    // 判断从 `fromIndex` 开始是否存在该 `item`
     return _.indexOf(obj, item, fromIndex) >= 0;
   };
 
   // Invoke a method (with arguments) on every item in a collection.
+  /**
+   * 依次对集合内的每一项调用提供的方法，并将多余的参数作为该方法的参数使用。
+   *
+   * @param  {Object} obj    [description]
+   * @param  {String} method [方法名]
+   * @return {Array}         [description]
+   *
+   * @example
+   * _.invoke([[5, 1, 7], [3, 2, 1]], 'sort');
+   * > [[1, 5, 7], [1, 2, 3]]
+   */
   _.invoke = function(obj, method) {
     var args = slice.call(arguments, 2);
+    // 先判断一下是不是函数
     var isFunc = _.isFunction(method);
+    // 依次调用执行
     return _.map(obj, function(value) {
+      // 如果是函数的话就调用该方法，否则调用 `value` 中的该方法
       var func = isFunc ? method : value[method];
+      // `func` 不为 `null` 就调用该方法
       return func == null ? func : func.apply(value, args);
     });
   };
 
   // Convenience version of a common use case of `map`: fetching a property.
+  /**
+   * 取集合中对象某一个键对应值的简便写法。
+   *
+   * @param  {Array} obj [数组对象]
+   * @param  {String} key [对应的 key]
+   * @return {Array}     [对象值的数组]
+   *
+   * @example
+   * var stooges = [{name: 'moe', age: 40}, {name: 'larry', age: 50}, {name: 'curly', age: 60}];
+   * _.pluck(stooges, 'name');
+   * > ["moe", "larry", "curly"]
+   */
   _.pluck = function(obj, key) {
+    // 依次取 `key` 对应的属性值
     return _.map(obj, _.property(key));
   };
 
   // Convenience version of a common use case of `filter`: selecting only objects
   // containing specific `key:value` pairs.
   /**
-   * “筛选器”的常用用例的便利版本：只选择包含特定的“键：值”对的对象。
+   * 筛选符合某一条件的集合中的对象的简便写法。
+   *
+   * @param  {Array} obj   [description]
+   * @param  {Object} attrs [要匹配对象]
+   * @return {Array}       [将对象的value以数组的方式返回]
    *
    * @example1 将对象转化为数组
-   *    _.where({author: "Shakespeare", year: 1611})
-   *    => ["Shakespeare", 1611]
-   * @example2 第二个参数还没发现怎么使用
+   * _.where({author: "Shakespeare", year: 1611})
+   * > ["Shakespeare", 1611]
    *
-   * @param  {Object} obj   [description]
-   * @param  {[type]} attrs [description]
-   * @return {[Array]}       [将对象的value以数组的方式返回]
+   * @example2 遍历list中的每一个值，返回一个数组，这个数组里的元素包含 **attrs** 所列出的键 - 值对。
+   * var list = [{title: "Cymbeline", author: "Shakespeare", year: 1611},
+   *   {title: "The Tempest", author: "Shakespeare", year: 1611},
+   *   {title: "The day", author: "Shakespeare", year: 1612}
+   * ]
+   * _.where(list, {author: "Shakespeare", year: 1611});
+   * > [{title: "Cymbeline", author: "Shakespeare", year: 1611},
+   *   {title: "The Tempest", author: "Shakespeare", year: 1611}]
    */
   _.where = function(obj, attrs) {
+    // 取符合attrs的
     return _.filter(obj, _.matcher(attrs));
   };
 
   // Convenience version of a common use case of `find`: getting the first object
   // containing specific `key:value` pairs.
+  /**
+   * 寻找集合中第一个符合某条件的对象的简便写法。
+   *
+   * @param  {Array} obj   [description]
+   * @param  {Object} attrs [要匹配对象]
+   * @return {Object}       [description]
+   *
+   * @example 遍历整个list，返回匹配 attrs 参数所列出的所有 键 - 值 对的第一个值。
+   * var list = [{title: "Cymbeline", author: "Shakespeare", year: 1611},
+   *   {title: "The Tempest", author: "Shakespeare", year: 1611},
+   *   {title: "The day", author: "Shakespeare", year: 1612}
+   * ]
+   * _.findWhere(list, {author: "Shakespeare", year: 1611});
+   * {title: "Cymbeline", author: "Shakespeare", year: 1611}
+   */
   _.findWhere = function(obj, attrs) {
     return _.find(obj, _.matcher(attrs));
   };
 
   // Return the maximum element (or element-based computation).
+  /**
+   * 寻找集合中的最大值，如果集合是无法直接比较的，应当提供比较函数。
+   *
+   * @param  {Object} obj      [需要查找的对象]
+   * @param  {Function} iteratee [迭代器]
+   * @param  {[type]} context  [执行上下文]
+   * @return {[type]}          [description]
+   */
   _.max = function(obj, iteratee, context) {
+     // 先设定两个初值，一个是结果(result)，一个是上一次的计算值(lastComputed)
     var result = -Infinity,
       lastComputed = -Infinity,
       value, computed;
+
+    // 如果不提供迭代器，或者集合内不是对象，则直接比较
     if (iteratee == null && obj != null) {
       obj = isArrayLike(obj) ? obj : _.values(obj);
+
       for (var i = 0, length = obj.length; i < length; i++) {
         value = obj[i];
         if (value > result) {
@@ -626,6 +708,7 @@
         }
       }
     } else {
+      // 否则根据迭代器比较
       iteratee = cb(iteratee, context);
       _.each(obj, function(value, index, list) {
         computed = iteratee(value, index, list);
@@ -1352,10 +1435,20 @@
   };
 
   // Retrieve the values of an object's properties.
+  /**
+   * 将对象中的键值对的值取出来组成一个新的数组。
+   *
+   * @param  {Object} obj [键值对的对象]
+   * @return {Array}     [对象的值组成的数组]
+   */
   _.values = function(obj) {
+    // 取出所有的键
     var keys = _.keys(obj);
+    // 取长度
     var length = keys.length;
+    // 创建新数组
     var values = Array(length);
+    // 依次放入相应的值
     for (var i = 0; i < length; i++) {
       values[i] = obj[keys[i]];
     }
@@ -1842,6 +1935,10 @@
    *
    * @param  {Object} attrs [key:value，类型的对象]
    * @return {[type]}       [description]
+   *
+   * @example
+   * var ready = _.matcher({selected: true, visible: true});
+   * var readyToGoList = _.filter(list, ready);
    */
   _.matcher = _.matches = function(attrs) {
     attrs = _.extendOwn({}, attrs); // 扩展 `attrs` 为一个键值对 对象
