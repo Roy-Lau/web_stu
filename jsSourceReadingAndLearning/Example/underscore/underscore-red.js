@@ -152,16 +152,16 @@
    * @return {Function}          [description]
    */
   var cb = function(value, context, argCount) {
-    // 如果value为空，就返回一个返回参数自身的回调函数
+    // 如果 `value` 为空，就返回一个返回参数自身的回调函数
     if (value == null) return _.identity;
 
-    // 如果value是一个函数，则改变所执行函数的作用域
+    // 如果 `value` 是一个函数，则改变所执行函数的作用域
     if (_.isFunction(value)) return optimizeCb(value, context, argCount);
 
-    // 如果value是一个对象，返回一个是否匹配属性的函数
+    // 如果 `value` 是一个对象，返回一个是否匹配属性的函数
     if (_.isObject(value)) return _.matcher(value);
 
-    // 否则返回一个 读取对象value属性的回调函数
+    // 否则返回一个 读取对象 `value` 属性的回调函数
     return _.property(value);
   };
 
@@ -264,7 +264,7 @@
    */
   var getLength = property('length');
   /**
-   * [isArrayLike  判断对象是否为类数组]
+   * @title `isArrayLike` 判断对象是否为类数组
    * 判断对象是否为类数组，
    * 以确定集合是否应该作为数组或作为对象相关：http://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength。
    * HTMLα秒长度避免了ARM64上非常讨厌的IOS 8 JIT错误。#2094
@@ -684,12 +684,21 @@
 
   // Return the maximum element (or element-based computation).
   /**
+   * 返回最大元素（或基于元素的计算）。
    * 寻找集合中的最大值，如果集合是无法直接比较的，应当提供比较函数。
    *
-   * @param  {Object} obj      [需要查找的对象]
+   * @param  {Array} obj      [需要查找的数组对象]
    * @param  {Function} iteratee [迭代器]
    * @param  {[type]} context  [执行上下文]
-   * @return {[type]}          [description]
+   * @return {[type]}          [最大值 或者 最大值的对象]
+   *
+   * @example1 寻找数组的最大值
+   * _.max([3,2,1,4,5])
+   * > 5
+   * @example
+   * var stooges = [{name: 'moe', age: 40}, {name: 'larry', age: 50}, {name: 'curly', age: 60}];
+   * _.max(stooges, function(stooge){ return stooge.age; });
+   * > {name: 'curly', age: 60};
    */
   _.max = function(obj, iteratee, context) {
      // 先设定两个初值，一个是结果(result)，一个是上一次的计算值(lastComputed)
@@ -722,6 +731,19 @@
   };
 
   // Return the minimum element (or element-based computation).
+  /**
+   * 返回最小元素（或基于元素的计算）。
+   * 寻找集合中的最小值，如果集合是无法直接比较的，应当提供比较函数。这个和上面的(max)就是判断条件不一样，
+   *
+   * @param  {Array} obj      [需要查找的数组]
+   * @param  {Function} iteratee [迭代器]
+   * @param  {[type]} context  [执行上下文]
+   * @return {Number}          [最小值 或者 最小值的对象]
+   *
+   * @example 寻找数组的最小值
+   * _.max([3,2,1,4,5])
+   * > 1
+   */
   _.min = function(obj, iteratee, context) {
     var result = Infinity,
       lastComputed = Infinity,
@@ -749,13 +771,30 @@
 
   // Shuffle a collection, using the modern version of the
   // [Fisher-Yates shuffle](http://en.wikipedia.org/wiki/Fisher–Yates_shuffle).
+  /**
+   * 费雪耶兹 高纳德 洗牌 算法（三个名字，指的都是这个算法）
+   *
+   * @param  {Object} obj [需要洗牌的数组对象]
+   * @return {Array}      [洗牌后的数组]
+   *
+   * @example
+   * _.shuffle([1, 2, 3, 4, 5, 6]);
+   * > [4, 1, 6, 3, 5, 2]
+   */
   _.shuffle = function(obj) {
     var set = isArrayLike(obj) ? obj : _.values(obj);
+    // 获取传入对象的长度
     var length = set.length;
+    // 根据对象长度，创建一个数组
     var shuffled = Array(length);
+
+    // 循环传入对象的长度
     for (var index = 0, rand; index < length; index++) {
+      // 根据对象长度的 `index`,生成一个随机数 `rand`
       rand = _.random(0, index);
+      // 如果 `rand` 不等于 `index`, 将数组`shuffled`随机值 传入 数组`shuffled`的顺序位置
       if (rand !== index) shuffled[index] = shuffled[rand];
+      // 将对象 `set` 的顺序值 传入 数组 `shuffled` 的随机位置
       shuffled[rand] = set[index];
     }
     return shuffled;
@@ -764,23 +803,62 @@
   // Sample **n** random values from a collection.
   // If **n** is not specified, returns a single random element.
   // The internal `guard` argument allows it to work with `map`.
+  /**
+   * 取样函数，随机取集合中的某些值成为新的集合。
+   *
+   * @param  {Array} obj    [数组对象]
+   * @param  {Number} n     [要获取都的对象个数]
+   * @param  {[type]} guard [description]
+   * @return {Number,Array}       [description]
+   *
+   * @example
+   * 从 list中产生一个随机样本。传递一个数字表示从list中返回 `n` 个随机元素。否则将返回一个单一的随机项。
+   * _.sample([1, 2, 3, 4, 5, 6]);
+   * > 4
+   * _.sample([1, 2, 3, 4, 5, 6], 3);
+   * > [1, 6, 2]
+   *
+   */
   _.sample = function(obj, n, guard) {
+    // 如果不传入n，随机取一个索引对应的值
     if (n == null || guard) {
       if (!isArrayLike(obj)) obj = _.values(obj);
       return obj[_.random(obj.length - 1)];
     }
+    // 从 洗牌算法 中获取 `n` 个值
     return _.shuffle(obj).slice(0, Math.max(0, n));
   };
 
   // Sort the object's values by a criterion produced by an iteratee.
+  /**
+   * 根据给定的函数，对集合进行排序。
+   *
+   * @param  {[type]} obj      [description]
+   * @param  {[type]} iteratee [迭代器]
+   * @param  {[type]} context  [上下文]
+   * @return {Array}           [排序后的数组对象]
+   *
+   * @example 数字排序
+   * _.sortBy([1, 2, 3, 4, 5, 6], function(num){ return Math.sin(num); });
+   * > [5, 4, 6, 3, 1, 2]
+   *
+   * @example2 字符串排序
+   * var stooges = [{name: 'moe', age: 40}, {name: 'larry', age: 50}, {name: 'curly', age: 60}];
+   * _.sortBy(stooges, 'name');
+   * > [{name: 'curly', age: 60}, {name: 'larry', age: 50}, {name: 'moe', age: 40}];
+   */
   _.sortBy = function(obj, iteratee, context) {
     iteratee = cb(iteratee, context);
+
+    // 首先，最外面用 `pluck` 包裹，最后会取 `value` 作为新的集合
     return _.pluck(_.map(obj, function(value, index, list) {
+      // 对原对象进行处理，返回一个由新对象组成的集合
       return {
-        value: value,
-        index: index,
-        criteria: iteratee(value, index, list)
+        value: value, // 实际值
+        index: index, // 索引
+        criteria: iteratee(value, index, list) // 要比较的值
       };
+    // 然后，调用 `sort` 函数进行排序，首先更具比较值进行比较，一样的话按原顺序排列
     }).sort(function(left, right) {
       var a = left.criteria;
       var b = right.criteria;
@@ -793,12 +871,26 @@
   };
 
   // An internal function used for aggregate "group by" operations.
+  /**
+   * 抽象分组函数
+   *
+   * @param  {[type]} behavior [行为函数]
+   * @return {[type]}          [description]
+   */
   var group = function(behavior) {
+    /**
+     *
+     * @param  {[type]} obj         传入集合
+     * @param  {Function} iteratee  迭代器
+     * @param  {[type]} context     上下文
+     * @return {Object}             结果
+     */
     return function(obj, iteratee, context) {
       var result = {};
       iteratee = cb(iteratee, context);
       _.each(obj, function(value, index) {
         var key = iteratee(value, index, obj);
+        // 进行处理，传入参数为结果、当前值、当前键
         behavior(result, value, key);
       });
       return result;
@@ -807,13 +899,48 @@
 
   // Groups the object's values by a criterion. Pass either a string attribute
   // to group by, or a function that returns the criterion.
+  /**
+   * 根据传入的函数对集合进行分组，如果函数处理结果一致则放在同一组。
+   *
+   * @param  {[type]} result [description]
+   * @param  {[type]} value  [description]
+   * @param  {Array}  key
+   * @return {Object}        [json数组]
+   *
+   * @example 向下取整 相同的分为一组
+   * _.groupBy([1.3, 2.1, 2.4], function(num){ return Math.floor(num); });
+   * > {1: [1.3], 2: [2.1, 2.4]}
+   *
+   * @example 单词长度相同的分为一组
+   * _.groupBy(['one', 'two', 'three'], 'length');
+   * > {3: ["one", "two"], 5: ["three"]}
+   */
   _.groupBy = group(function(result, value, key) {
+
+    // 如果结果中存在 `key` 值而非原型链上的，就放入进去对应的数组，否则创建一个新数组
     if (_.has(result, key)) result[key].push(value);
     else result[key] = [value];
   });
 
   // Indexes the object's values by a criterion, similar to `groupBy`, but for
   // when you know that your index values will be unique.
+  /**
+   * 根据某个唯一索引，将集合进行分组，需要注意的是，这里应当保证传入的key唯一。
+   *
+   * @param  {Object} result [对象]
+   * @param  {[type]} value  [键]
+   * @param  {[type]} key    [值]
+   * @return {Object}        [对象]
+   *
+   * @example
+   * var stooges = [{name: 'moe', age: 40}, {name: 'larry', age: 50}, {name: 'curly', age: 60}];
+   * _.indexBy(stooges, 'age');
+   * > {
+   *   "40": {name: 'moe', age: 40},
+   *   "50": {name: 'larry', age: 50},
+   *   "60": {name: 'curly', age: 60}
+   * }
+   */
   _.indexBy = group(function(result, value, key) {
     result[key] = value;
   });
@@ -821,6 +948,20 @@
   // Counts instances of an object that group by a certain criterion. Pass
   // either a string attribute to count by, or a function that returns the
   // criterion.
+  /**
+   * 类似于 `groupBy` ，但是这里是显示数量。
+   *
+   * @param  {Object} result [对象]
+   * @param  {[type]} value  [键]
+   * @param  {[type]} key    [值]
+   * @return {Object}        [对象]
+   *
+   * @example
+   * _.countBy([1, 2, 3, 4, 5], function(num) {
+   *   return num % 2 == 0 ? 'even': 'odd';
+   * });
+   * > {odd: 3, even: 2}
+   */
   _.countBy = group(function(result, value, key) {
     if (_.has(result, key)) result[key]++;
     else result[key] = 1;
@@ -828,9 +969,13 @@
 
   // Safely create a real, live array from anything iterable.
   _.toArray = function(obj) {
+    // 如果无参数，返回空数组
     if (!obj) return [];
+    // 如果本身是数组，则使用 `slice` 创建一个等价的新数组
     if (_.isArray(obj)) return slice.call(obj);
+    // 如果是类数组的对象，直接返回自身构成的新数组
     if (isArrayLike(obj)) return _.map(obj, _.identity);
+    // 对象，将其值组成新数组
     return _.values(obj);
   };
 
@@ -849,6 +994,18 @@
 
   // Split a collection into two arrays: one whose elements all satisfy the given
   // predicate, and one whose elements all do not satisfy the predicate.
+  /**
+   * 根据给定的条件将集合分为两个部分，通过放入第一个数组，不通过放入二个数组。
+   *
+   * @param  {Object} obj       [要处理的对象]
+   * @param  {Function} predicate [判断函数]
+   * @param  {[type]} context   [上下文]
+   * @return {Array}            [0 通过，1 不通过]
+   *
+   * @example 奇数放在第一个数组，偶数放在第二个数组。
+   * _.partition([0, 1, 2, 3, 4, 5], isOdd);
+   * > [[1, 3, 5], [0, 2, 4]]
+   */
   _.partition = function(obj, predicate, context) {
     predicate = cb(predicate, context);
     var pass = [],
