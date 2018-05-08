@@ -1023,8 +1023,25 @@
   // Get the first element of an array. Passing **n** will return the first N
   // values in the array. Aliased as `head` and `take`. The **guard** check
   // allows it to work with `_.map`.
+  /**
+   * 获取数组的前 `n` 个元素，如果没有 `n` 或者传入了 `guard` 则为第一个元素。
+   *
+   * @param  {array} array    [需要处理的数组]
+   * @param  {Number} n       [下标]
+   * @param  {[type]} guard   [守卫]
+   * @return {Number,Array}   [数字,数组]
+   *
+   * @example1
+   * _.first([5, 4, 3, 2, 1]);
+   * > 5
+   * @example2 获取前三个
+   * _.first([5, 4, 3, 2, 1],3);
+   * > [5,4,3]
+   */
   _.first = _.head = _.take = function(array, n, guard) {
+    // 如果没有传递数组，或者数组为空，则返回 `void 0`
     if (array == null) return void 0;
+    // 如果没有传递 `n` 或者传递了 `guard`，返回数组第一个元素，这是为了适应 `_.map`
     if (n == null || guard) return array[0];
     return _.initial(array, array.length - n);
   };
@@ -1032,12 +1049,43 @@
   // Returns everything but the last entry of the array. Especially useful on
   // the arguments object. Passing **n** will return all the values in
   // the array, excluding the last N.
+  /**
+   * 返回数组除了最后n个外的其他元素
+   * 调用了slice方法，如果没有传递n或者传递了guard则返回除了最后一个外的元素
+   *
+   * @param  {array} array    [需要处理的数组]
+   * @param  {Number} n       [下标]
+   * @param  {[type]} guard   [守卫]
+   * @return {Number,Array}   [数字,数组]
+   *
+   * @example1
+   * _.initial([5, 4, 3, 2, 1]);
+   * > 5
+   * @example2 从后数删掉三个
+   * _.initial([5, 4, 3, 2, 1],3);
+   * > [5, 4]
+   */
   _.initial = function(array, n, guard) {
     return slice.call(array, 0, Math.max(0, array.length - (n == null || guard ? 1 : n)));
   };
 
   // Get the last element of an array. Passing **n** will return the last N
   // values in the array.
+  /**
+   * 返回最后 `n` 个元素，如果没有传入 `n` 或者传入了 `guard` 则为最后一个元素。
+   *
+   * @param  {array} array    [需要处理的数组]
+   * @param  {Number} n       [下标]
+   * @param  {[type]} guard   [守卫]
+   * @return {Number,Array}   [数字,数组]
+   *
+   * @example1
+   * _.last([5, 4, 3, 2, 1]);
+   * > 1
+   * @example2 获取后三个
+   * _.last([5, 4, 3, 2, 1], 3);
+   * > [3, 2, 1]
+   */
   _.last = function(array, n, guard) {
     if (array == null) return void 0;
     if (n == null || guard) return array[array.length - 1];
@@ -1047,30 +1095,68 @@
   // Returns everything but the first entry of the array. Aliased as `tail` and `drop`.
   // Especially useful on the arguments object. Passing an **n** will return
   // the rest N values in the array.
+  /**
+   * 返回除前 `n` 个元素外的其他元素，如果没有传入`n`或者传入了 `guard` 则为除了第一个元素外的其他元素。
+   *
+   * @param  {array} array    [需要处理的数组]
+   * @param  {Number} n       [下标]
+   * @param  {[type]} guard   [守卫]
+   * @return {Number,Array}   [数字,数组]
+   *
+   * @example1 默认从第一位开始
+   * _.rest([5, 4, 3, 2, 1]);
+   * > [4, 3, 2, 1]
+   * @example2 从第 n 位开始
+   * _.rest([5, 4, 3, 2, 1],3);
+   * > [2, 1]
+   */
   _.rest = _.tail = _.drop = function(array, n, guard) {
     return slice.call(array, n == null || guard ? 1 : n);
   };
 
   // Trim out all falsy values from an array.
+  /**
+   * 移除所有等价于 `false` 的元素，包括 `false、null、0、""、undefined、NaN`。
+   *
+   * @param  {Array} array [传入一个要处理的数组]
+   * @return {Array}       [返回一个参数不为 `false` 的数组]
+   */
   _.compact = function(array) {
+    // 只返回等价为 `true` 的元素，返回参数自身
     return _.filter(array, _.identity);
   };
 
   // Internal implementation of a recursive `flatten` function.
+  /**
+   * 实现可递归的平整化函数，平整化就是将多级嵌套的数组变成单一层级的。
+   *
+   * 传入参数为，输入、是否只执行一层、是否保存非数组元素、输出
+   * @param  {Object}  input      输入
+   * @param  {Boolean} shallow    是否只执行一层
+   * @param  {Boolean} strict     是否保存非数组元素
+   * @param  {Number}  startIndex 开始index
+   * @return {Array}              输出数组
+   */
   var flatten = function(input, shallow, strict, startIndex) {
+    // 初始化一个空数组和下标0
     var output = [],
       idx = 0;
     for (var i = startIndex || 0, length = getLength(input); i < length; i++) {
+      // 取当前值
       var value = input[i];
+      // 如果当前值是数组或者arguments
       if (isArrayLike(value) && (_.isArray(value) || _.isArguments(value))) {
-        //flatten current level of array or arguments object
+        // flatten current level of array or arguments object
+        // 如果 `shallow` 为 `true`，则只平整化一级
         if (!shallow) value = flatten(value, shallow, strict);
         var j = 0,
           len = value.length;
         output.length += len;
         while (j < len) {
+          // 依次塞入`output`中
           output[idx++] = value[j++];
         }
+      // 如果本身不是类数组对象，且 `strict` 为 `true`，则将该值直接塞入`output`中
       } else if (!strict) {
         output[idx++] = value;
       }
@@ -1079,11 +1165,35 @@
   };
 
   // Flatten out an array, either recursively (by default), or just one level.
+  /**
+   * 将数组平整化，默认会递归执行。
+   *
+   * @param  {Object} array   传入数组
+   * @param  {Boolean} shallow 是否只执行一层
+   * @return {Array}         [description]
+   *
+   * @example1
+   * _.flatten([1, [2], [3, [[4]]]]);
+   * > [1, 2, 3, 4];
+   * @example2 只执行一层
+   * _.flatten([1, [2], [3, [[4]]]], true);
+   * > [1, 2, 3, [[4]]];
+   */
   _.flatten = function(array, shallow) {
     return flatten(array, shallow, false);
   };
 
   // Return a version of the array that does not contain the specified value(s).
+  /**
+   * 将除第一个参数外的其余参数作为新数组，然后求第一个参数与这个新数组的差集。
+   *
+   * @param  {[type]} array [description]
+   * @return {Array}       [返回一个删除所有values值后的 array副本]
+   *
+   * @example 返回除去参数(0,1)后的数组
+   * _.without([1, 2, 1, 0, 3, 1, 4], 0, 1);
+   * > [2, 3, 4]
+   */
   _.without = function(array) {
     return _.difference(array, slice.call(arguments, 1));
   };
@@ -1091,7 +1201,23 @@
   // Produce a duplicate-free version of the array. If the array has already
   // been sorted, you have the option of using a faster algorithm.
   // Aliased as `unique`.
+  /**
+   * @title 数组去重+排序
+   * 根据传入的数组生成一个新的集合，其中的元素都唯一，其中对象是使用===来判断的。
+   *
+   * @param  {[type]}  array    [description]
+   * @param  {Boolean} isSorted [传入的数组是不是有序的（如果是有序的会加快速度）]
+   * @param  {[type]}  iteratee [迭代器]
+   * @param  {[type]}  context  [上下文]
+   * @return {Array}            [排序+去重后的数组]
+   *
+   * @example
+   * _.uniq([1, 2, 1, 3, 1, 4]);
+   * > [1, 2, 3, 4]
+   */
   _.uniq = _.unique = function(array, isSorted, iteratee, context) {
+    // 如果第二个参数不是传入布尔值，则认为传入的是false
+    // 也就是等价于传入了(array, false, iteratee, context)
     if (!_.isBoolean(isSorted)) {
       context = iteratee;
       iteratee = isSorted;
@@ -1100,17 +1226,30 @@
     if (iteratee != null) iteratee = cb(iteratee, context);
     var result = [];
     var seen = [];
+
+    // 依次遍历
     for (var i = 0, length = getLength(array); i < length; i++) {
+      // 初始化为数组的第一个值
       var value = array[i],
+      // 如果存在 `iteratee` 则用它取得计算值，否则直接用当前索引对应的值
         computed = iteratee ? iteratee(value, i, array) : value;
+      // 如果有序
       if (isSorted) {
+        // 如果是第一个值，或者上一个计算值不等于当前计算值则直接加入当前值
         if (!i || seen !== computed) result.push(value);
+        // 上一个值存储为当前计算值
         seen = computed;
+        // 否则如果有 迭代器
       } else if (iteratee) {
+        // 如果 `seen`的值中没有 `computed`
         if (!_.contains(seen, computed)) {
+          // 将 `computed` 的值 push 到 `seen` 中
           seen.push(computed);
+          // 结果放入当前值
           result.push(value);
         }
+
+        // 否则直接判断结果中是否有当前值
       } else if (!_.contains(result, value)) {
         result.push(value);
       }
@@ -1120,21 +1259,44 @@
 
   // Produce an array that contains the union: each distinct element from all of
   // the passed-in arrays.
+  /**
+   * 先将所有的参数平整化，然后再唯一化
+   *
+   * @return {Array}  [平整化+去重+排序后的数组]
+   *
+   * @example
+   * _.union([1, 2, 3], [101, 2, 1, 10], [2, 1]);
+   * > [1, 2, 3, 101, 10]
+   */
   _.union = function() {
     return _.uniq(flatten(arguments, true, true));
   };
 
   // Produce an array that contains every item shared between all the
   // passed-in arrays.
+  /**
+   * 求传入参数的各个数组的交集
+   *
+   * @param  {[type]} array [传入多个数组]
+   * @return {Array}       [返回一个 多个数组里有交集的数组]
+   *
+   * _.intersection([1, 2, 3], [101, 2, 1, 10], [2, 1]);
+   * > [1, 2]
+   */
   _.intersection = function(array) {
     var result = [];
     var argsLength = arguments.length;
+
+    // 对第一个参数数组里的值进行遍历
     for (var i = 0, length = getLength(array); i < length; i++) {
       var item = array[i];
+      // 如果结果中已经存在直接跳过
       if (_.contains(result, item)) continue;
+      // 判断在之后参数的数组里是否存在过，如果不存在就跳过
       for (var j = 1; j < argsLength; j++) {
         if (!_.contains(arguments[j], item)) break;
       }
+      // 如果之后的每个数组都存在过就加入结果中
       if (j === argsLength) result.push(item);
     }
     return result;
@@ -1143,7 +1305,9 @@
   // Take the difference between one array and a number of other arrays.
   // Only the elements present in just the first array will remain.
   _.difference = function(array) {
+    // 将 `arguments` 参数平整化
     var rest = flatten(arguments, true, true, 1);
+    // 只返回不包含在 `rest` 中的元素
     return _.filter(array, function(value) {
       return !_.contains(rest, value);
     });
@@ -1151,17 +1315,38 @@
 
   // Zip together multiple lists into a single array -- elements that share
   // an index go together.
+  /**
+   * `unzip` 的逆操作
+   *
+   * @return {Array} [description]
+   *
+   * @example
+   * _.zip(['moe', 'larry', 'curly'], [30, 40, 50], [true, false, false]);
+   * > [["moe", 30, true], ["larry", 40, false], ["curly", 50, false]]
+   */
   _.zip = function() {
     return _.unzip(arguments);
   };
 
   // Complement of _.zip. Unzip accepts an array of arrays and groups
   // each array's elements on shared indices
+  /**
+   * 相当于求矩阵的转置矩阵，原先数组中每个数组的第 `n` 个元素 元素将组成结果的第 `n` 个数组。
+   *
+   * @param  {[type]} array [description]
+   * @return {Array}       [description]
+   *
+   * @example
+   * _.unzip([['moe', 'larry', 'curly'], [30, 40, 50], [true, false, false]])
+   * > ["moe", 30, true], ["larry", 40, false], ["curly", 50, false]
+   */
   _.unzip = function(array) {
+    // 将参数数组中长度最长的 数组的长度 作为新数组的长度
     var length = array && _.max(array, getLength).length || 0;
     var result = Array(length);
 
     for (var index = 0; index < length; index++) {
+      // 依次取第`index`个值放入
       result[index] = _.pluck(array, index);
     }
     return result;
