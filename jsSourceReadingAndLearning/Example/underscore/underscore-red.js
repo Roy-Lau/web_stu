@@ -1355,6 +1355,21 @@
   // Converts lists into objects. Pass either a single array of `[key, value]`
   // pairs, or two parallel arrays of the same length -- one of keys, and one of
   // the corresponding values.
+  /**
+   * 将数组转成对象。可以传入键值对组成的数组作为元素的数组，或者第一个数组是键，第二个数组是值。
+   *
+   * @param  {Array} list   [数组]
+   * @param  {Array} values [数组值]
+   * @return {Object}       [对象结果]
+   *
+   * @example1
+   * _.object(['moe', 'larry', 'curly'], [30, 40, 50]);
+   * > {moe: 30, larry: 40, curly: 50}
+   *
+   * @example2
+   * _.object([['moe', 30], ['larry', 40], ['curly', 50]]);
+   * > {moe: 30, larry: 40, curly: 50}
+   */
   _.object = function(list, values) {
     var result = {};
     for (var i = 0, length = getLength(list); i < length; i++) {
@@ -1401,48 +1416,124 @@
   }
 
   // Returns the first index on an array-like that passes a predicate test
-  // 查找从左往右第一个符合的
+  /**
+   * 查找从左往右第一个符合的
+   * @type {Number}
+   *
+   * @example
+   * _.findIndex([4, 6, 8, 12], isPrime);
+   * > -1 // not found
+   * _.findIndex([4, 6, 7, 12], isPrime);
+   * > 2
+   */
   _.findIndex = createPredicateIndexFinder(1);
-  // 查找从右往左第一个符合的
+  /**
+   * 查找从右往左第一个符合的
+   * @type {Number}
+   * var users = [{'id': 1, 'name': 'Bob', 'last': 'Brown'},
+             {'id': 2, 'name': 'Ted', 'last': 'White'},
+             {'id': 3, 'name': 'Frank', 'last': 'James'},
+             {'id': 4, 'name': 'Ted', 'last': 'Jones'}];
+   * _.findLastIndex(users, {
+   *   name: 'Ted'
+   * });
+   * > 3
+   */
   _.findLastIndex = createPredicateIndexFinder(-1);
 
   // Use a comparator function to figure out the smallest index at which
   // an object should be inserted so as to maintain order. Uses binary search.
+  /**
+   * 查找某个 `value` 应该插入到数组中的哪个位置来保证数组有序
+   *
+   * @param  {Array} array      [要查询的数组]
+   * @param  {Object} obj      [要判断的对象]
+   * @param  {[type]} iteratee [迭代器]
+   * @param  {[type]} context  [上下文]
+   * @return {Number}          [要插入的位置]
+   *
+   * @example1
+   * _.sortedIndex([10, 20, 30, 40, 50], 35);
+   * > 3
+   * @example2 { 根据 `obj`的`age`来判断要插入 `array` 的什么位置 }
+   * var stooges = [{name: 'moe', age: 40}, {name: 'curly', age: 60}];
+   * _.sortedIndex(stooges, {name: 'larry', age: 50}, 'age');
+   * > 1
+   */
   _.sortedIndex = function(array, obj, iteratee, context) {
+    // 迭代函数，用来处理迭代
     iteratee = cb(iteratee, context, 1);
+    // 对象的值
     var value = iteratee(obj);
-    var low = 0,
-      high = getLength(array);
+
+    // 二分法的高低位设置
+    var low = 0,high = getLength(array);
+    // 循环(低值 小于 高值)
     while (low < high) {
+      console.log(iteratee(array[mid]),value,high,low,mid)
+      // 求中间值
       var mid = Math.floor((low + high) / 2);
+      // 如果数组的值 小于 对象的值, low 赋值为 中间值 +1
       if (iteratee(array[mid]) < value) low = mid + 1;
+      // 否则 高值等于中间值
       else high = mid;
     }
     return low;
   };
 
   // Generator function to create the indexOf and lastIndexOf functions
+  /**
+   * 寻找某个元素在素组中最先或者最后出现的位置，也是先抽象出一个寻找的函数，然后通过传递不同的方向。
+   *
+   * @param  {Number} dir             [方向]
+   * @param  {Function} predicateFind [判断函数]
+   * @param  {Function} sortedIndex   [查找函数]
+   * @return {[type]}                 [description]
+   */
   function createIndexFinder(dir, predicateFind, sortedIndex) {
+    /**
+     * @param  {Array} array  [要查询的数组]
+     * @param  {[type]} item  [要查询的内容]
+     * @param  {[type]} idx   [查询的起始位置或者是否排序]
+     * @return {[type]}       [description]
+     */
     return function(array, item, idx) {
       var i = 0,
         length = getLength(array);
+
+      // 首先如果传递的索引是数字
       if (typeof idx == 'number') {
+        // 如果从前往后
         if (dir > 0) {
+          // 处理索引起点，当输入负数的时候表示从后往前，但转换成从前往后的索引位置
           i = idx >= 0 ? idx : Math.max(idx + length, i);
         } else {
+          // 处理查找的最后位置
           length = idx >= 0 ? Math.min(idx + 1, length) : idx + length + 1;
         }
+
+      // 如果有有序查找函数、并且已知数组有序并且非空
       } else if (sortedIndex && idx && length) {
+        // 查找到相应的位置
         idx = sortedIndex(array, item);
+        // 如果该位置就是要查找的内容 则返回该位置，否则返回 -1
         return array[idx] === item ? idx : -1;
       }
+
+      // 如果`item`是`NaN`
       if (item !== item) {
+        // 索引是第一个 `NaN` 的位置
         idx = predicateFind(slice.call(array, i, length), _.isNaN);
+        // 如果存在则返回索引，否则返回 -1
         return idx >= 0 ? idx + i : -1;
       }
+
+      // 根据不同方向遍历
       for (idx = dir > 0 ? i : length - 1; idx >= 0 && idx < length; idx += dir) {
+        // 如果找到则返回索引
         if (array[idx] === item) return idx;
       }
+      // 找不到返回 -1
       return -1;
     };
   }
