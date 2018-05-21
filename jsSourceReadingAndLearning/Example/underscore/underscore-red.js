@@ -3,7 +3,7 @@
 //     (c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 //     Underscore may be freely distributed under the MIT license.
 
-(function() {
+(function () {
 
   // Baseline setup
   // --------------
@@ -41,7 +41,7 @@
 
   // Naked function reference for surrogate-prototype-swapping.
   // 代理原型交换的裸函数引用。
-  var Ctor = function() {};
+  var Ctor = function () {};
 
   // Create a safe reference to the Underscore object for use below.
   /**
@@ -49,7 +49,7 @@
    * @param  { Object } obj [description]
    * @return { Object }     [description]
    */
-  var _ = function(obj) {
+  var _ = function (obj) {
     if (obj instanceof _) return obj; // 如果传入的对象的原型上已经有 `_`,直接返回该对象
     if (!(this instanceof _)) return new _(obj); // 这里的 `this` 指向 `window`。如果`wundow`上没有`_`,返回一个`_`对象
     this._wrapped = obj; // 包装传入的对象
@@ -89,7 +89,7 @@
    * @param  {Number} argCount [函数参数的个数，针对不同参数个数进行不同的处理]
    * @return {[type]}          [description]
    */
-  var optimizeCb = function(func, context, argCount) {
+  var optimizeCb = function (func, context, argCount) {
 
     // `void 0` 返回 `undefined` ，即未传入上下文信息时直接返回相应的函数
     if (context === void 0) return func;
@@ -98,12 +98,12 @@
     switch (argCount == null ? 3 : argCount) {
       // 1个参数的时候，只需要传递当前值(为单值的情况，例如times函数)
       case 1:
-        return function(value) {
+        return function (value) {
           return func.call(context, value);
         };
         // 因为2个参数的情况没用被用到，所以在新版中被删除了
       case 2:
-        return function(value, other) {
+        return function (value, other) {
           return func.call(context, value, other);
         };
       case 3:
@@ -115,7 +115,7 @@
          * @param  {[type]} collection [整个集合]
          * @return {[type]}            [description]
          */
-        return function(value, index, collection) {
+        return function (value, index, collection) {
           return func.call(context, value, index, collection);
         };
       case 4:
@@ -128,12 +128,12 @@
          * @param  {[type]} collection  [整个集合]
          * @return {[type]}             [description]
          */
-        return function(accumulator, value, index, collection) {
+        return function (accumulator, value, index, collection) {
           return func.call(context, accumulator, value, index, collection);
         };
     }
     // 如果都不符合上述的任一条件，直接使用apply调用相关函数
-    return function() {
+    return function () {
       return func.apply(context, arguments);
     };
   };
@@ -151,7 +151,7 @@
    * @param  {Number}   argCount [函数参数的个数，针对不同参数个数进行不同的处理]
    * @return {Function}          [description]
    */
-  var cb = function(value, context, argCount) {
+  var cb = function (value, context, argCount) {
     // 如果 `value` 为空，就返回一个返回参数自身的回调函数
     if (value == null) return _.identity;
 
@@ -173,7 +173,7 @@
    * @param  {[type]} context   [执行上下文]
    * @return {Function}         [返回一个回调函数]
    */
-  _.iteratee = function(value, context) {
+  _.iteratee = function (value, context) {
     return cb(value, context, Infinity);
   };
 
@@ -185,8 +185,8 @@
    * @param  {Boolean} undefinedOnly [description]
    * @return {[Function,Object]}               [description]
    */
-  var createAssigner = function(keysFunc, undefinedOnly) {
-    return function(obj) {
+  var createAssigner = function (keysFunc, undefinedOnly) {
+    return function (obj) {
       var length = arguments.length;
       if (length < 2 || obj == null) return obj;
       for (var index = 1; index < length; index++) {
@@ -208,7 +208,7 @@
    * @param  {Object} prototype [原型]
    * @return {[type]}           [description]
    */
-  var baseCreate = function(prototype) {
+  var baseCreate = function (prototype) {
     // 如果传进来的(原型prototype)不是对象，直接返回 {}
     if (!_.isObject(prototype)) return {};
 
@@ -242,8 +242,8 @@
    *   getLength = property('length'),
    *   length = getLength(obj);
    */
-  var property = function(key) {
-    return function(obj) {
+  var property = function (key) {
+    return function (obj) {
       return obj == null ? void 0 : obj[key];
     };
   };
@@ -277,7 +277,7 @@
    *  例如数组、arguments、HTMLCollection 以及 NodeList 等等,
    *  当然 {length: 3} 这种对象也满足条件，但是_.each一般不会传这种值。
    */
-  var isArrayLike = function(collection) {
+  var isArrayLike = function (collection) {
     var length = getLength(collection);
     // collection 的长度是'number', 且大于等于0， 小于等于js的最大数值, 返回true
     return typeof length == 'number' && length >= 0 && length <= MAX_ARRAY_INDEX;
@@ -308,7 +308,7 @@
    * > roy name {name: "roy", age: 18}
    * > 18 "age" {name: "roy", age: 18}
    */
-  _.each = _.forEach = function(obj, iteratee, context) {
+  _.each = _.forEach = function (obj, iteratee, context) {
 
     // 优化遍历函数`iteratee`，将 `iteratee` 中的 `this` 动态设置为 `context`
     //
@@ -356,7 +356,7 @@
    * > 2 "a" {a:2,b:3}
    * > 3 "b" {a:2,b:3}
    */
-  _.map = _.collect = function(obj, iteratee, context) {
+  _.map = _.collect = function (obj, iteratee, context) {
 
     // 根据 `iteratee` 决定是返回等价、函数调用、属性匹配或者属性访问
     iteratee = cb(iteratee, context);
@@ -417,7 +417,7 @@
      * @param  {[type]} context  [上下文]
      * @return {Function}        [累加器的迭代函数]
      */
-    return function(obj, iteratee, memo, context) {
+    return function (obj, iteratee, memo, context) {
       iteratee = optimizeCb(iteratee, context, 4);
       var keys = !isArrayLike(obj) && _.keys(obj),
         length = (keys || obj).length,
@@ -467,7 +467,7 @@
    * > 2 1 [1, 2, 3]
    * > 3 2 [1, 2, 3]
    */
-  _.find = _.detect = function(obj, predicate, context) {
+  _.find = _.detect = function (obj, predicate, context) {
     var key;
     // 数组则查找索引(findIndex)，对象查找键(findKey)
     if (isArrayLike(obj)) {
@@ -488,7 +488,7 @@
    * @param  {[type]} context     上下文
    * @return {Array}           [description]
    */
-  _.filter = _.select = function(obj, predicate, context) {
+  _.filter = _.select = function (obj, predicate, context) {
 
     // 要返回的新数组
     var results = [];
@@ -497,7 +497,7 @@
     predicate = cb(predicate, context);
 
     // 遍历处理
-    _.each(obj, function(value, index, list) {
+    _.each(obj, function (value, index, list) {
       // 复合条件的放入数组
       if (predicate(value, index, list)) results.push(value);
     });
@@ -513,7 +513,7 @@
    * @param  {[type]} context   [上下文]
    * @return {[type]}           [description]
    */
-  _.reject = function(obj, predicate, context) {
+  _.reject = function (obj, predicate, context) {
     return _.filter(obj, _.negate(cb(predicate)), context);
   };
 
@@ -527,7 +527,7 @@
    * @param  {[type]} context   [上下文]
    * @return {Boolean}          [description]
    */
-  _.every = _.all = function(obj, predicate, context) {
+  _.every = _.all = function (obj, predicate, context) {
 
     // 处理判断函数
     predicate = cb(predicate, context);
@@ -552,7 +552,7 @@
    * @param  {[type]} context   [上下文]
    * @return {Boolean}           [description]
    */
-  _.some = _.any = function(obj, predicate, context) {
+  _.some = _.any = function (obj, predicate, context) {
 
     // 处理判断函数
     predicate = cb(predicate, context);
@@ -582,7 +582,7 @@
    * _.contains([1, 2, 3], 3);
    * > true
    */
-  _.contains = _.includes = _.include = function(obj, item, fromIndex, guard) {
+  _.contains = _.includes = _.include = function (obj, item, fromIndex, guard) {
     // 如果是对象，取其键值对的值重组数组
     if (!isArrayLike(obj)) obj = _.values(obj);
     // 如果 `fromIndex` 不是数字 或 `guard` 不存在, 将 `fromIndex` 重置为 `0`
@@ -603,12 +603,12 @@
    * _.invoke([[5, 1, 7], [3, 2, 1]], 'sort');
    * > [[1, 5, 7], [1, 2, 3]]
    */
-  _.invoke = function(obj, method) {
+  _.invoke = function (obj, method) {
     var args = slice.call(arguments, 2);
     // 先判断一下是不是函数
     var isFunc = _.isFunction(method);
     // 依次调用执行
-    return _.map(obj, function(value) {
+    return _.map(obj, function (value) {
       // 如果是函数的话就调用该方法，否则调用 `value` 中的该方法
       var func = isFunc ? method : value[method];
       // `func` 不为 `null` 就调用该方法
@@ -629,7 +629,7 @@
    * _.pluck(stooges, 'name');
    * > ["moe", "larry", "curly"]
    */
-  _.pluck = function(obj, key) {
+  _.pluck = function (obj, key) {
     // 依次取 `key` 对应的属性值
     return _.map(obj, _.property(key));
   };
@@ -656,7 +656,7 @@
    * > [{title: "Cymbeline", author: "Shakespeare", year: 1611},
    *   {title: "The Tempest", author: "Shakespeare", year: 1611}]
    */
-  _.where = function(obj, attrs) {
+  _.where = function (obj, attrs) {
     // 取符合attrs的
     return _.filter(obj, _.matcher(attrs));
   };
@@ -678,7 +678,7 @@
    * _.findWhere(list, {author: "Shakespeare", year: 1611});
    * {title: "Cymbeline", author: "Shakespeare", year: 1611}
    */
-  _.findWhere = function(obj, attrs) {
+  _.findWhere = function (obj, attrs) {
     return _.find(obj, _.matcher(attrs));
   };
 
@@ -700,8 +700,8 @@
    * _.max(stooges, function(stooge){ return stooge.age; });
    * > {name: 'curly', age: 60};
    */
-  _.max = function(obj, iteratee, context) {
-     // 先设定两个初值，一个是结果(result)，一个是上一次的计算值(lastComputed)
+  _.max = function (obj, iteratee, context) {
+    // 先设定两个初值，一个是结果(result)，一个是上一次的计算值(lastComputed)
     var result = -Infinity,
       lastComputed = -Infinity,
       value, computed;
@@ -719,7 +719,7 @@
     } else {
       // 否则根据迭代器比较
       iteratee = cb(iteratee, context);
-      _.each(obj, function(value, index, list) {
+      _.each(obj, function (value, index, list) {
         computed = iteratee(value, index, list);
         if (computed > lastComputed || computed === -Infinity && result === -Infinity) {
           result = value;
@@ -744,7 +744,7 @@
    * _.max([3,2,1,4,5])
    * > 1
    */
-  _.min = function(obj, iteratee, context) {
+  _.min = function (obj, iteratee, context) {
     var result = Infinity,
       lastComputed = Infinity,
       value, computed;
@@ -758,7 +758,7 @@
       }
     } else {
       iteratee = cb(iteratee, context);
-      _.each(obj, function(value, index, list) {
+      _.each(obj, function (value, index, list) {
         computed = iteratee(value, index, list);
         if (computed < lastComputed || computed === Infinity && result === Infinity) {
           result = value;
@@ -781,7 +781,7 @@
    * _.shuffle([1, 2, 3, 4, 5, 6]);
    * > [4, 1, 6, 3, 5, 2]
    */
-  _.shuffle = function(obj) {
+  _.shuffle = function (obj) {
     var set = isArrayLike(obj) ? obj : _.values(obj);
     // 获取传入对象的长度
     var length = set.length;
@@ -819,7 +819,7 @@
    * > [1, 6, 2]
    *
    */
-  _.sample = function(obj, n, guard) {
+  _.sample = function (obj, n, guard) {
     // 如果不传入n，随机取一个索引对应的值
     if (n == null || guard) {
       if (!isArrayLike(obj)) obj = _.values(obj);
@@ -847,19 +847,19 @@
    * _.sortBy(stooges, 'name');
    * > [{name: 'curly', age: 60}, {name: 'larry', age: 50}, {name: 'moe', age: 40}];
    */
-  _.sortBy = function(obj, iteratee, context) {
+  _.sortBy = function (obj, iteratee, context) {
     iteratee = cb(iteratee, context);
 
     // 首先，最外面用 `pluck` 包裹，最后会取 `value` 作为新的集合
-    return _.pluck(_.map(obj, function(value, index, list) {
+    return _.pluck(_.map(obj, function (value, index, list) {
       // 对原对象进行处理，返回一个由新对象组成的集合
       return {
         value: value, // 实际值
         index: index, // 索引
         criteria: iteratee(value, index, list) // 要比较的值
       };
-    // 然后，调用 `sort` 函数进行排序，首先更具比较值进行比较，一样的话按原顺序排列
-    }).sort(function(left, right) {
+      // 然后，调用 `sort` 函数进行排序，首先更具比较值进行比较，一样的话按原顺序排列
+    }).sort(function (left, right) {
       var a = left.criteria;
       var b = right.criteria;
       if (a !== b) {
@@ -877,7 +877,7 @@
    * @param  {[type]} behavior [行为函数]
    * @return {[type]}          [description]
    */
-  var group = function(behavior) {
+  var group = function (behavior) {
     /**
      *
      * @param  {[type]} obj         传入集合
@@ -885,10 +885,10 @@
      * @param  {[type]} context     上下文
      * @return {Object}             结果
      */
-    return function(obj, iteratee, context) {
+    return function (obj, iteratee, context) {
       var result = {};
       iteratee = cb(iteratee, context);
-      _.each(obj, function(value, index) {
+      _.each(obj, function (value, index) {
         var key = iteratee(value, index, obj);
         // 进行处理，传入参数为结果、当前值、当前键
         behavior(result, value, key);
@@ -915,7 +915,7 @@
    * _.groupBy(['one', 'two', 'three'], 'length');
    * > {3: ["one", "two"], 5: ["three"]}
    */
-  _.groupBy = group(function(result, value, key) {
+  _.groupBy = group(function (result, value, key) {
 
     // 如果结果中存在 `key` 值而非原型链上的，就放入进去对应的数组，否则创建一个新数组
     if (_.has(result, key)) result[key].push(value);
@@ -941,7 +941,7 @@
    *   "60": {name: 'curly', age: 60}
    * }
    */
-  _.indexBy = group(function(result, value, key) {
+  _.indexBy = group(function (result, value, key) {
     result[key] = value;
   });
 
@@ -962,13 +962,13 @@
    * });
    * > {odd: 3, even: 2}
    */
-  _.countBy = group(function(result, value, key) {
+  _.countBy = group(function (result, value, key) {
     if (_.has(result, key)) result[key]++;
     else result[key] = 1;
   });
 
   // Safely create a real, live array from anything iterable.
-  _.toArray = function(obj) {
+  _.toArray = function (obj) {
     // 如果无参数，返回空数组
     if (!obj) return [];
     // 如果本身是数组，则使用 `slice` 创建一个等价的新数组
@@ -985,7 +985,7 @@
    * @param  {Object} obj [description]
    * @return {Number}     [对象的长度]
    */
-  _.size = function(obj) {
+  _.size = function (obj) {
     // 如果传入的对象等于 `null` 则返回 0
     if (obj == null) return 0;
     // 如果传入的对象那个是一个类数组,返回传入对象的长度。否则返回对象 `keys` 的长度。
@@ -1006,11 +1006,11 @@
    * _.partition([0, 1, 2, 3, 4, 5], isOdd);
    * > [[1, 3, 5], [0, 2, 4]]
    */
-  _.partition = function(obj, predicate, context) {
+  _.partition = function (obj, predicate, context) {
     predicate = cb(predicate, context);
     var pass = [],
       fail = [];
-    _.each(obj, function(value, key, obj) {
+    _.each(obj, function (value, key, obj) {
       (predicate(value, key, obj) ? pass : fail).push(value);
     });
     return [pass, fail];
@@ -1038,7 +1038,7 @@
    * _.first([5, 4, 3, 2, 1],3);
    * > [5,4,3]
    */
-  _.first = _.head = _.take = function(array, n, guard) {
+  _.first = _.head = _.take = function (array, n, guard) {
     // 如果没有传递数组，或者数组为空，则返回 `void 0`
     if (array == null) return void 0;
     // 如果没有传递 `n` 或者传递了 `guard`，返回数组第一个元素，这是为了适应 `_.map`
@@ -1065,7 +1065,7 @@
    * _.initial([5, 4, 3, 2, 1],3);
    * > [5, 4]
    */
-  _.initial = function(array, n, guard) {
+  _.initial = function (array, n, guard) {
     return slice.call(array, 0, Math.max(0, array.length - (n == null || guard ? 1 : n)));
   };
 
@@ -1086,7 +1086,7 @@
    * _.last([5, 4, 3, 2, 1], 3);
    * > [3, 2, 1]
    */
-  _.last = function(array, n, guard) {
+  _.last = function (array, n, guard) {
     if (array == null) return void 0;
     if (n == null || guard) return array[array.length - 1];
     return _.rest(array, Math.max(0, array.length - n));
@@ -1110,7 +1110,7 @@
    * _.rest([5, 4, 3, 2, 1],3);
    * > [2, 1]
    */
-  _.rest = _.tail = _.drop = function(array, n, guard) {
+  _.rest = _.tail = _.drop = function (array, n, guard) {
     return slice.call(array, n == null || guard ? 1 : n);
   };
 
@@ -1121,7 +1121,7 @@
    * @param  {Array} array [传入一个要处理的数组]
    * @return {Array}       [返回一个参数不为 `false` 的数组]
    */
-  _.compact = function(array) {
+  _.compact = function (array) {
     // 只返回等价为 `true` 的元素，返回参数自身
     return _.filter(array, _.identity);
   };
@@ -1137,7 +1137,7 @@
    * @param  {Number}  startIndex 开始index
    * @return {Array}              输出数组
    */
-  var flatten = function(input, shallow, strict, startIndex) {
+  var flatten = function (input, shallow, strict, startIndex) {
     // 初始化一个空数组和下标0
     var output = [],
       idx = 0;
@@ -1156,7 +1156,7 @@
           // 依次塞入`output`中
           output[idx++] = value[j++];
         }
-      // 如果本身不是类数组对象，且 `strict` 为 `true`，则将该值直接塞入`output`中
+        // 如果本身不是类数组对象，且 `strict` 为 `true`，则将该值直接塞入`output`中
       } else if (!strict) {
         output[idx++] = value;
       }
@@ -1179,7 +1179,7 @@
    * _.flatten([1, [2], [3, [[4]]]], true);
    * > [1, 2, 3, [[4]]];
    */
-  _.flatten = function(array, shallow) {
+  _.flatten = function (array, shallow) {
     return flatten(array, shallow, false);
   };
 
@@ -1194,7 +1194,7 @@
    * _.without([1, 2, 1, 0, 3, 1, 4], 0, 1);
    * > [2, 3, 4]
    */
-  _.without = function(array) {
+  _.without = function (array) {
     return _.difference(array, slice.call(arguments, 1));
   };
 
@@ -1215,7 +1215,7 @@
    * _.uniq([1, 2, 1, 3, 1, 4]);
    * > [1, 2, 3, 4]
    */
-  _.uniq = _.unique = function(array, isSorted, iteratee, context) {
+  _.uniq = _.unique = function (array, isSorted, iteratee, context) {
     // 如果第二个参数不是传入布尔值，则认为传入的是false
     // 也就是等价于传入了(array, false, iteratee, context)
     if (!_.isBoolean(isSorted)) {
@@ -1231,7 +1231,7 @@
     for (var i = 0, length = getLength(array); i < length; i++) {
       // 初始化为数组的第一个值
       var value = array[i],
-      // 如果存在 `iteratee` 则用它取得计算值，否则直接用当前索引对应的值
+        // 如果存在 `iteratee` 则用它取得计算值，否则直接用当前索引对应的值
         computed = iteratee ? iteratee(value, i, array) : value;
       // 如果有序
       if (isSorted) {
@@ -1268,7 +1268,7 @@
    * _.union([1, 2, 3], [101, 2, 1, 10], [2, 1]);
    * > [1, 2, 3, 101, 10]
    */
-  _.union = function() {
+  _.union = function () {
     return _.uniq(flatten(arguments, true, true));
   };
 
@@ -1283,7 +1283,7 @@
    * _.intersection([1, 2, 3], [101, 2, 1, 10], [2, 1]);
    * > [1, 2]
    */
-  _.intersection = function(array) {
+  _.intersection = function (array) {
     var result = [];
     var argsLength = arguments.length;
 
@@ -1304,11 +1304,11 @@
 
   // Take the difference between one array and a number of other arrays.
   // Only the elements present in just the first array will remain.
-  _.difference = function(array) {
+  _.difference = function (array) {
     // 将 `arguments` 参数平整化
     var rest = flatten(arguments, true, true, 1);
     // 只返回不包含在 `rest` 中的元素
-    return _.filter(array, function(value) {
+    return _.filter(array, function (value) {
       return !_.contains(rest, value);
     });
   };
@@ -1324,7 +1324,7 @@
    * _.zip(['moe', 'larry', 'curly'], [30, 40, 50], [true, false, false]);
    * > [["moe", 30, true], ["larry", 40, false], ["curly", 50, false]]
    */
-  _.zip = function() {
+  _.zip = function () {
     return _.unzip(arguments);
   };
 
@@ -1340,7 +1340,7 @@
    * _.unzip([['moe', 'larry', 'curly'], [30, 40, 50], [true, false, false]])
    * > ["moe", 30, true], ["larry", 40, false], ["curly", 50, false]
    */
-  _.unzip = function(array) {
+  _.unzip = function (array) {
     // 将参数数组中长度最长的 数组的长度 作为新数组的长度
     var length = array && _.max(array, getLength).length || 0;
     var result = Array(length);
@@ -1370,7 +1370,7 @@
    * _.object([['moe', 30], ['larry', 40], ['curly', 50]]);
    * > {moe: 30, larry: 40, curly: 50}
    */
-  _.object = function(list, values) {
+  _.object = function (list, values) {
     var result = {};
     for (var i = 0, length = getLength(list); i < length; i++) {
       if (values) {
@@ -1394,11 +1394,11 @@
      * 返回 回调函数
      *
      * @param  {Array} array      [要的处理的数组]
-     * @param  {Object} predicate [判断条件(key or index)]
-     * @param  {[type]} context   [上下文]
+     * @param  {Object} predicate   [判断条件(key or index)]
+     * @param  {[type]} context    [上下文]
      * @return {Number}           [index or -1]
      */
-    return function(array, predicate, context) {
+    return function (array, predicate, context) {
 
       // 假设函数会进行迭代执行
       predicate = cb(predicate, context);
@@ -1460,17 +1460,18 @@
    * _.sortedIndex(stooges, {name: 'larry', age: 50}, 'age');
    * > 1
    */
-  _.sortedIndex = function(array, obj, iteratee, context) {
+  _.sortedIndex = function (array, obj, iteratee, context) {
     // 迭代函数，用来处理迭代
     iteratee = cb(iteratee, context, 1);
     // 对象的值
     var value = iteratee(obj);
 
     // 二分法的高低位设置
-    var low = 0,high = getLength(array);
+    var low = 0,
+      high = getLength(array);
     // 循环(低值 小于 高值)
     while (low < high) {
-      console.log(iteratee(array[mid]),value,high,low,mid)
+      console.log(iteratee(array[mid]), value, high, low, mid)
       // 求中间值
       var mid = Math.floor((low + high) / 2);
       // 如果数组的值 小于 对象的值, low 赋值为 中间值 +1
@@ -1497,7 +1498,7 @@
      * @param  {[type]} idx   [查询的起始位置或者是否排序]
      * @return {[type]}       [description]
      */
-    return function(array, item, idx) {
+    return function (array, item, idx) {
       var i = 0,
         length = getLength(array);
 
@@ -1512,7 +1513,7 @@
           length = idx >= 0 ? Math.min(idx + 1, length) : idx + length + 1;
         }
 
-      // 如果有有序查找函数、并且已知数组有序并且非空
+        // 如果有有序查找函数、并且已知数组有序并且非空
       } else if (sortedIndex && idx && length) {
         // 查找到相应的位置
         idx = sortedIndex(array, item);
@@ -1548,16 +1549,30 @@
   // Generate an integer Array containing an arithmetic progression. A port of
   // the native Python `range()` function. See
   // [the Python documentation](http://docs.python.org/library/functions.html#range).
-  _.range = function(start, stop, step) {
+  /**
+   * 创建一个以`start`开始，`stop`结束，间隔为`step`的数字数组。
+   *
+   * @param  {Number} start [开始]
+   * @param  {Number} stop  [停止]
+   * @param  {Number} step  [步长]
+   * @return {Array}       [范围]
+   */
+  _.range = function (start, stop, step) {
+    // 如果没有传入终止值
     if (stop == null) {
+      // start 值作为终止值
       stop = start || 0;
+      // 起始值变为零
       start = 0;
     }
+    // 如果没有传入 步长，则默认为 1
     step = step || 1;
 
+    // 向上取整作为数组长度
     var length = Math.max(Math.ceil((stop - start) / step), 0);
     var range = Array(length);
 
+    // 遍历，每次增加值为间隔值
     for (var idx = 0; idx < length; idx++, start += step) {
       range[idx] = start;
     }
@@ -1568,25 +1583,41 @@
   // Function (ahem) Functions
   // 与函数有关的函数
   // ------------------
-
   // Determines whether to execute a function as a constructor
   // or a normal function with the provided arguments
-  var executeBound = function(sourceFunc, boundFunc, context, callingContext, args) {
+  /**
+   * 判断要执行的原函数是作为构造器使用还是直接调用
+   *
+   * @param  {Function} sourceFunc     [源函数]
+   * @param  {Function} boundFunc      [界限函数]
+   * @param  {[type]} context        [上下文]
+   * @param  {[type]} callingContext [调用上下文]
+   * @param  {[type]} args           [description]
+   * @return {Function}              [返回新函数]
+   */
+
+  var executeBound = function (sourceFunc, boundFunc, context, callingContext, args) {
+
+    // 如果调用的上下文是绑定的函数的一个实例，则对原函数进行调用
     if (!(callingContext instanceof boundFunc)) return sourceFunc.apply(context, args);
+    // 根据原函数的原型创建新的实例
     var self = baseCreate(sourceFunc.prototype);
+    // 用新实例调用原函数
     var result = sourceFunc.apply(self, args);
+    // 如果结果是对象就返回结果
     if (_.isObject(result)) return result;
+    // 否则返回新函数
     return self;
   };
 
   // Create a function bound to a given object (assigning `this`, and arguments,
   // optionally). Delegates to **ECMAScript 5**'s native `Function.bind` if
   // available.
-  _.bind = function(func, context) {
+  _.bind = function (func, context) {
     if (nativeBind && func.bind === nativeBind) return nativeBind.apply(func, slice.call(arguments, 1));
     if (!_.isFunction(func)) throw new TypeError('Bind must be called on a function');
     var args = slice.call(arguments, 2);
-    var bound = function() {
+    var bound = function () {
       return executeBound(func, bound, context, this, args.concat(slice.call(arguments)));
     };
     return bound;
@@ -1595,9 +1626,9 @@
   // Partially apply a function by creating a version that has had some of its
   // arguments pre-filled, without changing its dynamic `this` context. _ acts
   // as a placeholder, allowing any combination of arguments to be pre-filled.
-  _.partial = function(func) {
+  _.partial = function (func) {
     var boundArgs = slice.call(arguments, 1);
-    var bound = function() {
+    var bound = function () {
       var position = 0,
         length = boundArgs.length;
       var args = Array(length);
@@ -1613,7 +1644,7 @@
   // Bind a number of an object's methods to that object. Remaining arguments
   // are the method names to be bound. Useful for ensuring that all callbacks
   // defined on an object belong to it.
-  _.bindAll = function(obj) {
+  _.bindAll = function (obj) {
     var i, length = arguments.length,
       key;
     if (length <= 1) throw new Error('bindAll must be passed function names'); // bindAll 必须传递函数名
@@ -1625,8 +1656,8 @@
   };
 
   // Memoize an expensive function by storing its results.
-  _.memoize = function(func, hasher) {
-    var memoize = function(key) {
+  _.memoize = function (func, hasher) {
+    var memoize = function (key) {
       var cache = memoize.cache;
       var address = '' + (hasher ? hasher.apply(this, arguments) : key);
       if (!_.has(cache, address)) cache[address] = func.apply(this, arguments);
@@ -1638,9 +1669,9 @@
 
   // Delays a function for the given number of milliseconds, and then calls
   // it with the arguments supplied.
-  _.delay = function(func, wait) {
+  _.delay = function (func, wait) {
     var args = slice.call(arguments, 2);
-    return setTimeout(function() {
+    return setTimeout(function () {
       return func.apply(null, args);
     }, wait);
   };
@@ -1654,18 +1685,18 @@
   // as much as it can, without ever going more than once per `wait` duration;
   // but if you'd like to disable the execution on the leading edge, pass
   // `{leading: false}`. To disable execution on the trailing edge, ditto.
-  _.throttle = function(func, wait, options) {
+  _.throttle = function (func, wait, options) {
     var context, args, result;
     var timeout = null;
     var previous = 0;
     if (!options) options = {};
-    var later = function() {
+    var later = function () {
       previous = options.leading === false ? 0 : _.now();
       timeout = null;
       result = func.apply(context, args);
       if (!timeout) context = args = null;
     };
-    return function() {
+    return function () {
       var now = _.now();
       if (!previous && options.leading === false) previous = now;
       var remaining = wait - (now - previous);
@@ -1690,10 +1721,10 @@
   // be triggered. The function will be called after it stops being called for
   // N milliseconds. If `immediate` is passed, trigger the function on the
   // leading edge, instead of the trailing.
-  _.debounce = function(func, wait, immediate) {
+  _.debounce = function (func, wait, immediate) {
     var timeout, args, context, timestamp, result;
 
-    var later = function() {
+    var later = function () {
       var last = _.now() - timestamp;
 
       if (last < wait && last >= 0) {
@@ -1707,7 +1738,7 @@
       }
     };
 
-    return function() {
+    return function () {
       context = this;
       args = arguments;
       timestamp = _.now();
@@ -1725,24 +1756,24 @@
   // Returns the first function passed as an argument to the second,
   // allowing you to adjust arguments, run code before and after, and
   // conditionally execute the original function.
-  _.wrap = function(func, wrapper) {
+  _.wrap = function (func, wrapper) {
     return _.partial(wrapper, func);
   };
 
   // Returns a negated version of the passed-in predicate.
   // 对传入的判断函数，将其判断条件取反然后返回新的判断函数。
-  _.negate = function(predicate) {
-    return function() {
+  _.negate = function (predicate) {
+    return function () {
       return !predicate.apply(this, arguments); // 对结果取反
     };
   };
 
   // Returns a function that is the composition of a list of functions, each
   // consuming the return value of the function that follows.
-  _.compose = function() {
+  _.compose = function () {
     var args = arguments;
     var start = args.length - 1;
-    return function() {
+    return function () {
       var i = start;
       var result = args[start].apply(this, arguments);
       while (i--) result = args[i].call(this, result);
@@ -1751,8 +1782,8 @@
   };
 
   // Returns a function that will only be executed on and after the Nth call.
-  _.after = function(times, func) {
-    return function() {
+  _.after = function (times, func) {
+    return function () {
       if (--times < 1) {
         return func.apply(this, arguments);
       }
@@ -1760,9 +1791,9 @@
   };
 
   // Returns a function that will only be executed up to (but not including) the Nth call.
-  _.before = function(times, func) {
+  _.before = function (times, func) {
     var memo;
-    return function() {
+    return function () {
       if (--times > 0) {
         memo = func.apply(this, arguments);
       }
@@ -1787,7 +1818,9 @@
    * Object.propertyIsEnumerable: 判断一个对象是否可以枚举
    * @type {Boolean}
    */
-  var hasEnumBug = !{ toString: null }.propertyIsEnumerable('toString');
+  var hasEnumBug = !{
+    toString: null
+  }.propertyIsEnumerable('toString');
   // 所有需要处理的可能存在枚举问题的属性(不可枚举的属性)
   var nonEnumerableProps = ['valueOf', 'isPrototypeOf', 'toString',
     'propertyIsEnumerable', 'hasOwnProperty', 'toLocaleString'
@@ -1825,7 +1858,7 @@
    * @param  {Object} obj [传入一个对象]
    * @return {Array}      [返回对象的key值]
    */
-  _.keys = function(obj) {
+  _.keys = function (obj) {
 
     // 如果传入的不是一个对象，返回一个空数组
     if (!_.isObject(obj)) return [];
@@ -1856,7 +1889,7 @@
    * @param  {Object} obj [需要处理的对象]
    * @return {Array}     [对象所有的key值]
    */
-  _.allKeys = function(obj) {
+  _.allKeys = function (obj) {
     if (!_.isObject(obj)) return [];
     var keys = [];
     // 获取所有的key
@@ -1874,7 +1907,7 @@
    * @param  {Object} obj [键值对的对象]
    * @return {Array}     [对象的值组成的数组]
    */
-  _.values = function(obj) {
+  _.values = function (obj) {
     // 取出所有的键
     var keys = _.keys(obj);
     // 取长度
@@ -1890,7 +1923,7 @@
 
   // Returns the results of applying the iteratee to each element of the object
   // In contrast to _.map it returns an object
-  _.mapObject = function(obj, iteratee, context) {
+  _.mapObject = function (obj, iteratee, context) {
     iteratee = cb(iteratee, context);
     var keys = _.keys(obj),
       length = keys.length,
@@ -1904,7 +1937,7 @@
   };
 
   // Convert an object into a list of `[key, value]` pairs.
-  _.pairs = function(obj) {
+  _.pairs = function (obj) {
     var keys = _.keys(obj);
     var length = keys.length;
     var pairs = Array(length);
@@ -1915,7 +1948,7 @@
   };
 
   // Invert the keys and values of an object. The values must be serializable.
-  _.invert = function(obj) {
+  _.invert = function (obj) {
     var result = {};
     var keys = _.keys(obj);
     for (var i = 0, length = keys.length; i < length; i++) {
@@ -1926,7 +1959,7 @@
 
   // Return a sorted list of the function names available on the object.
   // Aliased as `methods`
-  _.functions = _.methods = function(obj) {
+  _.functions = _.methods = function (obj) {
     var names = [];
     for (var key in obj) {
       if (_.isFunction(obj[key])) names.push(key);
@@ -1943,7 +1976,7 @@
 
   // Returns the first key on an object that passes a predicate test
   // 查找键
-  _.findKey = function(obj, predicate, context) {
+  _.findKey = function (obj, predicate, context) {
     predicate = cb(predicate, context);
     var keys = _.keys(obj),
       key;
@@ -1954,7 +1987,7 @@
   };
 
   // Return a copy of the object only containing the whitelisted properties.
-  _.pick = function(object, oiteratee, context) {
+  _.pick = function (object, oiteratee, context) {
     var result = {},
       obj = object,
       iteratee, keys;
@@ -1964,7 +1997,9 @@
       iteratee = optimizeCb(oiteratee, context);
     } else {
       keys = flatten(arguments, false, false, 1);
-      iteratee = function(value, key, obj) { return key in obj; };
+      iteratee = function (value, key, obj) {
+        return key in obj;
+      };
       obj = Object(obj);
     }
     for (var i = 0, length = keys.length; i < length; i++) {
@@ -1976,12 +2011,12 @@
   };
 
   // Return a copy of the object without the blacklisted properties.
-  _.omit = function(obj, iteratee, context) {
+  _.omit = function (obj, iteratee, context) {
     if (_.isFunction(iteratee)) {
       iteratee = _.negate(iteratee);
     } else {
       var keys = _.map(flatten(arguments, false, false, 1), String);
-      iteratee = function(value, key) {
+      iteratee = function (value, key) {
         return !_.contains(keys, key);
       };
     }
@@ -1994,14 +2029,14 @@
   // Creates an object that inherits from the given prototype object.
   // If additional properties are provided then they will be added to the
   // created object.
-  _.create = function(prototype, props) {
+  _.create = function (prototype, props) {
     var result = baseCreate(prototype);
     if (props) _.extendOwn(result, props);
     return result;
   };
 
   // Create a (shallow-cloned) duplicate of an object.
-  _.clone = function(obj) {
+  _.clone = function (obj) {
     if (!_.isObject(obj)) return obj;
     return _.isArray(obj) ? obj.slice() : _.extend({}, obj);
   };
@@ -2009,7 +2044,7 @@
   // Invokes interceptor with the obj, and then returns obj.
   // The primary purpose of this method is to "tap into" a method chain, in
   // order to perform operations on intermediate results within the chain.
-  _.tap = function(obj, interceptor) {
+  _.tap = function (obj, interceptor) {
     interceptor(obj);
     return obj;
   };
@@ -2028,7 +2063,7 @@
    * _.isMatch(stooge, {age: 32});
    * > true
    */
-  _.isMatch = function(object, attrs) {
+  _.isMatch = function (object, attrs) {
     var keys = _.keys(attrs),
       length = keys.length;
 
@@ -2054,7 +2089,7 @@
 
 
   // Internal recursive comparison function for `isEqual`.
-  var eq = function(a, b, aStack, bStack) {
+  var eq = function (a, b, aStack, bStack) {
     // Identical objects are equal. `0 === -0`, but they aren't identical.
     // See the [Harmony `egal` proposal](http://wiki.ecmascript.org/doku.php?id=harmony:egal).
     if (a === b) return a !== 0 || 1 / a === 1 / b;
@@ -2150,7 +2185,7 @@
 
   // Perform a deep comparison to check if two objects are equal.
   // 执行深度比较以检查两个对象是否相等。
-  _.isEqual = function(a, b) {
+  _.isEqual = function (a, b) {
     return eq(a, b);
   };
 
@@ -2159,7 +2194,7 @@
   // “空”对象没有可枚举的自身属性。
   //
   // 判断传入的对象是否为空
-  _.isEmpty = function(obj) {
+  _.isEmpty = function (obj) {
     // 如果 `obj == null` 直接返回 true
     if (obj == null) return true;
 
@@ -2185,7 +2220,7 @@
     |Node.DOCUMENT_TYPE_NODE           |10   |描述文档类型的 DocumentType 节点。例如 <!DOCTYPE html>  就是用于 HTML5 的。
     |Node.DOCUMENT_FRAGMENT_NODE       |11   |一个 DocumentFragment 节点
    */
-  _.isElement = function(obj) {
+  _.isElement = function (obj) {
     // 如果 `obj`不为空，且 `obj` 的nodeType绝对等于1，返回true
     return !!(obj && obj.nodeType === 1);
   };
@@ -2193,7 +2228,7 @@
   // Is a given value an array?
   // Delegates to ECMA5's native Array.isArray
   // 判断传来的对象那个是不是个数组
-  _.isArray = nativeIsArray || function(obj) {
+  _.isArray = nativeIsArray || function (obj) {
     return toString.call(obj) === '[object Array]';
   };
 
@@ -2204,16 +2239,16 @@
    * @param  {Object}  obj [接收一个对象]
    * @return {Boolean}     [{ture：是对象，false:不是对象}]
    */
-  _.isObject = function(obj) {
+  _.isObject = function (obj) {
     var type = typeof obj;
     return type === 'function' || type === 'object' && !!obj;
   };
 
   // Add some isType methods: isArguments, isFunction, isString, isNumber, isDate, isRegExp, isError.
   // 添加一些判断类型方法：`isArguments, isFunction, isString, isNumber, isDate, isRegExp, isError.`
-  _.each(['Arguments', 'Function', 'String', 'Number', 'Date', 'RegExp', 'Error'], function(name) { // 遍历数组
+  _.each(['Arguments', 'Function', 'String', 'Number', 'Date', 'RegExp', 'Error'], function (name) { // 遍历数组
     // 拼接数组项（前面加is），并赋值个 `_`
-    _['is' + name] = function(obj) {
+    _['is' + name] = function (obj) {
       // 判断每个数组项的类型
       return toString.call(obj) === '[object ' + name + ']';
     };
@@ -2227,7 +2262,7 @@
   // 因为IE<9下对arguments调用Object.prototype.toString.call()，返回的是[object Object]，
   // 而非[object Arguments]，所以遇到这种情况需要判断一下是否还有callee属性。
   if (!_.isArguments(arguments)) {
-    _.isArguments = function(obj) {
+    _.isArguments = function (obj) {
       return _.has(obj, 'callee');
     };
   }
@@ -2236,7 +2271,7 @@
   // IE 11 (#1621), and in Safari 8 (#1929).
   // 如果合适的话，优化`isFunction`。在旧V8中工作一些类型的bug，即IE 11（#1621）和Safari 8（#1929）。
   if (typeof /./ != 'function' && typeof Int8Array != 'object') {
-    _.isFunction = function(obj) {
+    _.isFunction = function (obj) {
       return typeof obj == 'function' || false;
     };
   }
@@ -2250,13 +2285,13 @@
    * _.isFinite(-Infinity);
    * > false
    */
-  _.isFinite = function(obj) {
+  _.isFinite = function (obj) {
     return isFinite(obj) && !isNaN(parseFloat(obj));
   };
 
   // Is the given value `NaN`? (NaN is the only number which does not equal itself).
   // 判断传入的对象是否是 `NaN`， (NaN 是唯一一个不等于自身的数字).
-  _.isNaN = function(obj) {
+  _.isNaN = function (obj) {
     // 1. 首先，传入的对象必须是个`Number`类型的
     // 2. 且 自身不等于自身
     return _.isNumber(obj) && obj !== +obj;
@@ -2264,19 +2299,19 @@
 
   // Is a given value a boolean?
   // 判断传入的对象是否是 `boolean` 类型的
-  _.isBoolean = function(obj) {
+  _.isBoolean = function (obj) {
     return obj === true || obj === false || toString.call(obj) === '[object Boolean]';
   };
 
   // Is a given value equal to null?
   // 判断传入的对象是否等于 `null`
-  _.isNull = function(obj) {
+  _.isNull = function (obj) {
     return obj === null;
   };
 
   // Is a given variable undefined?
   // 判断传入的对象是否等于 `undefined`, `void 0 === undefined`
-  _.isUndefined = function(obj) {
+  _.isUndefined = function (obj) {
     return obj === void 0;
   };
 
@@ -2289,7 +2324,7 @@
    * @param  {String}  key [要判断的key]
    * @return {Boolean}     [对象上是否有key]
    */
-  _.has = function(obj, key) {
+  _.has = function (obj, key) {
     return obj != null && hasOwnProperty.call(obj, key);
   };
 
@@ -2306,7 +2341,7 @@
    * @example
    * var underscore = _.noConflict();
    */
-  _.noConflict = function() {
+  _.noConflict = function () {
     root._ = previousUnderscore;
     return this;
   };
@@ -2318,19 +2353,19 @@
    * @param  {[type]} value [description]
    * @return {[type]}       [description]
    */
-  _.identity = function(value) {
+  _.identity = function (value) {
     return value;
   };
 
   // Predicate-generating functions. Often useful outside of Underscore.
-  _.constant = function(value) {
-    return function() {
+  _.constant = function (value) {
+    return function () {
       return value;
     };
   };
 
   // 返回undefined，不论传递给它的是什么参数。 可以用作默认可选的回调参数。
-  _.noop = function() {};
+  _.noop = function () {};
 
   /**
    * 返回一个函数，这个函数返回任何传入的对象的key属性。
@@ -2354,8 +2389,8 @@
    * _.propertyOf(stooge)('name');
    * > 'moe'
    */
-  _.propertyOf = function(obj) {
-    return obj == null ? function() {} : function(key) {
+  _.propertyOf = function (obj) {
+    return obj == null ? function () {} : function (key) {
       return obj[key];
     };
   };
@@ -2373,15 +2408,15 @@
    * var ready = _.matcher({selected: true, visible: true});
    * var readyToGoList = _.filter(list, ready);
    */
-  _.matcher = _.matches = function(attrs) {
+  _.matcher = _.matches = function (attrs) {
     attrs = _.extendOwn({}, attrs); // 扩展 `attrs` 为一个键值对 对象
-    return function(obj) {
+    return function (obj) {
       return _.isMatch(obj, attrs);
     };
   };
 
   // Run a function **n** times.
-  _.times = function(n, iteratee, context) {
+  _.times = function (n, iteratee, context) {
     var accum = Array(Math.max(0, n));
     iteratee = optimizeCb(iteratee, context, 1);
     for (var i = 0; i < n; i++) accum[i] = iteratee(i);
@@ -2389,7 +2424,7 @@
   };
 
   // Return a random integer between min and max (inclusive).
-  _.random = function(min, max) {
+  _.random = function (min, max) {
     if (max == null) {
       max = min;
       min = 0;
@@ -2403,7 +2438,7 @@
    *
    * @return {Date} [返回一个毫秒的时间戳]
    */
-  _.now = Date.now || function() {
+  _.now = Date.now || function () {
     return new Date().getTime();
   };
 
@@ -2425,15 +2460,15 @@
    * @param  {[type]} map [description]
    * @return {[type]}     [description]
    */
-  var createEscaper = function(map) {
-    var escaper = function(match) {
+  var createEscaper = function (map) {
+    var escaper = function (match) {
       return map[match];
     };
     // Regexes for identifying a key that needs to be escaped
     var source = '(?:' + _.keys(map).join('|') + ')';
     var testRegexp = RegExp(source);
     var replaceRegexp = RegExp(source, 'g');
-    return function(string) {
+    return function (string) {
       string = string == null ? '' : '' + string;
       return testRegexp.test(string) ? string.replace(replaceRegexp, escaper) : string;
     };
@@ -2445,7 +2480,7 @@
 
   // If the value of the named `property` is a function then invoke it with the
   // `object` as context; otherwise, return it.
-  _.result = function(object, property, fallback) {
+  _.result = function (object, property, fallback) {
     var value = object == null ? void 0 : object[property];
     if (value === void 0) {
       value = fallback;
@@ -2456,7 +2491,7 @@
   // Generate a unique integer id (unique within the entire client session).
   // Useful for temporary DOM ids.
   var idCounter = 0;
-  _.uniqueId = function(prefix) {
+  _.uniqueId = function (prefix) {
     var id = ++idCounter + '';
     return prefix ? prefix + id : id;
   };
@@ -2509,7 +2544,7 @@
 
   var escaper = /\\|'|\r|\n|\u2028|\u2029/g;
 
-  var escapeChar = function(match) {
+  var escapeChar = function (match) {
     return '\\' + escapes[match];
   };
 
@@ -2524,7 +2559,7 @@
    * @param  {Object} oldSettings 旧的配置
    * @return {[type]}             [description]
    */
-  _.template = function(text, settings, oldSettings) {
+  _.template = function (text, settings, oldSettings) {
     if (!settings && oldSettings) settings = oldSettings;
     // 获取可以解析的内容。如果没有提供的话，用默认的配置
     settings = _.defaults({}, settings, _.templateSettings);
@@ -2553,7 +2588,7 @@
      * @param  {Number} offset      匹配到的子字符串在原字符串中的偏移量。（比如，如果原字符串是“abcd”，匹配到的子字符串是“bc”，那么这个参数将是1）
      * @return {Object}             match
      */
-    text.replace(matcher, function(match, escape, interpolate, evaluate, offset) {
+    text.replace(matcher, function (match, escape, interpolate, evaluate, offset) {
       // 需要做二次过滤，因为模版中可能有js不能执行的部分，如换行符等。
       source += text.slice(index, offset).replace(escaper, escapeChar);
       index = offset + match.length;
@@ -2594,7 +2629,7 @@
       throw e;
     }
 
-    var template = function(data) {
+    var template = function (data) {
       // 封装方法
       return render.call(this, data, _);
     };
@@ -2611,7 +2646,7 @@
 
   // Add a "chain" function. Start chaining a wrapped Underscore object.
   // 创建一个chain函数，用来支持链式调用
-  _.chain = function(obj) {
+  _.chain = function (obj) {
     var instance = _(obj);
     // 是否使用链式操作
     instance._chain = true;
@@ -2634,7 +2669,7 @@
    * @param  {Object} obj      [对象]
    * @return {Boolean}         [description]
    */
-  var result = function(instance, obj) {
+  var result = function (instance, obj) {
     return instance._chain ? _(obj).chain() : obj;
   };
 
@@ -2645,11 +2680,11 @@
    * @param  {Object} obj [description]
    * @return {Object}     [description]
    */
-  _.mixin = function(obj) {
+  _.mixin = function (obj) {
     // 通过循环遍历对象来浅拷贝对象属性
-    _.each(_.functions(obj), function(name) {
+    _.each(_.functions(obj), function (name) {
       var func = _[name] = obj[name];
-      _.prototype[name] = function() {
+      _.prototype[name] = function () {
         var args = [this._wrapped];
         push.apply(args, arguments);
         // 支持链式操作
@@ -2663,10 +2698,10 @@
 
   // Add all mutator Array functions to the wrapper.
   // 将Array.prototype中的相关方法添加到Underscore对象中, 这样Underscore对象也可以直接调用Array.prototype中的方法
-  _.each(['pop', 'push', 'reverse', 'shift', 'sort', 'splice', 'unshift'], function(name) {
+  _.each(['pop', 'push', 'reverse', 'shift', 'sort', 'splice', 'unshift'], function (name) {
     // 方法引用
     var method = ArrayProto[name];
-    _.prototype[name] = function() {
+    _.prototype[name] = function () {
       // 赋给obj引用变量方便调用
       var obj = this._wrapped;
       // 调用Array对应的方法
@@ -2679,10 +2714,10 @@
 
   // Add all accessor Array functions to the wrapper.
   // 将所有访问器数组函数添加到包装器中。
-  _.each(['concat', 'join', 'slice'], function(name) {
+  _.each(['concat', 'join', 'slice'], function (name) {
     // 方法引用
     var method = ArrayProto[name];
-    _.prototype[name] = function() {
+    _.prototype[name] = function () {
       // 返回Array对象或者封装后的Array
       return result(this, method.apply(this._wrapped, arguments));
     };
@@ -2690,7 +2725,7 @@
 
   // Extracts the result from a wrapped and chained object.
   // 返回存放在_wrapped属性中的underscore对象
-  _.prototype.value = function() {
+  _.prototype.value = function () {
     return this._wrapped;
   };
 
@@ -2699,7 +2734,7 @@
   // 提供一些方法方便其他情况使用
   _.prototype.valueOf = _.prototype.toJSON = _.prototype.value;
 
-  _.prototype.toString = function() {
+  _.prototype.toString = function () {
     return '' + this._wrapped;
   };
 
@@ -2713,7 +2748,7 @@
   //
   // 对AMD支持的一些处理
   if (typeof define === 'function' && define.amd) {
-    define('underscore', [], function() {
+    define('underscore', [], function () {
       return _;
     });
   }
