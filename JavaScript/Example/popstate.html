@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>back</title>
+</head>
+
+<body>
+</body>
+<script>
+window.addEventListener("popstate", function(e) {
+  alert("我监听到了浏览器的返回按钮事件啦"); //根据自己的需求实现自己的功能
+}, false);
+
+
+// PC端浏览器使用jquery监听
+//
+// $(function() {
+//   pushHistory();
+//   window.addEventListener("popstate", function(e) {
+//     alert("我监听到了浏览器的返回按钮事件啦"); //根据自己的需求实现自己的功能
+//   }, false);
+
+//   function pushHistory() {
+//     var state = {
+//       title: "title",
+//       url: "#"
+//     };
+//     window.history.pushState(state, "title", "#");
+//   }
+// })
+// $(document).ready(function(e) {
+//   if (window.history && window.history.pushState) {
+//     $(window).on('popstate', function() {
+//       window.history.pushState('forward', null, '#');
+//       window.history.forward(1);
+
+//     });
+//   }
+// });
+</script>
+
+</html>
