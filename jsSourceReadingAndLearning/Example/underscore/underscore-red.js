@@ -181,17 +181,17 @@
   /**
    * 创建一个分配器功能的内部函数。
    *
-   * @param  {Function} keysFunc      [description]
-   * @param  {Boolean} undefinedOnly [description]
+   * @param  {Function} keysFunc      [获取属性名的函数]
+   * @param  {Boolean} undefinedOnly  [是否有默认属性]
    * @return {[Function,Object]}               [description]
    */
   var createAssigner = function(keysFunc, undefinedOnly) {
     return function(obj) {
       var length = arguments.length;
-      if (length < 2 || obj == null) return obj;
+      if (length < 2 || obj == null) return obj; // 如果只传了对象或者没有传入对象，则直接返回对象
       for (var index = 1; index < length; index++) {
         var source = arguments[index],
-          keys = keysFunc(source),
+          keys = keysFunc(source),    // 获取要覆盖的键
           l = keys.length;
         for (var i = 0; i < l; i++) {
           var key = keys[i];
@@ -1942,31 +1942,60 @@
 
   // Returns the results of applying the iteratee to each element of the object
   // In contrast to _.map it returns an object
+  /**
+   * 针对对象的map函数。
+   *
+   * @param  {Object} obj      [description]
+   * @param  {Function} iteratee [description]
+   * @param  {[type]} context  [上下文]
+   * @return {Object}          [results]
+   *
+   * _.mapObject({start: 5, end: 12}, function(val, key) {
+   *   return val + 5;
+   * });
+   * {start: 10, end: 17}
+   */
   _.mapObject = function(obj, iteratee, context) {
     iteratee = cb(iteratee, context);
-    var keys = _.keys(obj),
+    var keys = _.keys(obj), // 获取属性名称
       length = keys.length,
       results = {},
       currentKey;
     for (var index = 0; index < length; index++) {
       currentKey = keys[index];
+      // 依次调用迭代函数
       results[currentKey] = iteratee(obj[currentKey], currentKey, obj);
     }
     return results;
   };
 
   // Convert an object into a list of `[key, value]` pairs.
+  /**
+   * 把一个对象转变为一个[key, value]形式的数组
+   *
+   * @param  {Object} obj [需要处理的对象]
+   * @return {Array}      [返回数组]
+   *
+   * _.pairs({one: 1, two: 2, three: 3});
+   * => [["one", 1], ["two", 2], ["three", 3]]
+   */
   _.pairs = function(obj) {
-    var keys = _.keys(obj);
-    var length = keys.length;
-    var pairs = Array(length);
+    var keys = _.keys(obj); // 获取对象的所有key值
+    var length = keys.length; // key的长度
+    var pairs = Array(length); // 创建数组
     for (var i = 0; i < length; i++) {
-      pairs[i] = [keys[i], obj[keys[i]]];
+      pairs[i] = [keys[i], obj[keys[i]]];  // 依次放入键值对
     }
     return pairs;
   };
 
   // Invert the keys and values of an object. The values must be serializable.
+  /**
+   * 翻转对象
+   *
+   * @param  {Object} obj [输入对象]
+   * @return {Object} result   [结果值]
+   */
   _.invert = function(obj) {
     var result = {};
     var keys = _.keys(obj);
@@ -1978,6 +2007,12 @@
 
   // Return a sorted list of the function names available on the object.
   // Aliased as `methods`
+  /**
+   * 返回对象中所有方法名，且是排序好的。
+   *
+   * @param  {Object} obj [传入对象]
+   * @return {Array}  names    [对象名]
+   */
   _.functions = _.methods = function(obj) {
     var names = [];
     for (var key in obj) {
@@ -1987,10 +2022,12 @@
   };
 
   // Extend a given object with all the properties in passed-in object(s).
+  // 使用传入对象中的所有属性扩展给定对象。
   _.extend = createAssigner(_.allKeys);
 
   // Assigns a given object with all the own properties in the passed-in object(s)
   // (https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object/assign)
+  // 类似于extend，但是只会扩展自有属性。
   _.extendOwn = _.assign = createAssigner(_.keys);
 
   // Returns the first key on an object that passes a predicate test
@@ -2001,21 +2038,36 @@
       key;
     for (var i = 0, length = keys.length; i < length; i++) {
       key = keys[i];
-      if (predicate(obj[key], key, obj)) return key;
+      if (predicate(obj[key], key, obj)) return key; // 判断函数传递三个参数，分别是属性值、属性名和整个对象
     }
   };
 
   // Return a copy of the object only containing the whitelisted properties.
+  /**
+   * @title 根据提供的属性名或者判断函数选择某些属性名来创建对象的副本。
+   *
+   * _.pick({name: 'moe', age: 50, userid: 'moe1'}, 'name', 'age');
+   * => {name: 'moe', age: 50}
+   *
+   * _.pick({name: 'moe', age: 50, userid: 'moe1'}, function(value, key, object) {
+   *   return _.isNumber(value);
+   * });
+   * => {age: 50}
+   *
+   */
   _.pick = function(object, oiteratee, context) {
     var result = {},
       obj = object,
       iteratee, keys;
     if (obj == null) return result;
+    // 如果是函数
     if (_.isFunction(oiteratee)) {
+      // 属性名取对象的所有属性名
       keys = _.allKeys(obj);
       iteratee = optimizeCb(oiteratee, context);
     } else {
       keys = flatten(arguments, false, false, 1);
+      // 迭代器获取对象的key
       iteratee = function(value, key, obj) {
         return key in obj;
       };
@@ -2030,48 +2082,79 @@
   };
 
   // Return a copy of the object without the blacklisted properties.
+  /**
+   * @title 根据提供的属性名或者判断函数过滤某些属性名来创建对象的副本。
+   * 根据keys 剔除obj的值
+   *
+   * @param  {[type]} obj      [description]
+   * @param  {[type]} iteratee [description]
+   * @param  {[type]} context  [description]
+   * @return {[type]}          [description]
+   *
+   * _.omit({name: 'moe', age: 50, userid: 'moe1'}, 'userid');
+   * => {name: 'moe', age: 50}
+   *
+   * _.omit({name: 'moe', age: 50, userid: 'moe1'}, function(value, key, object) {
+   *   return _.isNumber(value);
+   * });
+   * => {name: 'moe', userid: 'moe1'}
+   */
   _.omit = function(obj, iteratee, context) {
     if (_.isFunction(iteratee)) {
+      // 如果是函数 则取该判断函数的否定
       iteratee = _.negate(iteratee);
     } else {
       var keys = _.map(flatten(arguments, false, false, 1), String);
       iteratee = function(value, key) {
-        return !_.contains(keys, key);
+        return !_.contains(keys, key);  // 不包含才返回
       };
     }
     return _.pick(obj, iteratee, context);
   };
 
   // Fill in a given object with default properties.
+  // 使用默认属性填写给定对象。
   _.defaults = createAssigner(_.allKeys, true);
 
   // Creates an object that inherits from the given prototype object.
   // If additional properties are provided then they will be added to the
   // created object.
+  //通过给定的原型对象以及额外的属性值来创建一个对象
   _.create = function(prototype, props) {
-    var result = baseCreate(prototype);
-    if (props) _.extendOwn(result, props);
+    var result = baseCreate(prototype);   // 先根据原型创建
+    if (props) _.extendOwn(result, props);  // 再根据额外属性来扩展
     return result;
   };
 
   // Create a (shallow-cloned) duplicate of an object.
+  // 创建对象的浅拷贝
   _.clone = function(obj) {
-    if (!_.isObject(obj)) return obj;
-    return _.isArray(obj) ? obj.slice() : _.extend({}, obj);
+    if (!_.isObject(obj)) return obj;   // 如果传参不是对象，直接返回
+    return _.isArray(obj) ? obj.slice() : _.extend({}, obj);  // 如果传参是数组使用`slice`来创建新的拷贝，否则使用`extend`
   };
 
   // Invokes interceptor with the obj, and then returns obj.
   // The primary purpose of this method is to "tap into" a method chain, in
   // order to perform operations on intermediate results within the chain.
+  // 为了实现链式调用，使用函数调用对象后，再返回对象。
+  /**
+  * _.chain([1,2,3,200])
+  *   .filter(function(num) { return num % 2 == 0; })
+  *   .tap(alert)
+  *   .map(function(num) { return num * num })
+  *   .value();
+  * => // [2, 200] (alerted)
+  * => [4, 40000]
+  */
   _.tap = function(obj, interceptor) {
-    interceptor(obj);
-    return obj;
+    interceptor(obj);   // 调用函数
+    return obj;   // 返回对象
   };
 
   // Returns whether an object has a given set of `key:value` pairs.
   /**
    * @title 是否匹配
-   * 告诉你properties中的键和值是否包含在object中。
+   * 告诉你 properties 中的键和值是否包含在object中。
    *
    * @param  {Object}  object [description]
    * @param  {Object}  attrs  [description]
@@ -2108,22 +2191,42 @@
 
 
   // Internal recursive comparison function for `isEqual`.
+  /**
+   * 相等判断，但不判断嵌套的情况。
+   *
+   * @param  {[type]} a      [description]
+   * @param  {[type]} b      [description]
+   * @param  {[type]} aStack [description]
+   * @param  {[type]} bStack [description]
+   * @return {[type]}        [description]
+   */
   var eq = function(a, b, aStack, bStack) {
     // Identical objects are equal. `0 === -0`, but they aren't identical.
     // See the [Harmony `egal` proposal](http://wiki.ecmascript.org/doku.php?id=harmony:egal).
+    // 同一个东西是相等的
+    // 特殊的是，0等价于-0，但它们不是同一全局的东西
     if (a === b) return a !== 0 || 1 / a === 1 / b;
     // A strict comparison is necessary because `null == undefined`.
+    // 因为null == undefined，所以需要严格判断一下
     if (a == null || b == null) return a === b;
     // Unwrap any wrapped objects.
+    // 如果被比较双方是被`underscore`实例，则比较它们包裹的东西
     if (a instanceof _) a = a._wrapped;
     if (b instanceof _) b = b._wrapped;
     // Compare `[[Class]]` names.
+    // 比较类名
     var className = toString.call(a);
+    // 类名不一样直接返回 false
     if (className !== toString.call(b)) return false;
+
+    // 根据类名不同进行不同的判断
     switch (className) {
       // Strings, numbers, regular expressions, dates, and booleans are compared by value.
+      // 字符串、数字、正则表达式、日期以及布尔值根据值来判断
+      // 正则表达是转换成字符串来判断
       case '[object RegExp]':
         // RegExps are coerced to strings for comparison (Note: '' + /a/i === '/a/i')
+        // 原生值和对象包装后的值是相等的
       case '[object String]':
         // Primitives and their corresponding object wrappers are equivalent; thus, `"5"` is
         // equivalent to `new String("5")`.
@@ -2131,14 +2234,19 @@
       case '[object Number]':
         // `NaN`s are equivalent, but non-reflexive.
         // Object(NaN) is equivalent to NaN
-        if (+a !== +a) return +b !== +b;
+        // NaN是等价的，但彼此不相等
+        // Object(NaN)等价于NaN
+        if (+a !== +a) return +b !== +b;  // 不等于自身的说明是NaN
         // An `egal` comparison is performed for other numeric values.
+        // 使用了egal比较法
         return +a === 0 ? 1 / +a === 1 / b : +a === +b;
       case '[object Date]':
       case '[object Boolean]':
         // Coerce dates and booleans to numeric primitive values. Dates are compared by their
         // millisecond representations. Note that invalid dates with millisecond representations
         // of `NaN` are not equivalent.
+        // 将日期和布尔值转换成原始值
+        // 日期以毫秒来比较，其中非法日期将表示成NaN，但它们不相等
         return +a === +b;
     }
 
@@ -2480,25 +2588,36 @@
    * @return {[type]}     [description]
    */
   var createEscaper = function(map) {
-    var escaper = function(match) {
-      return map[match];
+    var escaper = function(match) { // 正则替换用到的函数，传入的匹配的值
+      return map[match]; // 返回映射中的值
     };
     // Regexes for identifying a key that needs to be escaped
+    // 通过正则捕获要转义的字符
     var source = '(?:' + _.keys(map).join('|') + ')';
+    // 创建测试正则表达式
     var testRegexp = RegExp(source);
+    // 创建替换正则表达式
     var replaceRegexp = RegExp(source, 'g');
     return function(string) {
-      string = string == null ? '' : '' + string;
-      return testRegexp.test(string) ? string.replace(replaceRegexp, escaper) : string;
+      string = string == null ? '' : '' + string; // 传入值转成字符串
+      return testRegexp.test(string) ? string.replace(replaceRegexp, escaper) : string; // 如果有需要转义的实体，就进行转义替换
     };
   };
   // 处理 HTML
+  // _.escape("<div>test</div>")
+  // "&lt;div&gt;test&lt;/div&gt;"
   _.escape = createEscaper(escapeMap);
+
   // 反处理 HTML
+  // _.unescape("&lt;div&gt;test&lt;/div&gt;")
+  // "<div>test</div>"
   _.unescape = createEscaper(unescapeMap);
 
   // If the value of the named `property` is a function then invoke it with the
   // `object` as context; otherwise, return it.
+  // 如果传入的属性名对应的值是函数，就以对象作为上下文调用它，
+  // 并返回调用结果，否则返回属性值，如果对象或者属性值不存在，
+  // 就返回提供的默认值，如果提供的默认值是函数，返回调用结果。
   _.result = function(object, property, fallback) {
     var value = object == null ? void 0 : object[property];
     if (value === void 0) {
@@ -2509,6 +2628,12 @@
 
   // Generate a unique integer id (unique within the entire client session).
   // Useful for temporary DOM ids.
+  /**
+   * 生成唯一id
+   * @type {Number} prefix 前缀
+   * @return {String} id 唯一id
+   * @description 如果没有传入`prefix`，怎从 `0` 开始计数。如果传入了`prefix`，则返回 `prefix+id`
+   */
   var idCounter = 0;
   _.uniqueId = function(prefix) {
     var id = ++idCounter + '';
