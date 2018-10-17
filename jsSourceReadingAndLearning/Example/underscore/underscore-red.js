@@ -2194,8 +2194,8 @@
   /**
    * 相等判断，但不判断嵌套的情况。
    *
-   * @param  {[type]} a      [description]
-   * @param  {[type]} b      [description]
+   * @param  {Object} a      [比较值 a]
+   * @param  {Object} b      [比较值 b]
    * @param  {[type]} aStack [description]
    * @param  {[type]} bStack [description]
    * @return {[type]}        [description]
@@ -2250,17 +2250,22 @@
         return +a === +b;
     }
 
+    // 数组要进行特殊处理
     var areArrays = className === '[object Array]';
     if (!areArrays) {
+      // 如果比较的双方有一方类型不等价与对象，则二者不相等
       if (typeof a != 'object' || typeof b != 'object') return false;
 
       // Objects with different constructors are not equivalent, but `Object`s or `Array`s
       // from different frames are.
+      // 构造函数不一样的对象不相等。但是，多个对象和数组的不同形式是相等的
       var aCtor = a.constructor,
         bCtor = b.constructor;
-      if (aCtor !== bCtor && !(_.isFunction(aCtor) && aCtor instanceof aCtor &&
-          _.isFunction(bCtor) && bCtor instanceof bCtor) &&
-        ('constructor' in a && 'constructor' in b)) {
+      if (aCtor !== bCtor && // a、b的构造函数不同
+          !(_.isFunction(aCtor) && aCtor instanceof aCtor // a的构造函数是函数且不是自身的实例
+          && _.isFunction(bCtor) && bCtor instanceof bCtor)  // b的构造函数是函数且不是自身的实例
+          && ('constructor' in a && 'constructor' in b)  // a、b都有构造函数
+        ) {
         return false;
       }
     }
@@ -2269,9 +2274,15 @@
 
     // Initializing stack of traversed objects.
     // It's done here since we only need them for objects and arrays comparison.
+    // 假设循环结构是等价的
+    // 这里判断循环结构的算法是改编自ES5.1
+    // 为要遍历的对象初始化栈
+    // 我们这里只需要用来比较对象和数组
     aStack = aStack || [];
     bStack = bStack || [];
     var length = aStack.length;
+    // 线性搜索
+    // 效率与独一无二的嵌套结构的数量成反比
     while (length--) {
       // Linear search. Performance is inversely proportional to the number of
       // unique nested structures.
@@ -2279,24 +2290,30 @@
     }
 
     // Add the first object to the stack of traversed objects.
+    // 将第一个对象添加到遍历对象的堆栈中。
     aStack.push(a);
     bStack.push(b);
 
     // Recursively compare objects and arrays.
+    // 递归比较对象们和数组们
     if (areArrays) {
       // Compare array lengths to determine if a deep comparison is necessary.
+      // 首先判断数组长度，不一样的直接返回 false，不需要进一步比较
       length = a.length;
       if (length !== b.length) return false;
       // Deep compare the contents, ignoring non-numeric properties.
+      // 对数字型属性进行深层次比较
       while (length--) {
         if (!eq(a[length], b[length], aStack, bStack)) return false;
       }
     } else {
       // Deep compare objects.
+      // 深度比较对象
       var keys = _.keys(a),
         key;
       length = keys.length;
       // Ensure that both objects contain the same number of properties before comparing deep equality.
+      // 如果对象的属性数量不一致，直接返回 false，无需进一步比较
       if (_.keys(b).length !== length) return false;
       while (length--) {
         // Deep compare each member
@@ -2305,6 +2322,8 @@
       }
     }
     // Remove the first object from the stack of traversed objects.
+    // 出栈
+    // 从遍历对象的堆栈中删除第一个对象。
     aStack.pop();
     bStack.pop();
     return true;
