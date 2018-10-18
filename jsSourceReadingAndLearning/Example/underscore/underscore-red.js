@@ -1645,6 +1645,19 @@
   // Partially apply a function by creating a version that has had some of its
   // arguments pre-filled, without changing its dynamic `this` context. _ acts
   // as a placeholder, allowing any combination of arguments to be pre-filled.
+  /**
+   * 对函数的某些参数进行预先填充
+   *
+   * var add = function(a, b) { return a + b; };
+   * add5 = _.partial(add, 5);
+   * add5(20);
+   * => 25
+   *
+   * // Using a placeholder
+   * addFrom20 = _.partial(add, _, 20);
+   * addFrom20(5);
+   * => 25
+   */
   _.partial = function(func) {
     var boundArgs = slice.call(arguments, 1);
     var bound = function() {
@@ -1652,10 +1665,12 @@
         length = boundArgs.length;
       var args = Array(length);
       for (var i = 0; i < length; i++) {
+        // 如果传入的参数是 `_` 则直接填充传入的参数，否则填充预先绑定的参数
         args[i] = boundArgs[i] === _ ? arguments[position++] : boundArgs[i];
       }
+      // 如果还剩余参数没有填入，则直接填入
       while (position < arguments.length) args.push(arguments[position++]);
-      return executeBound(func, bound, this, this, args);
+      return executeBound(func, bound, this, this, args); // 调用
     };
     return bound;
   };
