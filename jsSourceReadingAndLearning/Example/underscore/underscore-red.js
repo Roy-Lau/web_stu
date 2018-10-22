@@ -1657,6 +1657,8 @@
    * addFrom20 = _.partial(add, _, 20);
    * addFrom20(5);
    * => 25
+   *
+   *
    */
   _.partial = function(func) {
     var boundArgs = slice.call(arguments, 1);
