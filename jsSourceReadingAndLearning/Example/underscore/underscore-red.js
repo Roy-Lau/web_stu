@@ -1680,18 +1680,32 @@
   // Bind a number of an object's methods to that object. Remaining arguments
   // are the method names to be bound. Useful for ensuring that all callbacks
   // defined on an object belong to it.
+  /**
+   * bindAll(绑定全部)
+   *
+   * @param  {Object} obj [要绑定的对象]
+   * @return {[type]}     [description]
+   */
   _.bindAll = function(obj) {
     var i, length = arguments.length,
       key;
     if (length <= 1) throw new Error('bindAll must be passed function names'); // bindAll 必须传递函数名
     for (i = 1; i < length; i++) {
       key = arguments[i];
-      obj[key] = _.bind(obj[key], obj);
+      obj[key] = _.bind(obj[key], obj);   // 依次对每个方法进行绑定
     }
     return obj;
   };
 
   // Memoize an expensive function by storing its results.
+  // 缓存函数的计算结果，可以提供哈希函数来进行哈希位置计算。
+  /**
+   * memoize（记忆）
+   *
+   * @param  {Function} func   函数
+   * @param  {[type]} hasher hash 值
+   * @return {Object}        [description]
+   */
   _.memoize = function(func, hasher) {
     var memoize = function(key) {
       var cache = memoize.cache;
@@ -1705,6 +1719,15 @@
 
   // Delays a function for the given number of milliseconds, and then calls
   // it with the arguments supplied.
+  /**
+   * 延迟调用Function
+   *
+   * @param  {[type]} func [要执行的函数]
+   * @param  {[type]} wait [等待时间，延迟时间]
+   * @return {[type]}      [description]
+   * @description
+   * 等待 `wait`秒后，调用传来的 `func` 方法
+   */
   _.delay = function(func, wait) {
     var args = slice.call(arguments, 2);
     return setTimeout(function() {
@@ -1714,39 +1737,64 @@
 
   // Defers a function, scheduling it to run after the current call stack has
   // cleared.
-  _.defer = _.partial(_.delay, _, 1);
+  // 延迟函数的执行直到当前调用栈清空为止，一般可以用于执行开销的计算等。
+  _.defer = _.partial(_.delay, _, 1);   // 延迟1ms执行
 
   // Returns a function, that, when invoked, will only be triggered at most once
   // during a given window of time. Normally, the throttled function will run
   // as much as it can, without ever going more than once per `wait` duration;
   // but if you'd like to disable the execution on the leading edge, pass
   // `{leading: false}`. To disable execution on the trailing edge, ditto.
+  /**
+   * throttle(防抖)
+   * @param  {Function} func    [要调用的函数]
+   * @param  {Number} wait    [等待间隔]
+   * @param  {Object} options [可选参数]
+   * @return {[type]}         [description]
+   * @description
+   *   创建并返回一个像节流阀一样的函数，当重复调用函数的时候，至少每隔 wait毫秒调用一次该函数。
+   *   对于想控制一些触发频率较高的事件有帮助。
+   * @example
+   *   var throttled = _.throttle(updatePosition, 100);
+   *   $(window).scroll(throttled);
+   */
   _.throttle = function(func, wait, options) {
     var context, args, result;
     var timeout = null;
-    var previous = 0;
+    var previous = 0;   // 记录之前的时间
     if (!options) options = {};
     var later = function() {
+      // 如果 `leading` 传 `false` ，则前一个执行时间为`0`，否则为当前时间
       previous = options.leading === false ? 0 : _.now();
-      timeout = null;
-      result = func.apply(context, args);
-      if (!timeout) context = args = null;
+
+      timeout = null;   // 计时任务清空
+      result = func.apply(context, args);   // 调用函数
+      if (!timeout) context = args = null;    // 如果没有计时任务，上下文和参数为`null`
     };
     return function() {
-      var now = _.now();
+      var now = _.now();    // 取当前时间戳
+      // 如果，之前没有执行过，并且 `leadign` 为 `false` ，之前执行时间为现在
       if (!previous && options.leading === false) previous = now;
+
+      // 持续时间为等待间隔减去当前时间和上一次执行时间差
       var remaining = wait - (now - previous);
       context = this;
       args = arguments;
+
+      // 如果距离上次执行时间超过了等待间隔，或者时间出现了异常
       if (remaining <= 0 || remaining > wait) {
+        // 如果已经有了定时任务则清除
         if (timeout) {
           clearTimeout(timeout);
           timeout = null;
         }
-        previous = now;
-        result = func.apply(context, args);
-        if (!timeout) context = args = null;
+        previous = now;   // 将之前执行时间定为现在
+        result = func.apply(context, args);   // 执行一次函数
+        if (!timeout) context = args = null;    // 如果没有计时任务则清零
+
+      // 如果没有及时任务且 `trailing` 不为 `false`
       } else if (!timeout && options.trailing !== false) {
+        // 在 `remaining` 时间后执行 `later`
         timeout = setTimeout(later, remaining);
       }
       return result;
@@ -1757,6 +1805,19 @@
   // be triggered. The function will be called after it stops being called for
   // N milliseconds. If `immediate` is passed, trigger the function on the
   // leading edge, instead of the trailing.
+  /**
+   * [debounce description]
+   * @param  {Function} func    [要调用的函数]
+   * @param  {Number} wait      [等待间隔]
+   * @param  {Boolean} immediate [可选项。immediate：即时，直接，立刻]
+   * @return {[type]}           [description]
+   * @description
+   *   用来限制函数的调用频率，固定时间内如果再次调用将再次等待一段固定时间后调用。
+   *   也就是说只有在调用一段时间内无再次调用的函数才会被执行。可以通过传递第三个参数来控制何时调用。
+   *  @example
+   *    var lazyLayout = _.debounce(calculateLayout, 300);
+   *    $(window).resize(lazyLayout);
+   */
   _.debounce = function(func, wait, immediate) {
     var timeout, args, context, timestamp, result;
 
@@ -1766,9 +1827,9 @@
       if (last < wait && last >= 0) {
         timeout = setTimeout(later, wait - last);
       } else {
-        timeout = null;
+        timeout = null;   // 计时任务清空
         if (!immediate) {
-          result = func.apply(context, args);
+          result = func.apply(context, args);   // 如果传递 `immediate` 则调用
           if (!timeout) context = args = null;
         }
       }
@@ -1780,6 +1841,7 @@
       timestamp = _.now();
       var callNow = immediate && !timeout;
       if (!timeout) timeout = setTimeout(later, wait);
+      // 如果callNow为true就执行
       if (callNow) {
         result = func.apply(context, args);
         context = args = null;
