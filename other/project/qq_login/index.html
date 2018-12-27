@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>登录页</title>
+    <!-- http://wiki.open.qq.com/wiki/%E3%80%90QQ%E7%99%BB%E5%BD%95%E3%80%91JS_SDK%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E js-SDK -->
+    <!-- https://connect.qq.com/manage.html  qq 开发者管理中心-->
+</head>
+
+<body>
+    <table border="1">
+        <tr>
+            <td>
+                <span id="qqLoginBtn" title="点击QQ登录">登录qq</span>
+            </td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>参考网站</td>
+            <td><a href="http://wiki.open.qq.com/wiki/%E3%80%90QQ%E7%99%BB%E5%BD%95%E3%80%91JS_SDK%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E">js-SDK</a></td>
+            <td><a href="https://connect.qq.com/manage.html"> qq 开发者管理中心</a></td>
+        </tr>
+        <tr>
+            <td>功能按钮</td>
+            <td>
+                <button onclick="showPopup()">新打开个页面(另一种登录方式)</button>
+            </td>
+            <td>
+                <button onclick="getQQMe()">获取openId, accessToken 然后调用get_simple_userinfo</button>
+            </td>
+        </tr>
+    </table>
+    <!-- <button onclick="get_simple_userinfo()">get_simple_userinfo</button> -->
+</body>
+<script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="101540064" data-redirecturi="http://139.199.99.154:9090/return.html" charset="utf-8"></script>
+<script type="text/javascript">
+//调用QC.Login方法，指定btnId参数将按钮绑定在容器节点中
+QC.Login({
+    //btnId：插入按钮的节点id，必选
+    btnId: "qqLoginBtn",
+    //用户需要确认的scope授权项，可选，默认all
+    // scope: "all",
+    //按钮尺寸，可用值[A_XL| A_L| A_M| A_S|  B_M| B_S| C_S]，可选，默认B_S
+    // size: "C_S"
+}, function(reqData, opts) { //登录成功
+    //根据返回数据，更换按钮显示状态方法
+    var dom = document.getElementById(opts['btnId']),
+        _logoutTemplate = [
+            //头像
+            '<span><img src="{figureurl}" class="{size_key}"/></span>',
+            //昵称
+            '<span>{nickname}</span>',
+            //退出
+            '<span><a href="javascript:QC.Login.signOut();">退出</a></span>'
+        ].join("");
+
+    dom && (dom.innerHTML = QC.String.format(_logoutTemplate, {
+        nickname: QC.String.escHTML(reqData.nickname),
+        figureurl: reqData.figureurl
+    }));
+    console.log("reqData: ", reqData, "opts: ", opts)
+}, function(opts) { //注销成功
+
+    alert('QQ登录 注销成功');
+
+});
+// 新打开个页面 （登录成功后 关闭）
+function showPopup() {
+    QC.Login.showPopup(function(opts) {
+        console.log("showPopup-opts: ", opts)
+    });
+}
+var getQQMe = function() {
+    QC.Login.getMe(function(openId, accessToken) {
+        console.log("openId", openId, "accessToken", accessToken)
+        get_simple_userinfo(openId, accessToken)
+    })
+};
+
+function get_simple_userinfo(openId, accessToken) {
+    /**
+     * api 必填 如 https://openmobile.qq.com/user/get_simple_userinfo 获取用户信息
+     * paras 必填  如 https://graph.qq.com/user/get_simple_userinfo?
+            access_token=1234ABD1234ABD&
+            oauth_consumer_key=12345&
+            openid=B08D412EEC4000FFC37CAABBDC1234CC
+     * fmt 必填 {josn ，xml} 默认是json
+     * method “GET”或“POST”
+     */
+    // QC.api(api, paras, fmt, method)
+    var uri = 'https://graph.qq.com/user/get_simple_userinfo?access_token=' + accessToken + '&oauth_consumer_key=12345&openid=' + openId
+    QC.api(uri)
+        .success(function(response) {
+            // Response的公开属性如下：
+            // .status：响应状态，-1：代表未知；404：响应错误；200：响应成功。
+            // .fmt：响应数据格式，json/xml。
+            // .code/.ret：响应返回码，0为成功，其他为失败。
+            // .data：响应数据实体，json对象/xml对象。
+            // .seq：响应序号，从1000开始编号。
+            console.log("请求完成并且返回码为0的回调。", response)
+        })
+        .error(function(response) {
+            console.log("请求完成并且返回码不为0的回调。", response)
+        })
+        .complete(function(response) {
+            console.log("请求完成后的回调。", response)
+        })
+
+}
+</script>
+
+</html>

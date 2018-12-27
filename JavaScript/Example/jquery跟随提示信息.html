@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>jQuery跟随提示信息</title>
+    <script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
+    <style>
+    #tooltip {
+        position: absolute;
+        border: 1px solid #333;
+        background: #f7f5d1;
+        padding: 1px;
+        color: #333;
+        display: none;
+    }
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li><a href="###1" class="tooltip" title="[活动]春鞋迎春大促">[活动]春鞋迎春大促</a> </li>
+        <li><a href="###1" class="tooltip" title="[活动]秋冬服装大促">[活动]秋冬服装大促</a> </li>
+        <li><a href="###1" class="tooltip" title="[活动]床品大促">[活动]床品大促</a> </li>
+        <li><a href="###1" class="tooltip" title="[活动]家电大促">[活动]家电大促</a> </li>
+        <li><a href="###1" class="tooltip" title="[活动]百货促销">[活动]百货促销</a> </li>
+    </ul>
+    <script>
+    var x = 10;
+    var y = 20;
+    var newtitle = '';
+    $('a.tooltip').mouseover(function(e) {
+        newtitle = this.title;
+        this.title = '';
+        $('body').append('<div id="tooltip">' + newtitle + '</div>');
+        $('#tooltip').css({
+            'left': (e.pageX + x + 'px'),
+            'top': (e.pageY + y + 'px')
+        }).show();
+    }).mouseout(function() {
+        this.title = newtitle;
+        $('#tooltip').remove();
+    }).mousemove(function(e) {
+        $('#tooltip').css({
+            'left': (e.pageX + x + 'px'),
+            'top': (e.pageY + y + 'px')
+        }).show();
+    })
+    </script>
+</body>
+
+</html>

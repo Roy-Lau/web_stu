@@ -10,13 +10,13 @@
 
 body{background:#333;}
 .box {
-  width:800px; height:280px; margin: 50px auto; 
+  width:800px; height:280px; margin: 50px auto;
 }
 .box .link {
   width:205px; height:280px; float: left; margin:0 20px;
 }
 .link .icon {
-  display:inline-block; width:100%; height:190px; cursor:pointer; 
+  display:inline-block; width:100%; height:190px; cursor:pointer;
   transition:ease-out 0.2s;
 }
 .link-miss .icon {
@@ -153,7 +153,7 @@ CSS3--box-sizing
         $('.tip em').text(title);
         var pos = $(this).offset().left;
         var dis = parseInt($('.tip').outerWidth()-$(this).outerWidth())/2;
-        var l = pos - dis; 
+        var l = pos - dis;
         $('.tip').css({'left':l+'px'}).animate({'top':180,'opacity':1},300);
     },function(){
         if(!$('.tip').is(':animated')){
