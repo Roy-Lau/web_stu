@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>js-cookie demo</title>
+</head>
+<body>
+	<p></p>
+</body>
+<script type="text/javascript" src="js-cookie.js"></script>
+<script type="text/javascript">
+window.onload = function(){
+	var isServer = document.location.protocol === ('http:'||'https')
+	if (!isServer) {
+		document.write("js-cookie 需要运行在服务器下")
+	}else{
+		document.write("js-cookie: 请在 console 中调试js-cookie")
+	}
+	console.log(Cookies)
+}
+
+
+</script>
+
+</html>
