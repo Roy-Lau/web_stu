@@ -252,7 +252,9 @@ function checkComponents (options: Object) {
   }
 }
 
+// 验证组件
 export function validateComponentName (name: string) {
+  // 组件名不合法
   if (!/^[a-zA-Z][\w-]*$/.test(name)) {
     warn(
       'Invalid component name: "' + name + '". Component names ' +
@@ -260,6 +262,7 @@ export function validateComponentName (name: string) {
       'and must start with a letter.'
     )
   }
+  // 组件名是h5的内置标签
   if (isBuiltInTag(name) || config.isReservedTag(name)) {
     warn(
       'Do not use built-in or reserved HTML elements as component ' +
@@ -362,6 +365,13 @@ function assertObjectType (name: string, value: any, vm: ?Component) {
  * Merge two option objects into a new one.
  * Core utility used in both instantiation and inheritance.
  */
+/**
+ * 合并参数（将两个组件的参数进行合并）
+ * @param  {[type]} parent: Object        父组件对象
+ * @param  {[type]} child:  Object        子组件对象
+ * @param  {[type]} vm?:    Component     虚拟节点
+ * @return {[type]}         合并后的组件参数
+ */
 export function mergeOptions (
   parent: Object,
   child: Object,
@@ -378,6 +388,9 @@ export function mergeOptions (
   normalizeProps(child, vm)
   normalizeInject(child, vm)
   normalizeDirectives(child)
+  /**
+   * extends mixins 递归调用他们的对象合并（逻辑基本相同，优先级不同）
+   */
   const extendsFrom = child.extends
   if (extendsFrom) {
     parent = mergeOptions(parent, extendsFrom, vm)
