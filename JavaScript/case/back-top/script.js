@@ -100,29 +100,29 @@ function ScrollTo_js(el, opt) {
 ScrollTo_js.defaults = {
     mode: 'move',
     pos: 0,
-    speed: 800
+    speed: 5
 }
 ScrollTo_js.prototype._move = function() {
+
     var self = this
+
     // 设置定时器
-    var timer = setInterval(function() {
-        console.log(self.opts)
+   var timer = setInterval(function() {
         // 获取滚动条距离顶部的高度
         var barTop = document.documentElement.scrollTop || document.body.scrollTop,
             ispeed = Math.floor(-barTop / self.opts.speed);
         // 设置滚动条距离顶部的高度
         var setTop = document.documentElement.scrollTop = document.body.scrollTop
-            // 如果 mode 是 'move' 则滚动到顶部，如果mode不为 'move' 直接跳转到顶部
-            document.documentElement.scrollTop = document.body.scrollTop = self.opts.mode === 'move' ? barTop + ispeed : 0;
-
-            console.log(document.documentElement.scrollTop = document.body.scrollTop)
-        if (setTop === self.opts.pos) {
+        // 如果 mode 是 'move' 则滚动到顶部，如果mode不为 'move' 直接跳转到顶部
+        document.documentElement.scrollTop = document.body.scrollTop = self.opts.mode === 'move' ? barTop + ispeed : 0;
+        if (barTop === self.opts.pos) {
             clearInterval(timer); // 清除定时器
         }
     }, 30)
 };
 
 ScrollTo_js.prototype._checkPosition = function() {
+    var self = this
     // 获取滚动条距离顶部的高度
     var barTop = document.documentElement.scrollTop || document.body.scrollTop,
         height = document.documentElement.clientHeight
@@ -213,6 +213,6 @@ ScrollTo_jq.prototype._checkPosition = function() {
 window.onload = function() {
     // js_backTop('btn-back-top','move')
     // jq_backTop()
-    new ScrollTo_js('#btn-back-top',{mode:'move',pos:100,speed:80})
+    new ScrollTo_js('#btn-back-top', { mode: 'move', pos: 10 })
     // new ScrollTo_jq('#btn-back-top',{mode:'go'})
 }
