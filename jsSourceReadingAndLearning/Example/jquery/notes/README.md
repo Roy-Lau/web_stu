@@ -133,3 +133,45 @@
 
 6-1、 [jQuery自定义事件之trigger事件](./jq-event/6-1.md)  
 6-2、 [jQuery自定义事件之triggerHandler事件](./jq-event/6-2.md)  
+
+
+
+
+### jQuery基础 — 动画篇
+
+#### 第1章 动画基础隐藏和显示
+
+1-1、 [jQuery中隐藏元素的hide方法](./jq-animation/1-1.md)  
+1-2、 [jQuery中显示元素的show方法](./jq-animation/1-2.md)  
+1-3、 [jQuery中显示与隐藏切换toggle方法](./jq-animation/1-3.md)  
+
+#### 第2章 上卷下拉效果
+
+2-1、 [jQuery中下拉动画slideDown](./jq-animation/2-1.md)  
+2-2、 [jQuery中上卷动画slideUp](./jq-animation/2-2.md)  
+2-3、 [jQuery中上卷下拉切换slideToggle](./jq-animation/2-3.md)  
+
+#### 第3章 淡入淡出效果
+
+3-1、 [jQuery中淡出动画fadeOut](./jq-animation/3-1.md)  
+3-2、 [jQuery中淡入动画fadeIn](./jq-animation/3-2.md)  
+3-3、 [jQuery中淡入淡出切换fadeToggle](./jq-animation/3-3.md)  
+3-4、 [jQuery中淡入效果fadeTo](./jq-animation/3-4.md)  
+
+#### 第4章 动画切换的比较
+
+4-1、 [jQuery中toggle与slideToggle以及fadeToggle的比较](./jq-animation/4-1.md)  
+
+#### 第5章 自定义动画
+
+5-1、 [jQuery中动画animate(上)](./jq-animation/5-1.md)  
+5-2、 [jQuery中动画animate(下)](./jq-animation/5-2.md)  
+5-3、 [jQuery中停止动画stop](./jq-animation/5-3.md)  
+
+#### 第6章 jQuery核心
+
+6-1、 [jQuery中each方法的应用](./jq-animation/6-1.md)  
+6-2、 [jQuery中查找数组中的索引inArray](./jq-animation/6-2.md)  
+6-3、 [jQuery中去空格神器trim方法](./jq-animation/6-3.md)  
+6-4、 [jQuery中DOM元素的获取get方法](./jq-animation/6-4.md)  
+6-5、 [jQuery中DOM元素的获取index方法](./jq-animation/6-5.md)  
