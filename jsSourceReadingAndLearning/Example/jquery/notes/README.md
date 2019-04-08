@@ -175,3 +175,54 @@
 6-3、 [jQuery中去空格神器trim方法](./jq-animation/6-3.md)  
 6-4、 [jQuery中DOM元素的获取get方法](./jq-animation/6-4.md)  
 6-5、 [jQuery中DOM元素的获取index方法](./jq-animation/6-5.md)  
+
+
+### jQuery基础 — Ajax应用与常用插件
+
+#### 第1章 jQuery 实现Ajax应用
+
+1-1、 [使用load()方法异步请求数据](./jq-ajax/1-1.md)
+1-2、 [使用getJSON()方法异步加载JSON格式数据](./jq-ajax/1-2.md)
+1-3、 [使用getScript()方法异步加载并执行js文件](./jq-ajax/1-3.md)
+1-4、 [使用get()方法以GET方式从服务器获取数据](./jq-ajax/1-4.md)
+1-5、 [使用post()方法以POST方式从服务器发送数据](./jq-ajax/1-5.md)
+1-6、 [使用serialize()方法序列化表单元素值](./jq-ajax/1-6.md)
+1-7、 [使用ajax()方法加载服务器数据](./jq-ajax/1-7.md)
+1-8、 [使用ajaxSetup()方法设置全局Ajax默认选项](./jq-ajax/1-8.md)
+1-9、 [使用ajaxStart()和ajaxStop()方法](./jq-ajax/1-9.md)
+
+#### 第2章 jQuery 常用插件
+
+2-1、 [表单验证插件——validate](./jq-ajax/2-1.md)
+2-2、 [表单插件——form](./jq-ajax/2-2.md)
+2-3、 [图片灯箱插件——lightBox](./jq-ajax/2-3.md)
+2-4、 [图片放大镜插件——jqzoom](./jq-ajax/2-4.md)
+2-5、 [cookie插件——cookie](./jq-ajax/2-5.md)
+2-6、 [搜索插件——autocomplete](./jq-ajax/2-6.md)
+2-7、 [右键菜单插件——contextmenu](./jq-ajax/2-7.md)
+2-8、 [自定义对象级插件——lifocuscolor插件](./jq-ajax/2-8.md)
+2-9、 [自定义类级别插件——twoaddresult](./jq-ajax/2-9.md)
+
+#### 第3章 jQuery UI型插件
+
+3-1、 [拖曳插件——draggable](./jq-ajax/3-1.md)
+3-2、 [放置插件——droppable](./jq-ajax/3-2.md)
+3-3、 [拖曳排序插件——sortable](./jq-ajax/3-3.md)
+3-4、 [面板折叠插件——accordion](./jq-ajax/3-4.md)
+3-5、 [选项卡插件——tabs](./jq-ajax/3-5.md)
+3-6、 [对话框插件——dialog](./jq-ajax/3-6.md)
+3-7、 [菜单工具插件——menu](./jq-ajax/3-7.md)
+3-8、 [微调按钮插件——spinner](./jq-ajax/3-8.md)
+3-9、 [工具提示插件——tooltip](./jq-ajax/3-9.md)
+
+#### 第4章 jQuery 工具类函数
+
+4-1、 [获取浏览器的名称与版本信息](./jq-ajax/4-1.md)
+4-2、 [检测浏览器是否属于W3C盒子模型](./jq-ajax/4-2.md)
+4-3、 [检测对象是否为空](./jq-ajax/4-3.md)
+4-4、 [检测对象是否为原始对象](./jq-ajax/4-4.md)
+4-5、 [检测两个节点的包含关系](./jq-ajax/4-5.md)
+4-6、 [字符串操作函数](./jq-ajax/4-6.md)
+4-7、 [URL操作函数](./jq-ajax/4-7.md)
+4-8、 [使用$.extend()扩展工具函数](./jq-ajax/4-8.md)
+4-9、 [使用$.extend()扩展Object对象](./jq-ajax/4-9.md)
