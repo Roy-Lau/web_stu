@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>字符串 二进制互转</title>
+</head>
+
+<body>
+	<p>
+	    <textarea id="strId" placeholder="请输入您要转换的字符串"></textarea>
+	    <button id="toBinary">字符串转二进制</button>
+	    <span  id="binaryText"></span>
+	</p>
+	<p>
+	    <textarea id="binaryId" placeholder="请输入您要转换的二进制"></textarea>
+	    <button id="toStr">二进制转字符串</button>
+	    <span  id="strText"></span>
+	</p>
+</body>
+<script>
+// 字符串转换为二进制
+function strToBinary(str) {
+    let result = [];
+    let list = str.split("");
+    for (let i = 0; i < list.length; i++) {
+        if (i != 0) {
+            result.push(" ");
+        }
+        let item = list[i];
+        let binaryStr = item.charCodeAt().toString(2);
+        result.push(binaryStr);
+    }
+    return result.join("");
+}
+//将二进制字符串转换成Unicode字符串
+function binaryToStr(str) {
+    let result = [];
+    let list = str.split(" ");
+    for (let i = 0; i < list.length; i++) {
+        let item = list[i];
+        let asciiCode = parseInt(item, 2);
+        let charValue = String.fromCharCode(asciiCode);
+        result.push(charValue);
+    }
+    return result.join("");
+}
+let strId = document.getElementById('strId'),
+	binaryId = document.getElementById('binaryId'),
+	binaryText = document.getElementById('binaryText'),
+	strText = document.getElementById('strText'),
+	toBinary = document.getElementById('toBinary'),
+	toStr = document.getElementById('toStr')
+
+
+	toBinary.onclick = function(e){
+		let binary = strToBinary(strId.value)
+		binaryText.innerText = binary
+	}
+	toStr.onclick = function(e){
+		let _str = binaryToStr(binaryId.value)
+		strText.innerText = _str
+	}
+</script>
+
+</html>
