@@ -32,7 +32,7 @@
 #### 第3章 jQuery的属性与样式
 
 3-1 [jQuery的属性与样式之.attr()与.removeAttr()](./jq-style/3-1.md)  
-3-2 [jQuery的属性与样式之html()及.text()](./jq-style/3-2.md)  
+3-2 [jQuery的属性与样式之.html()及.text()](./jq-style/3-2.md)  
 3-3 [jQuery的属性与样式之.val()](./jq-style/3-3.md)  
 3-4 [jQuery的属性与样式之增加样式.addClass()](./jq-style/3-4.md)  
 3-5 [jQuery的属性与样式之删除样式.removeClass()](./jq-style/3-5.md)  
