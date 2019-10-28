@@ -1,6 +1,9 @@
 const fs = require('fs')
 const chalk = require('chalk')
-
+/**
+ * 读取 packages 目录，返回一个数组。
+ * 数组内容是 packages 目录下的所有文件夹名字，不包括 package.json 文件里 private 不存在或为 false 的文件，和 buildOptions 存在的文件夹
+ */
 const targets = (exports.targets = fs.readdirSync('packages').filter(f => {
   if (!fs.statSync(`packages/${f}`).isDirectory()) {
     return false

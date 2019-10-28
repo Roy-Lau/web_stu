@@ -44,6 +44,10 @@ const isHTMLTag = /*#__PURE__*/ makeMap(HTML_TAGS);
 const isSVGTag = /*#__PURE__*/ makeMap(SVG_TAGS);
 const isVoidTag = /*#__PURE__*/ makeMap(VOID_TAGS);
 
+const EMPTY_OBJ =  Object.freeze({})
+    ;
+
+const isRawTextContainer = /*#__PURE__*/ makeMap('style,iframe,script,noscript', true);
 const parserOptionsMinimal = {
     isVoidTag,
     isNativeTag: tag => isHTMLTag(tag) || isSVGTag(tag),
@@ -93,7 +97,7 @@ const parserOptionsMinimal = {
             if (tag === 'textarea' || tag === 'title') {
                 return 1 /* RCDATA */;
             }
-            if (/^(?:style|xmp|iframe|noembed|noframes|script|noscript)$/i.test(tag)) {
+            if (isRawTextContainer(tag)) {
                 return 2 /* RAWTEXT */;
             }
         }
@@ -2501,9 +2505,6 @@ const transformModel = (dir, node, context) => {
     }
     return baseResult;
 };
-
-const EMPTY_OBJ =  Object.freeze({})
-    ;
 
 const isEventOptionModifier = /*#__PURE__*/ makeMap(`passive,once,capture`);
 const isNonKeyModifier = /*#__PURE__*/ makeMap(
