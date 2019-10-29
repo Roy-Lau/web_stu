@@ -7479,39 +7479,138 @@ var Vue = (function (exports) {
 
   const doc = document;
   const svgNS = 'http://www.w3.org/2000/svg';
+  /**
+   * dom 节点的基本函数封装
+   * @type {Object} 节点对象
+   */
   const nodeOps = {
+      /**
+       * 插入函数
+       *
+       * @type {Node} child
+       * @type {Node} parent
+       * @type {Node} anchor
+       */
       insert: (child, parent, anchor) => {
+          // 如果 anchor 不为空
           if (anchor != null) {
+              // 将 child 插入到 anchor 节点之前， parent 节点中
+              // https://developer.mozilla.org/zh-CN/docs/Web/API/Node/insertBefore
               parent.insertBefore(child, anchor);
           }
           else {
+              // 将 child 插入到 parent 的末尾节点中
+              // https://developer.mozilla.org/zh-CN/docs/Web/API/Node/appendChild
               parent.appendChild(child);
           }
       },
+      /**
+       * 移除函数
+       */
       remove: (child) => {
+          // 获取 child 节点的父节点
           const parent = child.parentNode;
+          // 如果 parent 不为空
           if (parent != null) {
+              // 移除 parent 节点的子节点（child）
               parent.removeChild(child);
           }
       },
+      /**
+       * 创建元素
+       *
+       * @type {string} tag 标签
+       * @type {boolean} isSVG 是否为 svg
+       * @return {Element} 返回创建后的元素
+       *
+       * 先判断传入的是否是个 svg
+       * 如果是 svg , 通过 createElementNS 创建 svg 标签。 参考 https://developer.mozilla.org/zh-CN/docs/Web/API/Document/createElementNS
+       * 如果不是 svg , 通过 createElement 创建元素标签。 参考 https://developer.mozilla.org/zh-CN/docs/Web/API/Document/createElement
+       */
       createElement: (tag, isSVG) => isSVG ? doc.createElementNS(svgNS, tag) : doc.createElement(tag),
+      /**
+       * 创建 text 节点
+       * @param {String} text 要创建文本
+       * @return {String} Text 文本节点
+       *
+       * 参考 https://developer.mozilla.org/zh-CN/docs/Web/API/Document/createTextNode
+       */
       createText: (text) => doc.createTextNode(text),
+      /**
+       * 创建注释节点
+       *
+       * @param {String} text 注释文本
+       * @return {String} text 注释节点
+       *
+       * 参考 https://developer.mozilla.org/zh-CN/docs/Web/API/Document/createComment
+       */
       createComment: (text) => doc.createComment(text),
+      /**
+       * 设置节点值
+       *
+       * @type {Text} node dom 节点
+       * @type {string} text 要插入 dom 节点的文本
+       *
+       * 参考 https://developer.mozilla.org/zh-CN/docs/Web/API/Node/nodeValue
+       */
       setText: (node, text) => {
           node.nodeValue = text;
       },
+      /**
+       * 设置元素文本
+       *
+       * @type {HTMLElement} el 元素
+       * @type {string} text 要插入元素中的文本
+       *
+       * 参考 https://developer.mozilla.org/zh-CN/docs/Web/API/Node/textContent
+       */
       setElementText: (el, text) => {
           el.textContent = text;
       },
+      /**
+       * 获取 dom 节点的父节点
+       *
+       * @type {Node} node 子节点
+       * @return {HTMLElement|null} node 父节点元素
+       *
+       * 参考 https://developer.mozilla.org/zh-CN/docs/Web/API/ParentNode
+       */
       parentNode: (node) => node.parentNode,
+      /**
+       * 获取 dom 节点的兄弟节点（相邻节点）
+       *
+       * @type {Node} node dom 节点
+       * @return {Node|null} node 相邻节点
+       *
+       * 参考 https://developer.mozilla.org/zh-CN/docs/Web/API/Node/nextSibling
+       */
       nextSibling: (node) => node.nextSibling,
+      /**
+       * 获取 document 对象中的某个元素
+       * @type {string} selector 要获取的元素名
+       * @return {HTMLElement|null}  返回获取的元素节点（如果有多个，只返回第一个）
+       *
+       * 参考 https://developer.mozilla.org/zh-CN/docs/Web/API/Document/querySelector
+       */
       querySelector: (selector) => doc.querySelector(selector)
   };
 
   // compiler should normalize class + :class bindings on the same element
   // into a single binding ['staticClass', dynamic]
+  // 编译器应规范同一元素上的 class 和 :class 绑定，统一为 ['staticClass', dynamic] 数组绑定
+  /**
+   * 导出 添加类（class） 函数
+   * @param {Element} el    元素
+   * @param {string}  value class值
+   * @param {boolean} isSVG 是否为 SVG
+   *
+   * 如果 isSVG 为 true ，使用 setAttribute 函数 设置类(class) 。 参考 https://developer.mozilla.org/zh-CN/docs/Web/API/Element/setAttribute
+   * 如果 isSVG 为 false ，使用 className 属性 设置值(value) 。 参考 https://developer.mozilla.org/zh-CN/docs/Web/API/Element/className
+   *
+   */
   function patchClass(el, value, isSVG) {
       // directly setting className should be faster than setAttribute in theory
+      // 理论上直接设置 className 应该比 setAttribute 快
       if (isSVG) {
           el.setAttribute('class', value);
       }
@@ -7520,19 +7619,32 @@ var Vue = (function (exports) {
       }
   }
 
+  /**
+   * 导出 添加样式 函数
+   * @param {Element} el   元素
+   * @param {Style}   prev 元素上个样式
+   * @param {Style}   next 元素下个样式
+   */
   function patchStyle(el, prev, next) {
+      // 获取元素的内联样式
       const style = el.style;
+      // 如果 next 存在，删除元素的内联样式
       if (!next) {
           el.removeAttribute('style');
+          // 如果 next 为字符串，设置元素的css样式名为 next
       }
       else if (isString(next)) {
           style.cssText = next;
       }
       else {
+          // 遍历 next , 可能是其他属性
           for (const key in next) {
+              // 将 next 的 key 设置为 style 的 key
               style[key] = next[key];
           }
+          // 如果 prev 存在，且不是字符串类型
           if (prev && !isString(prev)) {
+              // 遍历 prev
               for (const key in prev) {
                   if (!next[key]) {
                       style[key] = '';
@@ -7542,6 +7654,18 @@ var Vue = (function (exports) {
       }
   }
 
+  /**
+   * 导出 添加属性 函数
+   *
+   * @param {Element} el    元素
+   * @param {string}  key   属性名
+   * @param {any}     value 属性值
+   *
+   * 移除or新增 元素中的一个属性
+   *
+   * 如果没有 value（属性值） 则删除 key 。 移除 参考： https://developer.mozilla.org/zh-CN/docs/Web/API/Element/removeAttribute
+   * 如果有 value（属性值） 则新增 key 和 value 。 新增 参考： https://developer.mozilla.org/zh-CN/docs/Web/API/Element/setAttribute
+   */
   function patchAttr(el, key, value) {
       if (value == null) {
           el.removeAttribute(key);
@@ -7551,10 +7675,21 @@ var Vue = (function (exports) {
       }
   }
 
+  /**
+   * 导出 添加dom prop 函数
+   * @param {any}    el              dom 元素
+   * @param {string} key             [description]
+   * @param {any}    value           [description]
+   * @param {any}    prevChildren    [description]
+   * @param {any}    parentComponent [description]
+   * @param {any}    parentSuspense  [description]
+   * @param {Function}    unmountChildren [description]
+   */
   function patchDOMProp(el, key, value, 
   // the following args are passed only due to potential innerHTML/textContent
   // overriding existing VNodes, in which case the old tree must be properly
   // unmounted.
+  // 仅由于潜在的 innerHTML/textContent 覆盖现有 VNode 而传递以下 arg ，在这种情况下，必须正确卸载旧树
   prevChildren, parentComponent, parentSuspense, unmountChildren) {
       if ((key === 'innerHTML' || key === 'textContent') && prevChildren != null) {
           unmountChildren(prevChildren, parentComponent, parentSuspense);

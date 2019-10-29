@@ -1,9 +1,11 @@
 import { createApp } from '../src'
 import { mockWarn } from '@vue/runtime-test'
 
+// 编译器+运行时集成
 describe('compiler + runtime integration', () => {
   mockWarn()
 
+  // 应该支持即时模板编译
   it('should support on-the-fly template compilation', () => {
     const container = document.createElement('div')
     const App = {
@@ -18,6 +20,7 @@ describe('compiler + runtime integration', () => {
     expect(container.innerHTML).toBe(`0`)
   })
 
+  // 应使用代码框警告模板编译错误
   it('should warn template compilation errors with codeframe', () => {
     const container = document.createElement('div')
     const App = {
@@ -35,6 +38,7 @@ describe('compiler + runtime integration', () => {
     ).toHaveBeenWarned()
   })
 
+  // 应该支持自定义元素
   it('should support custom element', () => {
     const app = createApp()
     const container = document.createElement('div')
@@ -46,6 +50,7 @@ describe('compiler + runtime integration', () => {
     expect(container.innerHTML).toBe('<custom></custom>')
   })
 
+  // 应该支持使用元素innerHTML作为模板
   it('should support using element innerHTML as template', () => {
     const app = createApp()
     let container = document.createElement('div')

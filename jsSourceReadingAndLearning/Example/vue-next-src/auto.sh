@@ -6,7 +6,7 @@ echo "end 拷贝文件"
 cd /c/Workspace/web_stu
 pwd
 echo "start 开始上传"
-read -t 30 -p "请输入commit:" commit
+read -t 300 -p "请输入commit:" commit
 git add .
 git commit -m "vue-next-src: $commit"
 git push

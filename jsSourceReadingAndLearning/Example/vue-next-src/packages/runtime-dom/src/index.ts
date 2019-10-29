@@ -2,6 +2,7 @@ import { createRenderer, warn } from '@vue/runtime-core'
 import { nodeOps } from './nodeOps'
 import { patchProp } from './patchProp'
 // Importing from the compiler, will be tree-shaken in prod
+// 从编译器中导入，将在生产环境中通过 "树摇" 删除
 import { isHTMLTag, isSVGTag } from '@vue/compiler-dom'
 import { isFunction, isString } from '@vue/shared'
 
