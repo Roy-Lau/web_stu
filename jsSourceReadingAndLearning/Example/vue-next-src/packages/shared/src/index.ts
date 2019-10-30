@@ -4,11 +4,15 @@ export { makeMap }
 export * from './patchFlags'
 export { isGloballyWhitelisted } from './globalsWhitelist'
 
+// 导出一个空对象
 export const EMPTY_OBJ: { readonly [key: string]: any } = __DEV__
   ? Object.freeze({})
   : {}
+
+// 导出一个空数组
 export const EMPTY_ARR: [] = []
 
+// 导出一个空函数
 export const NOOP = () => {}
 
 /**
@@ -16,6 +20,7 @@ export const NOOP = () => {}
  */
 export const NO = () => false
 
+// 判断传入的字符串的前两个字符是否为 'on'
 export const isOn = (key: string) => key[0] === 'o' && key[1] === 'n'
 
 export const extend = <T extends object, U extends object>(
