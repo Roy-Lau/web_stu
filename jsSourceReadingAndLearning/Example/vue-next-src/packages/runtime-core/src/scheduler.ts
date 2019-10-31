@@ -3,10 +3,18 @@ import { isArray } from '@vue/shared'
 
 const queue: Function[] = []
 const postFlushCbs: Function[] = []
-const p = Promise.resolve()
+const p = Promise.resolve() // 参考 https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise/resolve
 
 let isFlushing = false
-
+/**
+ * 异步 Promise 函数
+ * @param  {()=> void}        fn 传入函数回调
+ * @return {Promise<void>}    返回 Promise
+ *
+ * 如果传入了回调函数，返回 Promise.resolve().then(fn)
+ * 如果未传入了回调函数，返回静态 Promise.resolve()
+ *
+ */
 export function nextTick(fn?: () => void): Promise<void> {
   return fn ? p.then(fn) : p
 }

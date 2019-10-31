@@ -67,9 +67,11 @@ const createApp = () => {
   return app
 }
 
+// 导出渲染函数和创建应用函数
 export { render, createApp }
 
 // DOM-only runtime helpers
+// 仅限 DOM 的运行时助手
 export {
   vModelText,
   vModelCheckbox,
@@ -81,10 +83,12 @@ export {
 export { withModifiers, withKeys } from './directives/vOn'
 
 // re-export everything from core
+// 从 运行时核心模块 导出所有 接口及函数，如下：
 // h, Component, reactivity API, nextTick, flags & types
 export * from '@vue/runtime-core'
 
 // Type augmentations
+// 类型扩充
 export interface ComponentPublicInstance {
   $el: Element
 }

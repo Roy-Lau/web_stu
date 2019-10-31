@@ -1,5 +1,6 @@
 // This package is the "full-build" that includes both the runtime
 // and the compiler, and supports on-the-fly compilation of the template option.
+// 该软件包是“完整版本”，包括运行时和编译器，并支持模板选项的即时编译。
 import { compile, CompilerOptions } from '@vue/compiler-dom'
 import { registerRuntimeCompiler, RenderFunction } from '@vue/runtime-dom'
 import * as runtimeDom from '@vue/runtime-dom'

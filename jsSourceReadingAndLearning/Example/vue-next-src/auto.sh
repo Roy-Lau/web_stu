@@ -11,4 +11,4 @@ git add .
 git commit -m "vue-next-src: $commit"
 git push
 echo "end 上传完成"
-read
+read -t 30

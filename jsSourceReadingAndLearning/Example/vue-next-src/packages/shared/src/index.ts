@@ -40,28 +40,37 @@ export const hasOwn = (
 ): key is keyof typeof val => hasOwnProperty.call(val, key)
 
 export const isArray = Array.isArray
+// 判断传入的参数是否是函数
 export const isFunction = (val: unknown): val is Function =>
   typeof val === 'function'
+// 判断传入的参数是否是字符串
 export const isString = (val: unknown): val is string => typeof val === 'string'
+// 判断传入的参数是否是 symbol
 export const isSymbol = (val: unknown): val is symbol => typeof val === 'symbol'
+// 判断传入的参数是否是对象
 export const isObject = (val: unknown): val is Record<any, any> =>
   val !== null && typeof val === 'object'
 
+// 判断传入的参数是否是 Promise
 export function isPromise<T = any>(val: unknown): val is Promise<T> {
   return isObject(val) && isFunction(val.then) && isFunction(val.catch)
 }
 
 export const objectToString = Object.prototype.toString
+// 导出传入参数的类型字符串
 export const toTypeString = (value: unknown): string =>
   objectToString.call(value)
 
+// 导出传入参数的原始类型
 export function toRawType(value: unknown): string {
   return toTypeString(value).slice(8, -1)
 }
 
+// 判断传入的参数是否是普通对象
 export const isPlainObject = (val: unknown): val is object =>
   toTypeString(val) === '[object Object]'
 
+// 判断是否是 预留 prop
 export const isReservedProp = /*#__PURE__*/ makeMap(
   'key,ref,' +
     'onVnodeBeforeMount,onVnodeMounted,' +

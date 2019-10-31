@@ -69,9 +69,13 @@ var VueDOMCompiler = (function (exports) {
       return a;
   };
   const isArray = Array.isArray;
+  // 判断传入的参数是否是函数
   const isFunction = (val) => typeof val === 'function';
+  // 判断传入的参数是否是字符串
   const isString = (val) => typeof val === 'string';
+  // 判断传入的参数是否是 symbol
   const isSymbol = (val) => typeof val === 'symbol';
+  // 判断传入的参数是否是对象
   const isObject = (val) => val !== null && typeof val === 'object';
   const camelizeRE = /-(\w)/g;
   const camelize = (str) => {
